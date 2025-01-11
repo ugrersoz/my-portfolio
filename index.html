@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ugur Ersoz-Portolio</title>
+    <title>Uğur Ersöz - Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -31,6 +31,21 @@
             margin-bottom: 1rem;
         }
 
+        .header-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-contact a {
+            color: #2c2c2c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         main {
             max-width: 800px;
             margin: 0 auto;
@@ -45,75 +60,98 @@
             font-size: 1.5rem;
             margin-bottom: 2rem;
             font-weight: 600;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
         }
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
+        .cv-container {
             background: white;
-            padding: 1.5rem;
             border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+            padding: 2rem;
             border: 1px solid #eee;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .project-card h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .project-details {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            padding: 2rem;
+        .cv-tabs {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
         }
 
-        .project-details.active {
-            opacity: 1;
-            pointer-events: all;
+        .cv-tab {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #2c2c2c;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
-        .project-details-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 100%;
+        .cv-tab.active {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .cv-tab-content {
+            display: none;
+        }
+
+        .cv-tab-content.active {
+            display: block;
+        }
+
+        .timeline {
             position: relative;
         }
 
-        .close-button {
+        .timeline::before {
+            content: '';
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #2c2c2c;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #eee;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #2c2c2c;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content h4 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content ul {
+            margin-top: 0.5rem;
+            margin-left: 1.2rem;
         }
 
         .skills {
@@ -130,20 +168,43 @@
             font-size: 0.9rem;
         }
 
+        .certificate-card {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
         .contact {
             margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid #eee;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .contact a {
             color: #2c2c2c;
             text-decoration: none;
-            margin-right: 2rem;
         }
 
         .contact a:hover {
             text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .cv-tabs {
+                flex-direction: column;
+            }
+            
+            .header-contact {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -151,29 +212,118 @@
     <header>
         <h1>Uğur Ersöz</h1>
         <p>Product Developer & Researcher</p>
+        <div class="header-contact">
+            <a href="mailto:uersoz55@gmail.com">📧 uersoz55@gmail.com</a>
+            <a href="https://linkedin.com/in/ersozugur">👔 LinkedIn</a>
+            <a href="https://github.com/ugrersoz">💻 GitHub</a>
+            <a href="tel:+905531316644">📱 +90 553 131 66 44</a>
+        </div>
     </header>
 
     <main>
         <section id="about">
-            <h2>About Me </h2>
-            <p>🏀 Enthusiastic team player dedicated to thriving in challenging projects.🧬
-I am a young scientist and entrepreneurial engineer in the fields of biotechnology and health technologies. With a curious and investigative identity, I enjoy being involved in product management, product development, and R&D processes. I always strive to be part of a team in tasks that involve innovation and competition.</p>
+            <h2>About Me</h2>
+            <p>Product Developer with experience in scientific research and development, specialized in combining molecular biology knowledge with technical skills to create innovative solutions. Currently pursuing a Master's in Life Science Management & Engineering at HTW Berlin.</p>
         </section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects">
-                <div class="project-card" data-project="1">
-                    <h3>Project 1</h3>
-                    <p></p>
+        <section id="cv">
+            <h2>Experience & Education</h2>
+            <div class="cv-container">
+                <div class="cv-tabs">
+                    <button class="cv-tab active" data-tab="experience">Experience</button>
+                    <button class="cv-tab" data-tab="education">Education</button>
+                    <button class="cv-tab" data-tab="projects">Projects</button>
+                    <button class="cv-tab" data-tab="certificates">Activities & Certifications</button>
                 </div>
-                <div class="project-card" data-project="2">
-                    <h3>Project 2</h3>
-                    <p></p>
-                </div>
-                <div class="project-card" data-project="3">
-                    <h3>Project 3</h3>
-                    <p></p>
+                
+                <div class="cv-content">
+                    <div class="cv-tab-content active" id="experience">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">February 2023 - October 2024</div>
+                                <div class="timeline-content">
+                                    <h3>Uniqgene</h3>
+                                    <h4>Product Developer & Researcher</h4>
+                                    <ul>
+                                        <li>Led 6-month scientific product development project</li>
+                                        <li>Developed new product target system for sports performance products</li>
+                                        <li>Created data visualizations using Python for analysis</li>
+                                        <li>Analyzed 40+ competitors and gathered insights from 200+ users</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">February 2022 - January 2023</div>
+                                <div class="timeline-content">
+                                    <h3>Uniqgene</h3>
+                                    <h4>Intern & Growth Hacker</h4>
+                                    <ul>
+                                        <li>Conducted literature research in sports genetics</li>
+                                        <li>Contributed to product vision and strategic execution</li>
+                                        <li>Optimized campaign performance through data analysis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-tab-content" id="education">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">October 2024 - Present</div>
+                                <div class="timeline-content">
+                                    <h3>HTW Berlin</h3>
+                                    <h4>Master of Life Science Management & Engineering</h4>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">September 2018 - 2023</div>
+                                <div class="timeline-content">
+                                    <h3>Bahçeşehir University</h3>
+                                    <h4>BS in Molecular Biology and Genetics</h4>
+                                    <p>• ApplyBAU Scholarship</p>
+                                    <p>• Capstone Project Grade: A</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-tab-content" id="projects">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">April – September 2024</div>
+                                <div class="timeline-content">
+                                    <h3>Research Paper & Poster</h3>
+                                    <h4>Integration of Genetic Testing with Wearable Technology</h4>
+                                    <p>Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology, Oxford</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">February – June 2023</div>
+                                <div class="timeline-content">
+                                    <h3>Capstone Project</h3>
+                                    <h4>CYP1A2 Genotypes & Caffeine Metabolism Study</h4>
+                                    <p>Completed with highest grade (A)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-tab-content" id="certificates">
+                        <div class="certificate-card">
+                            <h3>Miuul</h3>
+                            <p>• Workflow and Process Management with Git, GitHub, GitLab, and Jira (10 hours)</p>
+                            <p>• Product Ownership (12 hours)</p>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>Insider</h3>
+                            <p>Scrum Development Program (3 weeks)</p>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>Global AI Hub</h3>
+                            <p>Python Programming</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -181,97 +331,53 @@ I am a young scientist and entrepreneurial engineer in the fields of biotechnolo
         <section id="skills">
             <h2>Skills</h2>
             <div class="skills">
-                <span class="skill-tag"></span>
-                <span class="skill-tag"></span>
-                <span class="skill-tag">t</span>
-                <span class="skill-tag"></span>
-                <span class="skill-tag"></span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">Jupyter Notebook</span>
+                <span class="skill-tag">VS Code</span>
+                <span class="skill-tag">UCSC Genome Browser</span>
+                <span class="skill-tag">Ensembl</span>
+                <span class="skill-tag">Galaxy</span>
+                <span class="skill-tag">Jira</span>
+                <span class="skill-tag">Confluence</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Miro</span>
+            </div>
+        </section>
+
+        <section id="languages">
+            <h2>Languages</h2>
+            <div class="skills">
+                <span class="skill-tag">Turkish (Native)</span>
+                <span class="skill-tag">English (B2)</span>
+                <span class="skill-tag">Spanish (A1-A2)</span>
             </div>
         </section>
 
         <section class="contact">
-            <a href="mailto:uersoz55@email.com">Email</a>
+            <a href="mailto:uersoz55@gmail.com">Email</a>
             <a href="https://github.com/ugrersoz">GitHub</a>
-            <a href="https://www.linkedin.com/in/ersozugur/">LinkedIn</a>
+            <a href="https://linkedin.com/in/ersozugur">LinkedIn</a>
+            <a href="tel:+905531316644">WhatsApp</a>
         </section>
     </main>
 
-    <div class="project-details">
-        <div class="project-details-content">
-            <button class="close-button">&times;</button>
-            <h3></h3>
-            <div class="content"></div>
-        </div>
-    </div>
-
     <script>
-        const projectData = {
-            "1": {
-                title: "Proje 1",
-                content: `
-                    <h4>Proje Detayları</h4>
-                    <p>Bu projede kullanılan teknolojiler ve detaylı açıklamalar burada yer alabilir.</p>
-                    <p>Özellikler:</p>
-                    <ul>
-                        <li>Özellik 1</li>
-                        <li>Özellik 2</li>
-                        <li>Özellik 3</li>
-                    </ul>
-                    <a href="#" target="_blank">GitHub Repo</a>
-                `
-            },
-            "2": {
-                title: "Proje 2",
-                content: `
-                    <h4>Proje Detayları</h4>
-                    <p>İkinci projenin detaylı açıklaması ve kullanılan teknolojiler.</p>
-                    <p>Özellikler:</p>
-                    <ul>
-                        <li>Özellik 1</li>
-                        <li>Özellik 2</li>
-                        <li>Özellik 3</li>
-                    </ul>
-                    <a href="#" target="_blank">Canlı Demo</a>
-                `
-            },
-            "3": {
-                title: "Proje 3",
-                content: `
-                    <h4>Proje Detayları</h4>
-                    <p>Üçüncü projenin kapsamlı açıklaması ve teknik detayları.</p>
-                    <p>Özellikler:</p>
-                    <ul>
-                        <li>Özellik 1</li>
-                        <li>Özellik 2</li>
-                        <li>Özellik 3</li>
-                    </ul>
-                    <a href="#" target="_blank">Dökümantasyon</a>
-                `
-            }
-        };
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const projectId = card.dataset.project;
-                const project = projectData[projectId];
-                const modal = document.querySelector('.project-details');
-                const modalTitle = modal.querySelector('h3');
-                const modalContent = modal.querySelector('.content');
+        // CV Tabs
+        document.querySelectorAll('.cv-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Aktif tab'ı değiştir
+                document.querySelectorAll('.cv-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
                 
-                modalTitle.textContent = project.title;
-                modalContent.innerHTML = project.content;
-                modal.classList.add('active');
+                // İlgili içeriği göster
+                const tabContent = tab.dataset.tab;
+                document.querySelectorAll('.cv-tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabContent).classList.add('active');
             });
-        });
-
-        document.querySelector('.close-button').addEventListener('click', () => {
-            document.querySelector('.project-details').classList.remove('active');
-        });
-
-        document.querySelector('.project-details').addEventListener('click', (e) => {
-            if (e.target === document.querySelector('.project-details')) {
-                document.querySelector('.project-details').classList.remove('active');
-            }
         });
     </script>
 </body>
