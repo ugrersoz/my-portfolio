@@ -12,10 +12,25 @@
             font-family: 'Inter', sans-serif;
         }
 
+        :root {
+            --bg-color: #fafafa;
+            --text-color: #2c2c2c;
+            --card-bg: white;
+            --border-color: #eee;
+        }
+
         body {
             line-height: 1.6;
-            color: #2c2c2c;
-            background: #fafafa;
+            color: var(--text-color);
+            background: var(--bg-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: #2c2c2c;
+            --border-color: #444;
         }
 
         header {
@@ -23,6 +38,19 @@
             text-align: left;
             max-width: 800px;
             margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1, header p {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        header p {
+            animation-delay: 0.3s;
         }
 
         h1 {
@@ -39,7 +67,7 @@
         }
 
         .header-contact a {
-            color: #2c2c2c;
+            color: var(--text-color);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -60,15 +88,15 @@
             font-size: 1.5rem;
             margin-bottom: 2rem;
             font-weight: 600;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
         }
 
         .cv-container {
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
             padding: 2rem;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
         }
 
         .cv-tabs {
@@ -84,9 +112,14 @@
             padding: 0.5rem 1rem;
             cursor: pointer;
             font-size: 1rem;
-            color: #2c2c2c;
+            color: var(--text-color);
             border-radius: 4px;
             transition: all 0.3s ease;
+        }
+
+        .cv-tab:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
 
         .cv-tab.active {
@@ -113,13 +146,21 @@
             top: 0;
             height: 100%;
             width: 2px;
-            background: #eee;
+            background: var(--border-color);
         }
 
         .timeline-item {
             padding-left: 2rem;
             position: relative;
             margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .timeline-item::before {
@@ -130,7 +171,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #2c2c2c;
+            background: var(--text-color);
         }
 
         .timeline-date {
@@ -154,6 +195,98 @@
             margin-left: 1.2rem;
         }
 
+        /* Proje Stilleri */
+        .project-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .project-content {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-details {
+            flex: 1;
+        }
+
+        .project-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal Stilleri */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -162,10 +295,17 @@
 
         .skill-tag {
             background: #f5f5f5;
-            color: #2c2c2c;
+            color: var(--text-color);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: scale(1.1);
         }
 
         .certificate-card {
@@ -175,21 +315,17 @@
             margin-bottom: 1rem;
         }
 
-        .certificate-card h3 {
-            margin-bottom: 0.5rem;
-        }
-
         .contact {
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-color);
             display: flex;
             gap: 2rem;
             flex-wrap: wrap;
         }
 
         .contact a {
-            color: #2c2c2c;
+            color: var(--text-color);
             text-decoration: none;
         }
 
@@ -201,9 +337,15 @@
             .cv-tabs {
                 flex-direction: column;
             }
-            
             .header-contact {
                 flex-direction: column;
+            }
+            .project-content {
+                flex-direction: column;
+            }
+            .project-image {
+                width: 100%;
+                height: auto;
             }
         }
     </style>
@@ -216,8 +358,9 @@
             <a href="mailto:uersoz55@gmail.com">📧 Mail</a>
             <a href="https://linkedin.com/in/ersozugur">👔 LinkedIn</a>
             <a href="https://github.com/ugrersoz">💻 GitHub</a>
-            <a href="https://uersoz55.medium.com/">📰Medium</a>
+            <a href="https://uersoz55.medium.com/">📰 Medium</a>
         </div>
+        <button id="theme-toggle" style="position: fixed; top: 1rem; right: 1rem; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Toggle Theme</button>
     </header>
 
     <main>
@@ -245,10 +388,24 @@
                                     <h3>Uniqgene</h3>
                                     <h4>Product Developer & Researcher</h4>
                                     <ul>
-                                        <li>Led 6-month scientific product development project</li>
-                                        <li>Developed new product target system for sports performance products</li>
-                                        <li>Created data visualizations using Python for analysis</li>
-                                        <li>Analyzed 40+ competitors and gathered insights from 200+ users</li>
+                                        <li>Led a 6-month scientific product development project, presenting research to end users in an interactive format.</li>
+                                        <li>Designed and optimized products tailored to end-user profiles based on scientific research.</li>
+                                        <li>Developed a new product target system to enhance sports performance-related products.</li>
+                                        <li>Created insightful data visualizations using Python for comprehensive analysis (February - June).</li>
+                                        <li>Conducted competitor analysis (40+ competitors) and gathered insights from 200+ users over 10 months.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">July - August 2023</div>
+                                <div class="timeline-content">
+                                    <h3>Uniqgene</h3>
+                                    <h4>Research and Development Intern</h4>
+                                    <ul>
+                                        <li>Developed personalized reports for elite and semi-professional athletes.</li>
+                                        <li>Conducted literature searches to identify candidate genes for testing.</li>
+                                        <li>Designed primers and probes for DNA analysis.</li>
+                                        <li>Analyzed DNA samples using NanoDrop, DNA isolation, and qPCR techniques.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -258,9 +415,10 @@
                                     <h3>Uniqgene</h3>
                                     <h4>Intern & Growth Hacker</h4>
                                     <ul>
-                                        <li>Conducted literature research in sports genetics</li>
-                                        <li>Contributed to product vision and strategic execution</li>
-                                        <li>Optimized campaign performance through data analysis</li>
+                                        <li>Conducted literature research in sports genetics for product development.</li>
+                                        <li>Aligned plans with product vision and executed strategies.</li>
+                                        <li>Optimized campaign performance using data import/export techniques.</li>
+                                        <li>Assisted in research for NBA Launchpad and Barça Allianz Startup Challenge applications.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -289,22 +447,50 @@
                     </div>
                     
                     <div class="cv-tab-content" id="projects">
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-date">April – September 2024</div>
-                                <div class="timeline-content">
-                                    <h3>Research Paper & Poster</h3>
-                                    <h4>Integration of Genetic Testing with Wearable Technology</h4>
-                                    <p>Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology, Oxford</p>
+                        <div class="project-item">
+                            <div class="project-header">
+                                <div class="project-icon">🧬</div>
+                                <div>
+                                    <div class="project-title">Genetic Testing + Wearables</div>
+                                    <div class="project-date">April – September 2024</div>
                                 </div>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-date">February – June 2023</div>
-                                <div class="timeline-content">
-                                    <h3>Capstone Project</h3>
-                                    <h4>CYP1A2 Genotypes & Caffeine Metabolism Study</h4>
-                                    <p>Completed with highest grade (A)</p>
+                            <div class="project-content">
+                                <div class="project-details">
+                                    <p><strong>Advanced Biomarkers:</strong> Explored integrating genetic data with wearable tech for personalized sports and nutrition management. Presented at The Podium Institute Conference, Oxford, September 26-27, 2024.</p>
                                 </div>
+                                <img class="project-image" src="https://via.placeholder.com/100" alt="Research Poster" data-full-src="https://via.placeholder.com/800">
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-header">
+                                <div class="project-icon">☕</div>
+                                <div>
+                                    <div class="project-title">Caffeine Metabolism Study</div>
+                                    <div class="project-date">February – June 2023</div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-details">
+                                    <p><strong>Genetic Insights:</strong> Investigated CYP1A2 genotypes' impact on caffeine metabolism and sports performance for Turkish young adults. Achieved an A grade.</p>
+                                    <a href="#">Project Page</a>
+                                </div>
+                                <img class="project-image" src="https://via.placeholder.com/100" alt="Caffeine Study Graph" data-full-src="https://via.placeholder.com/800">
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-header">
+                                <div class="project-icon">📱</div>
+                                <div>
+                                    <div class="project-title">LiveUseful App</div>
+                                    <div class="project-date">May 2021</div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-details">
+                                    <p><strong>Sustainable Innovation:</strong> Designed a mobile app aligned with SDG "Healthy and Quality Life" during the MZV YetGen program.</p>
+                                </div>
+                                <img class="project-image" src="https://via.placeholder.com/100" alt="App Mockup" data-full-src="https://via.placeholder.com/800">
                             </div>
                         </div>
                     </div>
@@ -323,6 +509,14 @@
                             <h3>Global AI Hub</h3>
                             <p>Python Programming</p>
                         </div>
+                        <div class="certificate-card">
+                            <h3>MZV YetGen Program</h3>
+                            <p>21st Century Competencies Training (12 weeks, February - May 2021)</p>
+                        </div>
+                        <div class="certificate-card">
+                            <h3>Bahçeşehir University</h3>
+                            <p>Career and Development Club, Engineering Team Member (October 2020 - 2022)</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -331,20 +525,26 @@
         <section id="skills">
             <h2>Skills</h2>
             <div class="skills">
-                <span class="skill-tag">MS Office</span>
-                <span class="skill-tag">Google Workspace</span>
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">GitHub</span>
                 <span class="skill-tag">Python</span>
                 <span class="skill-tag">Jupyter Notebook</span>
                 <span class="skill-tag">VS Code</span>
+                <span class="skill-tag">Sublime Text</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
                 <span class="skill-tag">UCSC Genome Browser</span>
                 <span class="skill-tag">Ensembl</span>
                 <span class="skill-tag">Galaxy</span>
-                <span class="skill-tag">Jira</span>
-                <span class="skill-tag">Confluence</span>
+                <span class="skill-tag">NanoDrop</span>
+                <span class="skill-tag">DNA Isolation</span>
+                <span class="skill-tag">qPCR</span>
+                <span class="skill-tag">MS Office</span>
+                <span class="skill-tag">Google Workspace</span>
                 <span class="skill-tag">Figma</span>
                 <span class="skill-tag">Miro</span>
+                <span class="skill-tag">Eraser</span>
+                <span class="skill-tag">Slack</span>
+                <span class="skill-tag">Jira</span>
+                <span class="skill-tag">Confluence</span>
             </div>
         </section>
 
@@ -361,25 +561,61 @@
             <a href="mailto:uersoz55@gmail.com">Email</a>
             <a href="https://github.com/ugrersoz">GitHub</a>
             <a href="https://linkedin.com/in/ersozugur">LinkedIn</a>
-            <a href ="https://uersoz55.medium.com/">Medium</a> 
+            <a href="https://uersoz55.medium.com/">Medium</a>
         </section>
     </main>
 
+    <!-- Modal -->
+    <div class="modal" id="image-modal">
+        <img src="" alt="Full-size project image">
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         // CV Tabs
         document.querySelectorAll('.cv-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Aktif tab'ı değiştir
                 document.querySelectorAll('.cv-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
-                // İlgili içeriği göster
                 const tabContent = tab.dataset.tab;
                 document.querySelectorAll('.cv-tab-content').forEach(content => {
                     content.classList.remove('active');
                 });
                 document.getElementById(tabContent).classList.add('active');
             });
+        });
+
+        // Timeline animasyonu
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach(item => observer.observe(item));
+
+        // Tema değiştirici
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+
+        // Modal için görsel açma
+        const modal = document.getElementById('image-modal');
+        const modalImg = modal.querySelector('img');
+        document.querySelectorAll('.project-image').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImg.src = img.dataset.fullSrc;
+                modal.classList.add('active');
+            });
+        });
+
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
         });
     </script>
 </body>
