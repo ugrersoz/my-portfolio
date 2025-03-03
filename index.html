@@ -12,25 +12,10 @@
             font-family: 'Inter', sans-serif;
         }
 
-        :root {
-            --bg-color: #fafafa;
-            --text-color: #2c2c2c;
-            --card-bg: white;
-            --border-color: #eee;
-        }
-
         body {
             line-height: 1.6;
-            color: var(--text-color);
-            background: var(--bg-color);
-            transition: background 0.3s, color 0.3s;
-        }
-
-        body.dark-theme {
-            --bg-color: #1a1a1a;
-            --text-color: #ffffff;
-            --card-bg: #2c2c2c;
-            --border-color: #444;
+            color: #2c2c2c;
+            background: #fafafa;
         }
 
         header {
@@ -67,7 +52,7 @@
         }
 
         .header-contact a {
-            color: var(--text-color);
+            color: #2c2c2c;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -88,15 +73,15 @@
             font-size: 1.5rem;
             margin-bottom: 2rem;
             font-weight: 600;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
         }
 
         .cv-container {
-            background: var(--card-bg);
+            background: white;
             border-radius: 8px;
             padding: 2rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid #eee;
         }
 
         .cv-tabs {
@@ -112,7 +97,7 @@
             padding: 0.5rem 1rem;
             cursor: pointer;
             font-size: 1rem;
-            color: var(--text-color);
+            color: #2c2c2c;
             border-radius: 4px;
             transition: all 0.3s ease;
         }
@@ -146,7 +131,7 @@
             top: 0;
             height: 100%;
             width: 2px;
-            background: var(--border-color);
+            background: #eee;
         }
 
         .timeline-item {
@@ -171,7 +156,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: var(--text-color);
+            background: #2c2c2c;
         }
 
         .timeline-date {
@@ -197,8 +182,8 @@
 
         /* Proje Stilleri */
         .project-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: white;
+            border: 1px solid #eee;
             border-radius: 8px;
             padding: 1rem;
             margin-bottom: 1rem;
@@ -251,16 +236,18 @@
         }
 
         .project-image {
-            width: 100px;
-            height: 100px;
+            width: 150px; /* Daha büyük boyut */
+            height: 150px; /* Daha büyük boyut */
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 8px; /* Daha yuvarlatılmış köşeler */
+            border: 2px solid #eee; /* İnce çerçeve */
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Gölge efekti eklendi */
         }
 
         .project-image:hover {
-            transform: scale(1.05);
+            transform: scale(1.1); /* Daha belirgin büyüme */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Gölge efekti */
         }
 
         /* Modal Stilleri */
@@ -295,7 +282,7 @@
 
         .skill-tag {
             background: #f5f5f5;
-            color: var(--text-color);
+            color: #2c2c2c;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -313,24 +300,6 @@
             padding: 1.5rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-        }
-
-        .contact {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .contact a:hover {
-            text-decoration: underline;
         }
 
         @media (max-width: 600px) {
@@ -360,17 +329,16 @@
             <a href="https://github.com/ugrersoz">💻 GitHub</a>
             <a href="https://uersoz55.medium.com/">📰 Medium</a>
         </div>
-        <button id="theme-toggle" style="position: fixed; top: 1rem; right: 1rem; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Toggle Theme</button>
     </header>
 
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>Imagine a world where science meets innovation, where the code of life unlocks new possibilities for human performance. I’m Uğur Ersöz, a passionate Product Developer and Researcher with a knack for blending bioinformatics with cutting-edge technology. With a solid foundation in Molecular Biology and Genetics from Bahçeşehir University—where I graduated with top honors—I’m now diving deeper into Life Science Management & Engineering at HTW Berlin. My journey is fueled by curiosity, driven by data, and shaped by a vision to create solutions that transform sports, nutrition, and health. From coding insightful visualizations in Python to leading interactive research projects, I thrive at the intersection of science and technology, always eager to tackle the next big challenge.</p>
+            <p>Imagine a world where science meets innovation, where the code of life unlocks new possibilities for human performance. I’m Uğur Ersöz, a passionate Product Developer and Researcher with a knack for blending bioinformatics with cutting-edge technology. With a foundation in Molecular Biology and Genetics from Bahçeşehir University, I’m now diving deeper into Life Science Management & Engineering at HTW Berlin. My journey is fueled by curiosity, driven by data, and shaped by a vision to create solutions that transform sports, nutrition, and health. From coding insightful visualizations in Python to leading interactive research projects, I thrive at the intersection of science and technology, always eager to tackle the next big challenge.</p>
         </section>
 
         <section id="cv">
-            <h2>CV-Resume</h2>
+            <h2>Career Profile</h2>
             <div class="cv-container">
                 <div class="cv-tabs">
                     <button class="cv-tab active" data-tab="experience">Experience</button>
@@ -439,8 +407,7 @@
                                 <div class="timeline-content">
                                     <h3>Bahçeşehir University</h3>
                                     <h4>BS in Molecular Biology and Genetics</h4>
-                                    <p>• ApplyBAU Scholarship</p>
-                                    <p>• Capstone Project Grade: A</p>
+                                    <p>• Admitted with ApplyBAU Scholarship</p>
                                 </div>
                             </div>
                         </div>
@@ -459,7 +426,7 @@
                                 <div class="project-details">
                                     <p><strong>Advanced Biomarkers:</strong> Investigated the integration of genetic testing with wearable technology (e.g., heart rate monitors, activity trackers) to develop personalized sports and nutrition management solutions. Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology, Oxford, September 26-27, 2024, in collaboration with Yasemin Uk, Irmak Ege, Gözde Şimşek, and Oğuzhan Doğan.</p>
                                 </div>
-                                <img class="project-image" src="https://via.placeholder.com/100" alt="Research Poster" data-full-src="https://via.placeholder.com/800">
+                                <img class="project-image" src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/capstone-project2.jpeg" alt="Research Poster" data-full-src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/capstone-project2.jpeg">
                             </div>
                         </div>
                         <div class="project-item">
@@ -475,7 +442,7 @@
                                     <p><strong>Genetic Insights:</strong> Investigated CYP1A2 genotypes' impact on caffeine metabolism and sports performance for Turkish young adults. Achieved an A grade.</p>
                                     <a href="https://github.com/ugrersoz/Capstone_Project">Project Page</a>
                                 </div>
-                                <img class="project-image" src="https://via.placeholder.com/100" alt="Capstone Cover" data-full-src="https://via.placeholder.com/800">
+                                <img class="project-image" src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/capstone-project1.jpeg" alt="Capstone Cover" data-full-src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/capstone-project1.jpeg">
                             </div>
                         </div>
                         <div class="project-item">
@@ -490,7 +457,7 @@
                                 <div class="project-details">
                                     <p><strong>Sustainable Innovation:</strong> Designed a mobile app aligned with SDG "Healthy and Quality Life" during the MZV YetGen program.</p>
                                 </div>
-                                <img class="project-image" src="https://via.placeholder.com/100" alt="App Mockup" data-full-src="https://via.placeholder.com/800">
+                                <img class="project-image" src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/oxford-uniqgene-poster.png" alt="App Mockup" data-full-src="https://raw.githubusercontent.com/ugrersoz/my-portfolio/main/images/oxford-uniqgene-poster.png">
                             </div>
                         </div>
                     </div>
@@ -557,13 +524,6 @@
                 <span class="skill-tag">German (In Progress – HTW Berlin)</span>
             </div>
         </section>
-
-        <section class="contact">
-            <a href="mailto:uersoz55@gmail.com">Email</a>
-            <a href="https://github.com/ugrersoz">GitHub</a>
-            <a href="https://linkedin.com/in/ersozugur">LinkedIn</a>
-            <a href="https://uersoz55.medium.com/">Medium</a>
-        </section>
     </main>
 
     <!-- Modal -->
@@ -598,12 +558,6 @@
         }, { threshold: 0.2 });
 
         timelineItems.forEach(item => observer.observe(item));
-
-        // Tema değiştirici
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-        });
 
         // Modal için görsel açma
         const modal = document.getElementById('image-modal');
