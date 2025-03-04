@@ -4,7 +4,7 @@ This is Uğur Ersöz’s personal portfolio website. The site showcases my skill
 
 [https://ugrersoz.github.io/my-portfolio/](https://ugrersoz.github.io/my-portfolio/) 🚀
 
-## Son Güncelleme ve Versiyon
+## Last Update and Version
 📅 [![Last Commit](https://img.shields.io/github/last-commit/ugrersoz/my-portfolio?color=blue)](https://github.com/ugrersoz/my-portfolio/commits/main)  
 🔖 [![Version](https://img.shields.io/github/v/tag/ugrersoz/my-portfolio?label=Version&color=green)](https://github.com/ugrersoz/my-portfolio/releases)
 
