@@ -4,10 +4,6 @@ This is Uğur Ersöz’s personal portfolio website. The site showcases my skill
 
 [https://ugrersoz.github.io/my-portfolio/](https://ugrersoz.github.io/my-portfolio/) 🚀
 
-## Last Update and Version
-📅 [![Last Commit](https://img.shields.io/github/last-commit/ugrersoz/my-portfolio?color=blue)](https://github.com/ugrersoz/my-portfolio/commits/main)  
-🔖 [![Version](https://img.shields.io/github/v/tag/ugrersoz/my-portfolio?label=Version&color=green)](https://github.com/ugrersoz/my-portfolio/releases)
-
 ## About 🧑‍💻
 The site features a modern, responsive design and offers a user-friendly portfolio experience. It includes the following sections:
 
@@ -30,6 +26,10 @@ The site features a modern, responsive design and offers a user-friendly portfol
 
 ## License 📜
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Last Update and Version
+📅 [![Last Commit](https://img.shields.io/github/last-commit/ugrersoz/my-portfolio?color=blue)](https://github.com/ugrersoz/my-portfolio/commits/main)  
+🔖 [![Version](https://img.shields.io/github/v/tag/ugrersoz/my-portfolio?label=Version&color=green)](https://github.com/ugrersoz/my-portfolio/releases)
 
 [![GitHub Stars](https://img.shields.io/github/stars/ugrersoz/my-portfolio?color=yellow)](https://github.com/ugrersoz/my-portfolio/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/ugrersoz/my-portfolio?color=purple)](https://github.com/ugrersoz/my-portfolio/network/members)
