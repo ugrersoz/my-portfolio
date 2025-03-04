@@ -22,7 +22,7 @@ jobs:
         run: |
           sed -i "s|\(📅 **Update Date**: \).*|\1${LAST_COMMIT_DATE}|" README.md
           sed -i "s|\(🔖 **Version**: \).*|\1${LATEST_TAG}|" README.md
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: ugrersoz/git-auto-commit-action@v4
         with:
           commit_message: "Update README with latest commit date and version"
           branch: main
