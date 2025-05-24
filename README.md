@@ -2,7 +2,7 @@
 
 This is Uğur Ersöz’s personal portfolio website. The site showcases my skills, career background, projects, certifications, language proficiency, and contact information, built using HTML, CSS, and JavaScript. You can access the live version at:
 
-[https://ugrersoz.github.io/my-portfolio/v1/](https://ugrersoz.github.io/my-portfolio/v1/) 🚀
+[https://ugrersoz.github.io/my-portfolio/v1/index.html](https://ugrersoz.github.io/my-portfolio/v1/index.html) 🚀
 
 An earlier version (v0) of this portfolio, featuring a different layout and design, can be viewed [here](v0/index.html).
 
