@@ -261,7 +261,7 @@
             </h2>
             <div class="project-item">
                 <div class="project-header">
-                    <img class="project-image" src="images/oxford-uniqgene-poster.png" alt="Oxford Uniqgene Poster" data-full-src="images/oxford-uniqgene-poster.png">
+                    <img class="project-image" src="../images/oxford-uniqgene-poster.png" alt="Oxford Uniqgene Poster" data-full-src="../images/oxford-uniqgene-poster.png">
                     <div class="project-info">
                         <div class="project-title"><span class="icon">⌚</span> Integration of Genetic Testing with Wearable Technology</div>
                         <div class="project-duration">Apr - Sep 2024</div>
@@ -274,7 +274,7 @@
             </div>
             <div class="project-item">
                 <div class="project-header">
-                    <img class="project-image" src="images/capstone-project1.jpeg" alt="CYP1A2 Genotypes Study" data-full-src="images/capstone-project1.jpeg">
+                    <img class="project-image" src="../images/capstone-project1.jpeg" alt="CYP1A2 Genotypes Study" data-full-src="../images/capstone-project1.jpeg">
                     <div class="project-info">
                         <div class="project-title"><span class="icon">☕</span> CYP1A2 Genotypes & Caffeine Metabolism Study</div>
                         <div class="project-duration">Feb - Jun 2023</div>
@@ -287,7 +287,7 @@
             </div>
             <div class="project-item">
                 <div class="project-header">
-                    <img class="project-image" src="images/live-useful-project.jpeg" alt="LiveUseful App" data-full-src="images/live-useful-project.jpeg">
+                    <img class="project-image" src="../images/live-useful-project.jpeg" alt="LiveUseful App" data-full-src="../images/live-useful-project.jpeg">
                     <div class="project-info">
                         <div class="project-title"><span class="icon">📊</span> LiveUseful App</div>
                         <div class="project-duration">May 2021</div>
@@ -311,7 +311,21 @@
             var modal = document.getElementById('image-modal');
             var modalImg = modal.querySelector('img');
             modal.classList.add('active');
-            modalImg.src = img.getAttribute('data-full-src') || img.src;
+            // Ensure that the modal also uses the correct path if data-full-src is missing for some reason
+            // However, all current images have data-full-src, so this is mostly for robustness
+            let fullSrc = img.getAttribute('data-full-src');
+            if (fullSrc) {
+                 modalImg.src = fullSrc;
+            } else {
+                 // Fallback if data-full-src is not present, prepending ../
+                 // This case should not happen with the current HTML structure
+                 let srcAttr = img.getAttribute('src');
+                 if (srcAttr.startsWith('images/')) {
+                    modalImg.src = '../' + srcAttr;
+                 } else {
+                    modalImg.src = srcAttr; // Already relative or absolute
+                 }
+            }
         });
     });
     document.getElementById('image-modal').addEventListener('click', function() {
@@ -371,7 +385,7 @@
                         Spanish (A1-A2)
                     </div>
                 </div>
-            <a href="v0/index.html">Go to v0 Version</a>
+            <a href="../v0/index.html">Go to v0 Version</a>
             </div>
         </section>
     </div>
