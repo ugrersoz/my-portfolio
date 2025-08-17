@@ -89,6 +89,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Your Name**
 - GitHub: [@ugrersoz](https://github.com/ugrersoz)
-- Email: uersoz55@gmail.com.com
+- Email: uersoz55@gmail.com
 
 
