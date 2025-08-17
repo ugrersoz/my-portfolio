@@ -1,35 +1,94 @@
-# My Portfolio 🌟
+# 🎨 My Portfolio
 
-This is Uğur Ersöz’s personal portfolio website. The site showcases my skills, career background, projects, certifications, language proficiency, and contact information, built using HTML, CSS, and JavaScript. You can access the live version at:
+A modern, responsive portfolio website showcasing my projects and skills.
 
-[https://ugrersoz.github.io/my-portfolio/](https://ugrersoz.github.io/my-portfolio/) 🚀
+## 🌐 Live Demo
 
-## About 🧑‍💻
-The site features a modern, responsive design and offers a user-friendly portfolio experience. It includes the following sections:
+**Portfolio**: [https://ugrersoz.github.io/my-portfolio](https://ugrersoz.github.io/my-portfolio)
 
-- **About Me**: An introduction to myself, my professional background, and my vision. 📜
-- **Career Profile**: A tabbed timeline covering my experience, education, projects, and activities/certifications. 📅
-- **Projects**: Details of key projects (e.g., Uniqgene Research Poster, Capstone Project, LiveUseful App) with images that can be enlarged via a clickable modal. 🖼️
-- **Skills**: Technical and professional skills presented as tags (e.g., Python, Git, qPCR, Figma). 🛠️
-- **Languages**: My proficiency in Turkish, English, Spanish, and German. 🌍
+## 📋 Features
 
-## Features ✨
-- **Modern Design**: A sleek, minimalist design with Inter typography and animated transitions (fade-in, timeline animations). 🎨
-- **Responsiveness**: Optimized for both mobile and desktop devices, with layouts adjusted for screens below 600px. 📱💻
-- **Interactive Features**: Tabbed content (for the CV section), timeline animations, and project images with an enlargeable modal window. 🔄
-- **Accessibility**: SEO-friendly meta tags and accessible HTML5 semantic structure. ✅
+- ✨ Modern and responsive design
+- 🎯 Clean and professional layout
+- 📱 Mobile-friendly interface
+- 🚀 Fast loading and optimized
+- 🔧 Built with modern web technologies
 
-## Technologies Used 🛠️
+## 🗂️ Version History
+
+This portfolio has evolved through multiple iterations:
+
+| Version | Status | Description | Location |
+|---------|--------|-------------|----------|
+| v5.0 | **Current** | Latest version with enhanced features | `index.html` |
+| v4.0 | Archive | Previous iteration | `versions/v4/` |
+| v3.0 | Archive | Third iteration | `versions/v3/` |
+| v2.0 | Archive | Second iteration | `versions/v2/` |
+| v1.0 | Archive | First major update | `versions/v1/` |
+| v0.0 | Archive | Initial version | `versions/v0/` |
+
+
+## 📁 Project Structure
+
+```
+my-portfolio/
+├── index.html          # Main portfolio page (v5)
+├── README.md           # Project documentation
+├── LICENSE            # MIT License
+├── images/            # Portfolio images and assets
+├── versions/          # Previous versions archive
+│   ├── v0/           # Initial version
+│   │   └── index.html
+│   ├── v1/           # First major update
+│   │   └── index.html
+│   ├── v2/           # Version 2.0
+│   │   └── index.html
+│   ├── v3/           # Version 3.0
+│   │   └── index.html
+│   ├── v4/           # Version 4.0
+│   │   └── index.html
+│   └── v5/           # Version 5.0 (Current)
+│       └── index.html
+└── .github/
+    └── workflows/     # GitHub Actions for deployment
+```
+
+## 🔧 Technologies Used
+
 - HTML5
-- CSS3 (inline styling)
-- JavaScript (for animations and interactions)
+- CSS3
+- JavaScript
+- Responsive Design
+- GitHub Pages (Deployment)
 
-## License 📜
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## 📈 Development Timeline
 
-## Last Update and Version
-📅 [![Last Commit](https://img.shields.io/github/last-commit/ugrersoz/my-portfolio?color=blue)](https://github.com/ugrersoz/my-portfolio/commits/main)  
-🔖 [![Version](https://img.shields.io/github/v/tag/ugrersoz/my-portfolio?label=Version&color=green)](https://github.com/ugrersoz/my-portfolio/releases)
+- **v5.0** (Latest) - Enhanced UI/UX and performance optimizations
+- **v4.0** - Added new project sections and improved navigation
+- **v3.0** - Responsive design improvements and mobile optimization  
+- **v2.0** - Second iteration with improved styling
+- **v1.0** - First major update with enhanced features
+- **v0.0** - Initial portfolio version
 
-[![GitHub Stars](https://img.shields.io/github/stars/ugrersoz/my-portfolio?color=yellow)](https://github.com/ugrersoz/my-portfolio/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/ugrersoz/my-portfolio?color=purple)](https://github.com/ugrersoz/my-portfolio/network/members)
+## 🚢 Deployment
+
+This portfolio is automatically deployed using GitHub Actions. Every push to the `main` branch triggers a new deployment.
+
+### Manual Deployment
+```bash
+# Build and deploy
+npm run build
+npm run deploy
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Your Name**
+- GitHub: [@ugrersoz](https://github.com/ugrersoz)
+- Email: uersoz55@gmail.com.com
+
+
