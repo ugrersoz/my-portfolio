@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugur Ersoz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .name { font-size: 2.5rem; font-weight: 600; color: #000; margin-bottom: 8px; }
+        .alt-names { font-size: 0.9rem; color: #666; margin-bottom: 12px; }
+        .title { font-size: 1.2rem; font-weight: 500; color: #333; margin-bottom: 24px; }
+        .contact { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .contact-item { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 8px; background: #fff; text-decoration: none; color: #333; transition: all 0.3s ease; font-weight: 500; }
+        .contact-item img { width: 18px; height: 18px; }
+        .contact-item:hover { border-color: #4285f4; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+        .section { margin-bottom: 60px; }
+        .section-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+
+        .experience-item, .education-item, .project-card, .skill-category {
+            border: 1px solid #ddd;
+            background: linear-gradient(180deg, #ffffff, #fafafa);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .experience-item:hover, .education-item:hover, .project-card:hover, .skill-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #4285f4;
+            background: linear-gradient(180deg, #ffffff, #f9fbff);
+        }
+        .job-header, .education-header, .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .job-title, .degree, .card-title { font-weight: 600; font-size: 1.1rem; }
+        .company, .card-company { font-size: 0.95rem; color: #555; margin-bottom: 8px; }
+        .job-duration, .education-duration, .card-duration { font-size: 0.9rem; color: #666; background: #f8f9fa; padding: 3px 10px; border-radius: 10px; white-space: nowrap; }
+        .job-description, .education-description { margin-top: 12px; }
+        .job-description ul, .education-description ul { margin-left: 20px; margin-top: 8px; }
+        .job-description li, .education-description li { margin-bottom: 6px; }
+
+        /* Projects layout with improved image positioning */
+        .project-card {
+            display: block;
+        }
+        .project-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .project-image-container {
+            flex-shrink: 0;
+            width: 200px;
+        }
+        .project-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .project-image:hover {
+            transform: scale(1.05);
+            border-color: #4285f4;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+        .project-info-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .project-title-section {
+            flex: 1;
+        }
+        .card-description { 
+            font-size: 0.9rem; 
+            color: #555; 
+            margin-top: 12px; 
+            line-height: 1.5;
+        }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .skill-list { margin-top: 8px; }
+        .skill-item { display: inline-block; background: #f0f7ff; color: #1a73e8; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; margin: 2px 4px 2px 0; border: 1px solid #e1f0ff; }
+
+        /* Project Links */
+        .project-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .project-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; background: #f8f9fa; color: #4285f4; text-decoration: none; border-radius: 6px; font-size: 0.85rem; border: 1px solid #e1f0ff; transition: all 0.3s ease; }
+        .project-link:hover { background: #4285f4; color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3); }
+
+        /* Modal Styles */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+            animation: fadeIn 0.3s ease;
+            cursor: pointer;
+        }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-content { 
+            position: relative; 
+            max-width: 90%; 
+            max-height: 90%; 
+            animation: slideIn 0.3s ease;
+            cursor: default;
+        }
+        .close { 
+            position: absolute; 
+            top: -40px; 
+            right: -10px; 
+            color: white; 
+            font-size: 35px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+        .close:hover { color: #ddd; }
+        #modalImage { 
+            width: auto; 
+            height: auto; 
+            max-width: 100%; 
+            max-height: 100%; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container { padding: 40px 16px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .job-header, .education-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            
+            .project-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .project-image-container {
+                width: 100%;
+            }
+            .project-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .card-duration {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="name">Ugur Ersoz</h1>
+            <p class="alt-names">(Türkçe: Uğur Ersöz / Deutsch: Ugur Ersöz)</p>
+            <p class="title">Product Developer & Life Science Researcher</p>
+            <div class="contact">
+                <a class="contact-item" href="mailto:uersoz55@gmail.com"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"> Mail</a>
+                <a class="contact-item" href="https://www.linkedin.com/in/ersozugur" target="_blank"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"> LinkedIn</a>
+                <a class="contact-item" href="https://github.com/ugrersoz" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"> GitHub</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">💼 Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Product Developer & Researcher</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Jan 2023 - Oct 2024</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Led scientific product development projects, presenting research to end users in interactive formats</li>
+                        <li>Designed and optimized products tailored to end-user profiles based on scientific research</li>
+                        <li>Developed new product target system contributing to enhanced sports performance-related products effectiveness</li>
+                        <li>Conducted significant research project using Python for data visualizations that facilitated comprehensive analysis and decision-making</li>
+                        <li>Contributed to Interactive Report product development, analyzing 40+ competitors and gathering insights from 200+ users</li>
+                        <li>Led content development throughout 10-month project lifecycle</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Research and Development Intern</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Jul - Aug 2023</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Gained hands-on experience in biotechnology industry, focusing on personalized reports for elite and semi-professional athletes</li>
+                        <li>Conducted literature searches to analyze results and identify candidate genes for testing</li>
+                        <li>Designed primers and probes for DNA analysis</li>
+                        <li>Analyzed DNA samples and generated results as part of the R&D team</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Intern & Growth Hacker</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Feb 2022 - Jan 2023</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Conducted literature research in sports genetics field providing valuable insights for product development decisions</li>
+                        <li>Contributed to aligning plans with product vision and goals through strategic execution</li>
+                        <li>Utilized data import/export techniques to optimize campaign performance and aid decision-making processes</li>
+                        <li>Assisted in research process for NBA Launchpad and Barça Allianz Startup Challenge program applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Engineering Team Member</div>
+                        <div class="company">Bahçeşehir University - Career and Development Club</div>
+                    </div>
+                    <div class="job-duration">Oct 2020 - 2022</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Organized and contributed to multiple successful events including "Marketing Talks" and "Start-Up Summit"</li>
+                        <li>Played significant role in organizing team for "VI. Career Days" ensuring effective execution</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🎓 Education</h2>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="degree">Master of Life Science Engineering & Management</div>
+                        <div class="company">HTW Berlin</div>
+                    </div>
+                    <div class="education-duration">Oct 2024 - Present</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="degree">Bachelor of Science – Molecular Biology and Genetics</div>
+                        <div class="company">Bahçeşehir University</div>
+                    </div>
+                    <div class="education-duration">Sep 2018 - 2023</div>
+                </div>
+                <div class="education-description">
+                    <ul>
+                        <li>ApplyBAU Scholarship recipient</li>
+                        <li>Capstone Project Grade: A</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🚀</span>
+                Projects
+            </h2>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=Oxford+Poster" alt="Oxford Uniqgene Poster" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">⌚</span> 
+                                    Integration of Genetic Testing with Wearable Technology
+                                </div>
+                                <div class="card-company">
+                                    <span>📊</span>
+                                    Uniqgene Research Paper & Poster
+                                </div>
+                            </div>
+                            <div class="card-duration">Apr - Sep 2024</div>
+                        </div>
+                        <div class="card-description">
+                            Advanced biomarkers for personalized sports and nutrition management. Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology in Oxford. Examined integration of genetic data with wearables for performance optimization and injury prevention.
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ugrersoz/genetic-wearable-integration" target="_blank" class="project-link">
+                                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" height="16" alt="GitHub">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=CYP1A2+Study" alt="CYP1A2 Genotypes Study" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">☕</span> 
+                                    CYP1A2 Genotypes & Caffeine Metabolism Study
+                                </div>
+                                <div class="card-company">
+                                    <span>🎓</span>
+                                    Bahçeşehir University Capstone Project
+                                </div>
+                            </div>
+                            <div class="card-duration">Feb - Jun 2023</div>
+                        </div>
+                        <div class="card-description">
+                            Genetic approach to optimal caffeine consumption practices for Turkish young adult population. Completed with highest grade A and presented to departmental jury. Focused on the relation between genotype and caffeine metabolism/sports performance.
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ugrersoz/cyp1a2-caffeine-study" target="_blank" class="project-link">
+                                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" height="16" alt="GitHub">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=LiveUseful+App" alt="LiveUseful App" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">📊</span> 
+                                    LiveUseful App
+                                </div>
+                                <div class="card-company">
+                                    <span>📈</span>
+                                    MZV YetGen
+                                </div>
+                            </div>
+                            <div class="card-duration">May 2021</div>
+                        </div>
+                        <div class="card-description">
+                            Collaborated with team members during the MZV YetGen (Yetkin Gençler) training program to conceptualize and design a mobile application project aligned with the Sustainable Development Goals, specifically targeting the goal of "Healthy and Quality Life".
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">⚡ Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="job-title">🗣️ Languages</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Turkish (Native)</span>
+                        <span class="skill-item">English (C1)</span>
+                        <span class="skill-item">German (A2)</span>
+                        <span class="skill-item">Spanish (A1)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">💻 Programming</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">Git & GitHub</span>
+                        <span class="skill-item">CMD</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🐍 Python Libraries</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Pandas</span>
+                        <span class="skill-item">NumPy</span>
+                        <span class="skill-item">Matplotlib</span>
+                        <span class="skill-item">Scikit-learn</span>
+                        <span class="skill-item">Streamlit</span>
+                        <span class="skill-item">Jupyter Notebook</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🧬 Bioinformatics</div>
+                    <div class="skill-list">
+                        <span class="skill-item">UCSC Genome Browser</span>
+                        <span class="skill-item">Ensembl</span>
+                        <span class="skill-item">Galaxy</span>
+                        <span class="skill-item">DNA Analysis</span>
+                        <span class="skill-item">Primer Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🛠️ Tools & Software</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Microsoft Office</span>
+                        <span class="skill-item">Google Workspace</span>
+                        <span class="skill-item">Figma</span>
+                        <span class="skill-item">Miro</span>
+                        <span class="skill-item">Eraser</span>
+                        <span class="skill-item">VSCode</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">📊 Project Management</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Agile & Scrum</span>
+                        <span class="skill-item">Jira</span>
+                        <span class="skill-item">Confluence</span>
+                        <span class="skill-item">Slack</span>
+                        <span class="skill-item">Product Ownership</span>
+                        <span class="skill-item">Workflow Management</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 60px; padding: 20px 0; border-top: 1px solid #eee; color: #666; font-size: 0.9rem;">
+            © Developed by Ugur Ersoz. All information on this site is protected and may not be copied without permission.
+        </footer>
+    </div>
+    
+    <!-- Modal HTML -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Project Image">
+        </div>
+    </div>
+ 
+    <script>
+        function openModal(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('show');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Prevent modal from closing when clicking on the image
+        document.getElementById('modalImage').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>
