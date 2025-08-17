@@ -1,1341 +1,517 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ugur Ersoz - My Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #ffffff;
-      --surface: #f7f8fa;
-      --text: #0f1724;
-      --muted: #6b7280;
-      --accent: #1a73e8;
-      --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
-      --radius: 12px;
-      --shadow: 0 6px 18px rgba(15,23,36,0.06);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    [data-theme="dark"]{
-      --bg:#0b0f13;
-      --surface:#0f1720;
-      --text:#e6eef6;
-      --muted:#9aa6b2;
-      --accent:#5ea7ff;
-      --card:#0f1316;
-      --glass: rgba(255,255,255,0.03);
-      --shadow: 0 8px 24px rgba(0,0,0,0.6);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden
-    }
-    
-    /* Header */
-    header{
-      position:fixed;left:0;right:0;top:0;backdrop-filter: blur(12px);
-      background:linear-gradient(180deg, var(--glass), transparent);
-      border-bottom:1px solid rgba(0,0,0,0.04);z-index:40;
-      transition:var(--transition)
-    }
-    [data-theme="dark"] header{
-      background:linear-gradient(180deg, rgba(10,12,14,0.8), transparent);
-      border-bottom:1px solid rgba(255,255,255,0.03)
-    }
-    .container{max-width:1200px;margin:0 auto;padding:20px}
-    .nav{display:flex;align-items:center;gap:20px;padding:16px 0}
-    .brand{font-weight:800;font-size:18px;cursor:pointer;transition:var(--transition)}
-    .brand:hover{color:var(--accent)}
-    nav{display:flex;gap:8px}
-    nav a{
-      color:var(--muted);text-decoration:none;padding:10px 16px;border-radius:12px;
-      font-weight:500;transition:var(--transition);position:relative
-    }
-    nav a:hover, nav a.active{color:var(--text);background:var(--glass)}
-    nav a.active::after{
-      content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-      width:6px;height:6px;border-radius:50%;background:var(--accent)
-    }
-    .actions{margin-left:auto;display:flex;gap:12px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;padding:10px 16px;
-      border-radius:12px;background:var(--card);box-shadow:var(--shadow);
-      border:1px solid rgba(0,0,0,0.03);cursor:pointer;transition:var(--transition);
-      font-weight:500
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(15,23,36,0.1)}
-    [data-theme="dark"] .btn{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .btn:hover{box-shadow:0 8px 25px rgba(0,0,0,0.4)}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugur Ersoz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .name { font-size: 2.5rem; font-weight: 600; color: #000; margin-bottom: 8px; }
+        .alt-names { font-size: 0.9rem; color: #666; margin-bottom: 12px; }
+        .title { font-size: 1.2rem; font-weight: 500; color: #333; margin-bottom: 24px; }
+        .contact { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .contact-item { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid #ddd; border-radius: 8px; background: #fff; text-decoration: none; color: #333; transition: all 0.3s ease; font-weight: 500; }
+        .contact-item img { width: 18px; height: 18px; }
+        .contact-item:hover { border-color: #4285f4; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
 
-    /* Main Content */
-    main{padding-top:100px;min-height:100vh;transition:var(--transition)}
-    
-    /* Page System */
-    .page{display:none;animation:fadeIn 0.5s ease-out}
-    .page.active{display:block}
-    
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(20px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-    
-    @keyframes slideIn{
-      from{opacity:0;transform:translateX(-30px)}
-      to{opacity:1;transform:translateX(0)}
-    }
-    
-    /* Home Page */
-    .hero{
-      display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:center;
-      padding:60px 0;min-height:calc(100vh - 200px)
-    }
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;text-align:center}
-      .hero .right{order:-1}
-    }
-    
-    .hero-content{animation:slideIn 0.8s ease-out}
-    h1{
-      font-size:clamp(36px, 6vw, 56px);margin:0;font-weight:800;
-      background:linear-gradient(135deg,var(--text),var(--accent));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text
-    }
-    .subtitle{color:var(--muted);margin-top:8px;font-size:16px}
-    .role{
-      font-size:24px;margin-top:24px;font-weight:600;color:var(--text);
-      background:var(--surface);padding:16px 24px;border-radius:16px;
-      display:inline-block
-    }
-    .about{
-      margin-top:32px;padding:24px;background:var(--surface);
-      border-radius:16px;box-shadow:var(--shadow)
-    }
-    .socials{display:flex;gap:16px;margin-top:24px;flex-wrap:wrap}
-    .icon-btn{
-      display:inline-flex;align-items:center;gap:12px;padding:12px 18px;
-      border-radius:12px;background:var(--card);text-decoration:none;color:var(--text);
-      box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);
-      transition:var(--transition);font-weight:500
-    }
-    .icon-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,23,36,0.15)}
-    [data-theme="dark"] .icon-btn{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .icon-btn:hover{box-shadow:0 12px 32px rgba(0,0,0,0.5)}
-    .icon-btn img{width:20px;height:20px}
+        .section { margin-bottom: 60px; }
+        .section-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
 
-    .profile-section{
-      display:flex;justify-content:center;align-items:center;
-      animation:slideIn 0.8s ease-out 0.2s both
-    }
-    .profile-card{
-      text-align:center;max-width:280px;padding:24px;
-      background:var(--card);border-radius:24px;box-shadow:var(--shadow)
-    }
-    .profile-avatar{
-      width:180px;height:180px;border-radius:50%;margin:0 auto 20px;
-      background:linear-gradient(135deg,var(--accent),#a78bfa);
-      box-shadow:0 20px 40px rgba(26,115,232,0.3);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:800;color:white;font-size:32px;
-      transition:var(--transition)
-    }
-    .profile-avatar:hover{transform:scale(1.05)}
+        .experience-item, .education-item, .project-card, .skill-category {
+            border: 1px solid #ddd;
+            background: linear-gradient(180deg, #ffffff, #fafafa);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .experience-item:hover, .education-item:hover, .project-card:hover, .skill-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #4285f4;
+            background: linear-gradient(180deg, #ffffff, #f9fbff);
+        }
+        .job-header, .education-header, .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .job-title, .degree, .card-title { font-weight: 600; font-size: 1.1rem; }
+        .company, .card-company { font-size: 0.95rem; color: #555; margin-bottom: 8px; }
+        .job-duration, .education-duration, .card-duration { font-size: 0.9rem; color: #666; background: #f8f9fa; padding: 3px 10px; border-radius: 10px; white-space: nowrap; }
+        .job-description, .education-description { margin-top: 12px; }
+        .job-description ul, .education-description ul { margin-left: 20px; margin-top: 8px; }
+        .job-description li, .education-description li { margin-bottom: 6px; }
 
-    /* Content Pages */
-    .content-header{
-      text-align:center;margin-bottom:48px;padding:48px 0 24px
-    }
-    .content-header h2{
-      font-size:42px;margin:0;font-weight:800;
-      background:linear-gradient(135deg,var(--text),var(--accent));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text
-    }
-    .content-header p{color:var(--muted);margin-top:12px;font-size:18px}
+        /* Projects layout with improved image positioning */
+        .project-card {
+            display: block;
+        }
+        .project-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .project-image-container {
+            flex-shrink: 0;
+            width: 200px;
+        }
+        .project-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .project-image:hover {
+            transform: scale(1.05);
+            border-color: #4285f4;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+        .project-info-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .project-title-section {
+            flex: 1;
+        }
+        .card-description { 
+            font-size: 0.9rem; 
+            color: #555; 
+            margin-top: 12px; 
+            line-height: 1.5;
+        }
 
-    .content-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:24px;margin-bottom:48px
-    }
-    
-    .card{
-      background:var(--card);padding:24px;border-radius:16px;
-      box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);
-      transition:var(--transition);position:relative;overflow:hidden
-    }
-    .card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:4px;
-      background:linear-gradient(90deg,var(--accent),#a78bfa);
-      transform:scaleX(0);transform-origin:left;transition:var(--transition)
-    }
-    .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(15,23,36,0.1)}
-    .card:hover::before{transform:scaleX(1)}
-    [data-theme="dark"] .card{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .card:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3)}
-    
-    .card h3{margin:0 0 16px 0;font-weight:700;font-size:20px}
-    .card-meta{color:var(--muted);font-size:14px;margin-bottom:12px}
-    .card-description{line-height:1.6;margin-bottom:16px}
-    .card-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-    .tag{
-      background:var(--surface);color:var(--text);padding:4px 12px;
-      border-radius:20px;font-size:12px;font-weight:500
-    }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .skill-list { margin-top: 8px; }
+        .skill-item { display: inline-block; background: #f0f7ff; color: #1a73e8; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; margin: 2px 4px 2px 0; border: 1px solid #e1f0ff; }
 
-    /* New Experience Cards Design */
-    .experience-grid{
-      display:grid;gap:20px;margin-bottom:48px;max-width:900px;margin:0 auto
-    }
-    .experience-card{
-      background:var(--card);border-radius:16px;padding:20px;
-      box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);
-      transition:var(--transition);position:relative;overflow:hidden
-    }
-    .experience-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--accent),#a78bfa);
-      transform:scaleX(0);transform-origin:left;transition:var(--transition)
-    }
-    .experience-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(15,23,36,0.1)}
-    .experience-card:hover::before{transform:scaleX(1)}
-    [data-theme="dark"] .experience-card{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .experience-card:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+        /* Project Links */
+        .project-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .project-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; background: #f8f9fa; color: #4285f4; text-decoration: none; border-radius: 6px; font-size: 0.85rem; border: 1px solid #e1f0ff; transition: all 0.3s ease; }
+        .project-link:hover { background: #4285f4; color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3); }
 
-    .experience-header{
-      display:flex;justify-content:space-between;align-items:flex-start;
-      margin-bottom:12px;flex-wrap:wrap;gap:8px
-    }
-    .experience-title{
-      font-size:20px;font-weight:700;margin:0;color:var(--text)
-    }
-    .experience-period{
-      background:var(--accent);color:white;padding:4px 12px;
-      border-radius:16px;font-size:12px;font-weight:600;
-      white-space:nowrap
-    }
-    .experience-company{
-      color:var(--accent);font-size:16px;font-weight:600;margin-bottom:4px
-    }
-    .experience-location{
-      color:var(--muted);font-size:13px;margin-bottom:12px
-    }
-    .experience-description{
-      line-height:1.6;margin-bottom:16px;color:var(--text);font-size:14px
-    }
-    .experience-tags{
-      display:flex;gap:6px;flex-wrap:wrap
-    }
-    .experience-tag{
-      background:var(--surface);color:var(--text);padding:4px 10px;
-      border-radius:16px;font-size:11px;font-weight:500;
-      border:1px solid rgba(0,0,0,0.04)
-    }
-    [data-theme="dark"] .experience-tag{border:1px solid rgba(255,255,255,0.03)}
+        /* Modal Styles */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+            animation: fadeIn 0.3s ease;
+            cursor: pointer;
+        }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-content { 
+            position: relative; 
+            max-width: 90%; 
+            max-height: 90%; 
+            animation: slideIn 0.3s ease;
+            cursor: default;
+        }
+        .close { 
+            position: absolute; 
+            top: -40px; 
+            right: -10px; 
+            color: white; 
+            font-size: 35px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+        .close:hover { color: #ddd; }
+        #modalImage { 
+            width: auto; 
+            height: auto; 
+            max-width: 100%; 
+            max-height: 100%; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
 
-    /* Timeline for Education */
-    .timeline{
-      position:relative;padding:20px 0;max-width:800px;margin:0 auto
-    }
-    .timeline::before{
-      content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;
-      background:var(--accent);transform:translateX(-50%)
-    }
-    .timeline-item{
-      position:relative;margin-bottom:40px;display:flex;
-      width:100%;align-items:center
-    }
-    .timeline-item:nth-child(odd) .timeline-content{
-      margin-left:auto;text-align:right
-    }
-    .timeline-content{
-      background:var(--card);padding:24px;border-radius:16px;
-      box-shadow:var(--shadow);width:45%;position:relative;
-      border:1px solid rgba(0,0,0,0.04);transition:var(--transition)
-    }
-    .timeline-content:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(15,23,36,0.1)}
-    [data-theme="dark"] .timeline-content{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .timeline-content:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3)}
-    .timeline-dot{
-      position:absolute;left:50%;width:16px;height:16px;
-      background:var(--accent);border-radius:50%;transform:translateX(-50%);
-      border:4px solid var(--bg);z-index:2
-    }
-    .timeline-date{
-      color:var(--accent);font-weight:600;font-size:14px;margin-bottom:8px
-    }
-    .timeline-title{font-weight:700;font-size:18px;margin-bottom:8px}
-    .timeline-subtitle{color:var(--muted);font-size:16px;margin-bottom:12px}
-    .timeline-description{line-height:1.6;font-size:14px}
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    @media (max-width:768px){
-      .timeline::before{left:20px}
-      .timeline-item{flex-direction:column}
-      .timeline-content{width:100%;margin-left:40px;text-align:left}
-      .timeline-item:nth-child(odd) .timeline-content{margin-left:40px;text-align:left}
-      .timeline-dot{left:20px}
-      .experience-header{flex-direction:column;align-items:flex-start}
-      .experience-period{align-self:flex-start}
-    }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container { padding: 40px 16px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .job-header, .education-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            
+            .project-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .project-image-container {
+                width: 100%;
+            }
+            .project-image {
+                height: 180px;
+            }
+        }
 
-    /* Improved Projects Design */
-    .projects-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-      gap:28px;margin-bottom:48px
-    }
-    .project-card{
-      background:var(--card);border-radius:20px;overflow:hidden;
-      box-shadow:var(--shadow);transition:var(--transition);
-      border:1px solid rgba(0,0,0,0.04)
-    }
-    .project-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(15,23,36,0.15)}
-    [data-theme="dark"] .project-card{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .project-card:hover{box-shadow:0 30px 60px rgba(0,0,0,0.4)}
-    
-    .project-thumb{
-      height:180px;background:linear-gradient(135deg,var(--accent),#a78bfa);
-      position:relative;display:flex;align-items:center;justify-content:center;
-      color:white;font-weight:700;font-size:20px;cursor:pointer;
-      transition:var(--transition)
-    }
-    .project-thumb:hover{transform:scale(1.02)}
-    
-    .project-content{padding:24px}
-    .project-title{margin:0 0 12px 0;font-weight:700;font-size:20px}
-    .project-description{color:var(--muted);margin-bottom:20px;font-size:15px;line-height:1.6}
-    
-    .project-footer{
-      display:flex;justify-content:space-between;align-items:center;margin-top:20px
-    }
-    .project-tags{display:flex;gap:6px;flex-wrap:wrap}
-    .project-tag{
-      background:var(--surface);color:var(--text);padding:4px 10px;
-      border-radius:16px;font-size:11px;font-weight:500
-    }
-    .github-btn{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 16px;
-      background:var(--accent);color:white;text-decoration:none;
-      border-radius:12px;font-weight:600;font-size:14px;
-      transition:var(--transition)
-    }
-    .github-btn:hover{background:var(--text);transform:translateY(-1px)}
-    .github-icon{
-      width:18px;height:18px;fill:currentColor
-    }
-
-    /* Improved Skills Design */
-    .skills-container{
-      max-width:1000px;margin:0 auto
-    }
-    .skills-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:24px;margin-bottom:48px
-    }
-    .skill-card{
-      background:var(--card);padding:28px;border-radius:18px;
-      box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);
-      transition:var(--transition);position:relative;overflow:hidden;
-      text-align:left
-    }
-    .skill-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--accent),#a78bfa);
-      transform:scaleX(0);transform-origin:left;transition:var(--transition)
-    }
-    .skill-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(15,23,36,0.1)}
-    .skill-card:hover::before{transform:scaleX(1)}
-    [data-theme="dark"] .skill-card{border:1px solid rgba(255,255,255,0.03)}
-    [data-theme="dark"] .skill-card:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3)}
-    
-    .skill-header{
-      display:flex;align-items:center;gap:12px;margin-bottom:20px
-    }
-    .skill-icon{
-      font-size:24px;transition:var(--transition)
-    }
-    .skill-card:hover .skill-icon{transform:scale(1.1) rotate(5deg)}
-    .skill-title{
-      font-size:20px;font-weight:700;margin:0;color:var(--text)
-    }
-    .skill-items{
-      display:flex;flex-direction:column;gap:12px
-    }
-    .skill-item{
-      display:flex;flex-direction:column;gap:4px
-    }
-    .skill-label{
-      font-weight:600;color:var(--text);font-size:14px
-    }
-    .skill-value{
-      color:var(--muted);font-size:14px;line-height:1.5
-    }
-
-    /* Modal styles */
-    .modal{
-      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.8);z-index:1000;backdrop-filter:blur(10px);
-      animation:fadeIn 0.3s ease-out
-    }
-    .modal.active{display:flex;align-items:center;justify-content:center;padding:20px}
-    .modal-content{
-      position:relative;max-width:90vw;max-height:90vh;
-      background:var(--card);border-radius:16px;overflow:hidden;
-      box-shadow:0 25px 50px rgba(0,0,0,0.5);animation:slideIn 0.3s ease-out
-    }
-    .modal-header{
-      padding:20px;background:var(--surface);border-bottom:1px solid rgba(0,0,0,0.1);
-      display:flex;justify-content:space-between;align-items:center
-    }
-    [data-theme="dark"] .modal-header{border-bottom:1px solid rgba(255,255,255,0.1)}
-    .modal-title{margin:0;font-weight:700;font-size:20px}
-    .modal-close{
-      background:none;border:none;font-size:24px;cursor:pointer;
-      color:var(--muted);transition:var(--transition);
-      width:40px;height:40px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center
-    }
-    .modal-close:hover{background:var(--accent);color:white}
-    .modal-image{
-      width:100%;height:400px;object-fit:cover;
-      background:linear-gradient(135deg,var(--accent),#a78bfa);
-      display:flex;align-items:center;justify-content:center;
-      color:white;font-weight:800;font-size:48px
-    }
-    .modal-body{padding:24px;line-height:1.6}
-    .modal-body h4{margin:0 0 12px 0;font-weight:600;color:var(--accent)}
-    .modal-body p{margin:0 0 16px 0;color:var(--muted)}
-    .modal-body ul{margin:0;padding-left:20px}
-    .modal-body li{margin-bottom:8px;color:var(--muted)}
-
-    @media (max-width:768px){
-      .modal-content{max-width:95vw;max-height:95vh}
-      .modal-image{height:250px;font-size:32px}
-      .modal-header{padding:16px}
-      .modal-body{padding:16px}
-    }
-
-    /* Footer */
-    footer{
-      margin-top:80px;padding:32px 0;border-top:1px solid rgba(0,0,0,0.04);
-      text-align:center;color:var(--muted);background:var(--surface)
-    }
-    [data-theme="dark"] footer{border-top:1px solid rgba(255,255,255,0.03)}
-
-    /* Mobile responsiveness */
-    @media (max-width:768px){
-      .container{padding:16px}
-      .nav{gap:12px;flex-wrap:wrap}
-      nav{gap:4px;flex-wrap:wrap}
-      nav a{padding:8px 12px;font-size:14px}
-      .content-header h2{font-size:32px}
-      .projects-grid{grid-template-columns:1fr}
-      .content-grid{grid-template-columns:1fr}
-      .skills-grid{grid-template-columns:1fr}
-      .project-footer{flex-direction:column;align-items:flex-start;gap:12px}
-    }
-
-    /* Animations */
-    .animate-in{animation:slideIn 0.6s ease-out}
-    .animate-in:nth-child(2){animation-delay:0.1s}
-    .animate-in:nth-child(3){animation-delay:0.2s}
-    .animate-in:nth-child(4){animation-delay:0.3s}
-    .animate-in:nth-child(5){animation-delay:0.4s}
-
-    /* Scroll to top button */
-    .scroll-top{
-      position:fixed;bottom:20px;right:20px;
-      width:50px;height:50px;border-radius:50%;
-      background:var(--accent);color:white;
-      border:none;cursor:pointer;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:var(--shadow);
-      opacity:0;transform:translateY(20px);
-      transition:var(--transition);z-index:30
-    }
-    .scroll-top.visible{opacity:1;transform:translateY(0)}
-    .scroll-top:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(26,115,232,0.4)}
-  </style>
+        @media (max-width: 480px) {
+            .project-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .card-duration {
+                align-self: flex-start;
+            }
+        }
+    </style>
 </head>
-<body data-theme="light">
-  <header>
-    <div class="container nav">
-      <nav aria-label="Main navigation">
-        <a href="#" class="nav-link active" data-page="home">Home</a>
-        <a href="#" class="nav-link" data-page="education">Education</a>
-        <a href="#" class="nav-link" data-page="experience">Experience</a>
-        <a href="#" class="nav-link" data-page="projects">Projects</a>
-        <a href="#" class="nav-link" data-page="skills">Skills</a>
-      </nav>
-      <div class="actions">
-        <button id="themeToggle" class="btn" title="Toggle dark mode">🌗</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Home Page -->
-    <div id="home" class="page active">
-      <section class="hero">
-        <div class="hero-content">
-          <h1>Ugur Ersoz</h1>
-          <div class="subtitle">(Türkçe: Uğur Ersöz / Deutsch: Ugur Ersöz)</div>
-          <div class="role">Product Developer & Life Science Researcher</div>
-          <div class="about">
-            <strong>About Me</strong>
-            <p style="color:var(--muted);margin:8px 0 0 0;line-height:1.6">
-              Passionate Product Developer and Life Science Researcher with expertise in bioinformatics, 
-              full-stack development, and project management. I bridge the gap between technology and 
-              life sciences to create innovative solutions that make a real impact.
-            </p>
-            <div class="socials">
-              <a class="icon-btn" href="mailto:uersoz55@gmail.com" aria-label="Email">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Mail icon"> 
-                Email
-              </a>
-              <a class="icon-btn" href="https://www.linkedin.com/in/ersozugur" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="LinkedIn"> 
-                LinkedIn
-              </a>
-              <a class="icon-btn" href="https://github.com/ugrersoz" target="_blank" rel="noopener" aria-label="GitHub">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"> 
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-card">
-            <div class="profile-avatar">UE</div>
-            <div style="color:var(--muted);font-size:14px">
-              Based in Berlin, Germany<br>
-              Open to new opportunities
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Education Page -->
-    <div id="education" class="page">
-      <div class="content-header">
-        <h2>Education</h2>
-        <p>My academic journey and continuous learning path</p>
-      </div>
-      
-      <div class="timeline">
-        <div class="timeline-item animate-in">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-date">2024 - Present</div>
-            <div class="timeline-title">Hochschule für Technik und Wirtschaft Berlin (HTW Berlin)</div>
-            <div class="timeline-subtitle">Msc. Life Science Engineering & Management</div>
-            <div class="timeline-description">
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item animate-in">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-date">2018 - 2023</div>
-            <div class="timeline-title">Bahcesehir University</div>
-            <div class="timeline-subtitle">Faculty of Engineering & Natural Sciences - Bsc. Molecular Biology and Genetics</div>
-            <div class="timeline-description">
-              • ApplyBAU Scholarship 
-              • Capstone Project Grade: A
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Experience Page -->
-    <div id="experience" class="page">
-      <div class="content-header">
-        <h2>Experience</h2>
-        <p>Professional journey and key achievements</p>
-      </div>
-      
-      <div class="experience-grid">
-        <div class="experience-card animate-in">
-          <div class="experience-header">
-            <div>
-              <div class="experience-title">Product Developer & Researcher</div>
-              <div class="experience-company">Uniqgene</div>
-              <div class="experience-location">Türkiye</div>
-            </div>
-            <div class="experience-period">January 2023 - October 2024</div>
-          </div>
-         <div class="experience-description">
-            • Played a leading role in a 6-month scientific product development project, presenting research to end users in an interactive format.<br>
-            • Contributed to the design and optimization of products tailored to end-user profiles based on scientific research.<br>
-            • Conducted comprehensive competitor analysis focused on the United Kingdom, taking into account various parameters. Prepared detailed reports based on the analysis.<br>
-            • Designed and managed product lifecycle processes utilizing the Eraser tool, ensuring efficient product development and launch.<br>
-            • Played a pivotal role in developing the new product target system, contributing to enhancing the effectiveness of sports performance-related products.<br>
-            • Engaged in a significant research project from February to June, employing Python to create insightful data visualizations that facilitated comprehensive analysis and decision-making.<br>
-            • Contributed to the research and delivery of the scientific content for the Interactive Report product to end users. Conducted analysis of 40+ competitors and gathered insights from 200+ users to design the system based on the operations of 15+ similar competitors. Led content development throughout the 10-month project.
-          </div>
-          <div class="experience-tags">
-            <span class="experience-tag">Product Management</span>
-            <span class="experience-tag">Team Leadership</span>
-            <span class="experience-tag">Agile Development</span>
-            <span class="experience-tag">Bioinformatics</span>
-          </div>
-        </div>
-
-        <div class="experience-card animate-in">
-          <div class="experience-header">
-            <div>
-              <div class="experience-title">Intern & Growth Hacker</div>
-              <div class="experience-company">Uniqgene</div>
-              <div class="experience-location">Türkiye</div>
-            </div>
-            <div class="experience-period">February 2022 - December 2022</div>
-          </div>
-          <div class="experience-description">
-           <div class="experience-description">
-            • Conducted in-depth competitive research to identify market trends and potential growth opportunities.<br>
-            • Developed and executed growth strategies, resulting in increased user acquisition and engagement.<br>
-            • Conducted literature research in the sports genetics field, providing valuable insights for informed product development decisions.<br>
-            • Utilized data import/export techniques to optimize campaign performance and aid decision-making processes.<br>
-            • Contributed to aligning plans with the product's vision and goals, actively engaging in strategic execution.<br>
-            • Assisted in the research process for NBA Launchpad and Barça Allianz Startup Challenge program applications, identifying and evaluating potential opportunities for the company.
-          </div>
-          </div>
-          <div class="experience-tags">
-            <span class="experience-tag">React</span>
-            <span class="experience-tag">Node.js</span>
-            <span class="experience-tag">PostgreSQL</span>
-            <span class="experience-tag">Docker</span>
-            <span class="experience-tag">Data Visualization</span>
-          </div>
-        </div>
-
-        <div class="experience-card animate-in">
-          <div class="experience-header">
-            <div>
-              <div class="experience-title">Research & Development Intern </div>
-              <div class="experience-company">Uniqgene</div>
-              <div class="experience-location">Türkiye</div>
-            </div>
-            <div class="experience-period">July 2020 - August 2022</div>
-          </div>
-         <div class="experience-description">
-            • Conducted in-depth competitive research to identify market trends and potential growth opportunities.<br>
-            • Developed and executed growth strategies, resulting in increased user acquisition and engagement.<br>
-            • Conducted literature research in the sports genetics field, providing valuable insights for informed product development decisions.<br>
-            • Utilized data import/export techniques to optimize campaign performance and aid decision-making processes.<br>
-            • Contributed to aligning plans with the product's vision and goals, actively engaging in strategic execution.<br>
-            • Assisted in the research process for NBA Launchpad and Barça Allianz Startup Challenge program applications, identifying and evaluating potential opportunities for the company.
-          </div>
-          <div class="experience-tags">
-            <span class="experience-tag">Research</span>
-            <span class="experience-tag">Data Analysis</span>
-            <span class="experience-tag">Scientific Writing</span>
-            <span class="experience-tag">Python</span>
-            <span class="experience-tag">Bioinformatics</span>
-          </div>
-        </div>
-
-        <div class="experience-card animate-in">
-          <div class="experience-header">
-            <div>
-              <div class="experience-title">Engineering Team Member</div>
-              <div class="experience-company">Bahcesehir University - Career and Development Club </div>
-              <div class="experience-location">Türkiye</div>
-            </div>
-            <div class="experience-period">October 2020 - October 2022</div>
-          </div>
-         <div class="experience-description">
-          • Organized and contributed to the success of multiple events including "Marketing Talks" and "Start-Up Summit."<br>
-          • Played a significant role in the organizing team for "VI. Career Days" ensuring effective execution.
-         </div>
-          <div class="experience-tags">
-            <span class="experience-tag">JavaScript</span>
-            <span class="experience-tag">Vue.js</span>
-            <span class="experience-tag">PHP</span>
-            <span class="experience-tag">MySQL</span>
-            <span class="experience-tag">Git</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projects Page -->
-    <div id="projects" class="page">
-      <div class="content-header">
-        <h2>Projects</h2>
-        <p>Featured work and contributions</p>
-      </div>
-      
-      <div class="projects-grid">
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="labtracker">
-            <div>Uniqgene & Oxford Podium Institute</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Integration of Genetic Testing with Wearable Technology: Advanced Biomarkers for Personalised Sports and Nutrition Management</h3>
-            <p class="project-description">
-              Advanced biomarkers for personalized sports and nutrition management. Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology in Oxford. Examined integration of genetic data with wearables for performance optimization and injury prevention.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#vue</span>
-                <span class="project-tag">#laravel</span>
-                <span class="project-tag">#mysql</span>
-                <span class="project-tag">#pwa</span>
-              </div>
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="datavault">
-            <div>DataVault</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Scientific Data Repository</h3>
-            <p class="project-description">
-              Secure cloud-based repository for research data with version control, 
-              metadata management, and FAIR data principles compliance.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#react</span>
-                <span class="project-tag">#graphql</span>
-                <span class="project-tag">#postgresql</span>
-                <span class="project-tag">#kubernetes</span>
-              </div>
-              <a href="https://github.com/ugrersoz" class="github-btn" target="_blank">
-                <svg class="github-icon" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="biochat">
-            <div>BioChat</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">AI Research Assistant</h3>
-            <p class="project-description">
-              Intelligent chatbot for biological research queries using natural language processing. 
-              Trained on scientific literature and databases.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#python</span>
-                <span class="project-tag">#transformers</span>
-                <span class="project-tag">#flask</span>
-                <span class="project-tag">#nlp</span>
-              </div>
-              <a href="https://github.com/ugrersoz" class="github-btn" target="_blank">
-                <svg class="github-icon" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="geneanalyzer">
-            <div>GeneAnalyzer</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Gene Expression Analysis Platform</h3>
-            <p class="project-description">
-              Web-based platform for analyzing gene expression data with interactive visualizations,
-              statistical analysis tools, and automated report generation.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#python</span>
-                <span class="project-tag">#streamlit</span>
-                <span class="project-tag">#plotly</span>
-                <span class="project-tag">#pandas</span>
-              </div>
-              <a href="https://github.com/ugrersoz" class="github-btn" target="_blank">
-                <svg class="github-icon" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="proteinfolding">
-            <div>ProteinFold</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Protein Structure Predictor</h3>
-            <p class="project-description">
-              Machine learning model for predicting protein secondary structures using
-              deep neural networks and 3D visualization capabilities.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#tensorflow</span>
-                <span class="project-tag">#pytorch</span>
-                <span class="project-tag">#threejs</span>
-                <span class="project-tag">#fastapi</span>
-              </div>
-              <a href="https://github.com/ugrersoz" class="github-btn" target="_blank">
-                <svg class="github-icon" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card animate-in">
-          <div class="project-thumb" data-project="clinicaltrial">
-            <div>TrialTracker</div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Clinical Trial Management</h3>
-            <p class="project-description">
-              Comprehensive system for managing clinical trials with patient enrollment,
-              data collection, regulatory compliance, and real-time monitoring.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span class="project-tag">#angular</span>
-                <span class="project-tag">#springboot</span>
-                <span class="project-tag">#oracle</span>
-                <span class="project-tag">#docker</span>
-              </div>
-              <a href="https://github.com/ugrersoz" class="github-btn" target="_blank">
-                <svg class="github-icon" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project Modals -->
-      <div id="projectModal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="modalTitle">Project Details</h3>
-            <button class="modal-close" id="modalClose">&times;</button>
-          </div>
-          <div class="modal-image" id="modalImage">Preview</div>
-          <div class="modal-body" id="modalBody">
-            <p>Loading project details...</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Skills Page -->
-    <div id="skills" class="page">
-      <div class="content-header">
-        <h2>Skills</h2>
-        <p>Technical expertise and core competencies</p>
-      </div>
-      
-      <div class="skills-container">
-        <div class="skills-grid">
-          <div class="skill-card animate-in">
-            <div class="skill-header">
-              <span class="skill-icon">🔬</span>
-              <h3 class="skill-title">Bioinformatics & Research</h3>
-            </div>
-            <div class="skill-items">
-              <div class="skill-item">
-                <div class="skill-label">Genome Analysis</div>
-                <div class="skill-value">UCSC Genome Browser, Ensembl</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Databases</div>
-                <div class="skill-value">Galaxy, PubMed, UniProt</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Research Methods</div>
-                <div class="skill-value">Data Mining, Statistical Analysis</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-card animate-in">
-            <div class="skill-header">
-              <span class="skill-icon">💻</span>
-              <h3 class="skill-title">Web Development</h3>
-            </div>
-            <div class="skill-items">
-              <div class="skill-item">
-                <div class="skill-label">Programming Languages</div>
-                <div class="skill-value">JavaScript, Python, SQL</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Frameworks</div>
-                <div class="skill-value">React, Node.js, Flask, Vue.js</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Databases</div>
-                <div class="skill-value">PostgreSQL, MongoDB, MySQL</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-card animate-in">
-            <div class="skill-header">
-              <span class="skill-icon">📋</span>
-              <h3 class="skill-title">Project Management</h3>
-            </div>
-            <div class="skill-items">
-              <div class="skill-item">
-                <div class="skill-label">Tools</div>
-                <div class="skill-value">Jira, Confluence, Trello</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Methodologies</div>
-                <div class="skill-value">Scrum Development, Agile</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Leadership</div>
-                <div class="skill-value">Product Ownership, Team Coordination</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-card animate-in">
-            <div class="skill-header">
-              <span class="skill-icon">🌐</span>
-              <h3 class="skill-title">Languages</h3>
-            </div>
-            <div class="skill-items">
-              <div class="skill-item">
-                <div class="skill-label">Turkish</div>
-                <div class="skill-value">Native Speaker</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">English</div>
-                <div class="skill-value">B2-C1 (Professional)</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">German</div>
-                <div class="skill-value">A2 (Elementary)</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-label">Spanish</div>
-                <div class="skill-value">A1-A2 (Basic)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer>
+<body>
     <div class="container">
-      <p>&copy; 2025 Ugur Ersoz. All rights reserved. Built with passion for technology and science.</p>
+        <header class="header">
+            <h1 class="name">Ugur Ersoz</h1>
+            <p class="alt-names">(Türkçe: Uğur Ersöz / Deutsch: Ugur Ersöz)</p>
+            <p class="title">Product Developer & Life Science Researcher</p>
+            <div class="contact">
+                <a class="contact-item" href="mailto:uersoz55@gmail.com"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"> Mail</a>
+                <a class="contact-item" href="https://www.linkedin.com/in/ersozugur" target="_blank"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"> LinkedIn</a>
+                <a class="contact-item" href="https://github.com/ugrersoz" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"> GitHub</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">💼 Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Product Developer & Researcher</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Jan 2023 - Oct 2024</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Led scientific product development projects, presenting research to end users in interactive formats</li>
+                        <li>Designed and optimized products tailored to end-user profiles based on scientific research</li>
+                        <li>Developed new product target system contributing to enhanced sports performance-related products effectiveness</li>
+                        <li>Conducted significant research project using Python for data visualizations that facilitated comprehensive analysis and decision-making</li>
+                        <li>Contributed to Interactive Report product development, analyzing 40+ competitors and gathering insights from 200+ users</li>
+                        <li>Led content development throughout 10-month project lifecycle</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Research and Development Intern</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Jul - Aug 2023</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Gained hands-on experience in biotechnology industry, focusing on personalized reports for elite and semi-professional athletes</li>
+                        <li>Conducted literature searches to analyze results and identify candidate genes for testing</li>
+                        <li>Designed primers and probes for DNA analysis</li>
+                        <li>Analyzed DNA samples and generated results as part of the R&D team</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Intern & Growth Hacker</div>
+                        <div class="company">Uniqgene</div>
+                    </div>
+                    <div class="job-duration">Feb 2022 - Jan 2023</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Conducted literature research in sports genetics field providing valuable insights for product development decisions</li>
+                        <li>Contributed to aligning plans with product vision and goals through strategic execution</li>
+                        <li>Utilized data import/export techniques to optimize campaign performance and aid decision-making processes</li>
+                        <li>Assisted in research process for NBA Launchpad and Barça Allianz Startup Challenge program applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Engineering Team Member</div>
+                        <div class="company">Bahçeşehir University - Career and Development Club</div>
+                    </div>
+                    <div class="job-duration">Oct 2020 - 2022</div>
+                </div>
+                <div class="job-description">
+                    <ul>
+                        <li>Organized and contributed to multiple successful events including "Marketing Talks" and "Start-Up Summit"</li>
+                        <li>Played significant role in organizing team for "VI. Career Days" ensuring effective execution</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🎓 Education</h2>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="degree">Master of Life Science Engineering & Management</div>
+                        <div class="company">HTW Berlin</div>
+                    </div>
+                    <div class="education-duration">Oct 2024 - Present</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="degree">Bachelor of Science – Molecular Biology and Genetics</div>
+                        <div class="company">Bahçeşehir University</div>
+                    </div>
+                    <div class="education-duration">Sep 2018 - 2023</div>
+                </div>
+                <div class="education-description">
+                    <ul>
+                        <li>ApplyBAU Scholarship recipient</li>
+                        <li>Capstone Project Grade: A</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🚀</span>
+                Projects
+            </h2>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=Oxford+Poster" alt="Oxford Uniqgene Poster" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">⌚</span> 
+                                    Integration of Genetic Testing with Wearable Technology
+                                </div>
+                                <div class="card-company">
+                                    <span>📊</span>
+                                    Uniqgene Research Paper & Poster
+                                </div>
+                            </div>
+                            <div class="card-duration">Apr - Sep 2024</div>
+                        </div>
+                        <div class="card-description">
+                            Advanced biomarkers for personalized sports and nutrition management. Presented at The Podium Institute Inaugural Annual Conference on Sports Medicine and Technology in Oxford. Examined integration of genetic data with wearables for performance optimization and injury prevention.
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ugrersoz/genetic-wearable-integration" target="_blank" class="project-link">
+                                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" height="16" alt="GitHub">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=CYP1A2+Study" alt="CYP1A2 Genotypes Study" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">☕</span> 
+                                    CYP1A2 Genotypes & Caffeine Metabolism Study
+                                </div>
+                                <div class="card-company">
+                                    <span>🎓</span>
+                                    Bahçeşehir University Capstone Project
+                                </div>
+                            </div>
+                            <div class="card-duration">Feb - Jun 2023</div>
+                        </div>
+                        <div class="card-description">
+                            Genetic approach to optimal caffeine consumption practices for Turkish young adult population. Completed with highest grade A and presented to departmental jury. Focused on the relation between genotype and caffeine metabolism/sports performance.
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ugrersoz/cyp1a2-caffeine-study" target="_blank" class="project-link">
+                                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="16" height="16" alt="GitHub">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-image-container">
+                        <img class="project-image" src="https://via.placeholder.com/200x140?text=LiveUseful+App" alt="LiveUseful App" onclick="openModal(this)">
+                    </div>
+                    <div class="project-info-content">
+                        <div class="project-header">
+                            <div class="project-title-section">
+                                <div class="card-title">
+                                    <span class="icon">📊</span> 
+                                    LiveUseful App
+                                </div>
+                                <div class="card-company">
+                                    <span>📈</span>
+                                    MZV YetGen
+                                </div>
+                            </div>
+                            <div class="card-duration">May 2021</div>
+                        </div>
+                        <div class="card-description">
+                            Collaborated with team members during the MZV YetGen (Yetkin Gençler) training program to conceptualize and design a mobile application project aligned with the Sustainable Development Goals, specifically targeting the goal of "Healthy and Quality Life".
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">⚡ Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="job-title">🗣️ Languages</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Turkish (Native)</span>
+                        <span class="skill-item">English (C1)</span>
+                        <span class="skill-item">German (A2)</span>
+                        <span class="skill-item">Spanish (A1)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">💻 Programming</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">Git & GitHub</span>
+                        <span class="skill-item">CMD</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🐍 Python Libraries</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Pandas</span>
+                        <span class="skill-item">NumPy</span>
+                        <span class="skill-item">Matplotlib</span>
+                        <span class="skill-item">Scikit-learn</span>
+                        <span class="skill-item">Streamlit</span>
+                        <span class="skill-item">Jupyter Notebook</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🧬 Bioinformatics</div>
+                    <div class="skill-list">
+                        <span class="skill-item">UCSC Genome Browser</span>
+                        <span class="skill-item">Ensembl</span>
+                        <span class="skill-item">Galaxy</span>
+                        <span class="skill-item">DNA Analysis</span>
+                        <span class="skill-item">Primer Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">🛠️ Tools & Software</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Microsoft Office</span>
+                        <span class="skill-item">Google Workspace</span>
+                        <span class="skill-item">Figma</span>
+                        <span class="skill-item">Miro</span>
+                        <span class="skill-item">Eraser</span>
+                        <span class="skill-item">VSCode</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="job-title">📊 Project Management</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Agile & Scrum</span>
+                        <span class="skill-item">Jira</span>
+                        <span class="skill-item">Confluence</span>
+                        <span class="skill-item">Slack</span>
+                        <span class="skill-item">Product Ownership</span>
+                        <span class="skill-item">Workflow Management</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 60px; padding: 20px 0; border-top: 1px solid #eee; color: #666; font-size: 0.9rem;">
+            © Developed by Ugur Ersoz. All information on this site is protected and may not be copied without permission.
+        </footer>
     </div>
-  </footer>
-
-  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
-
-  <script>
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
     
-    // Check if localStorage is available
-    let savedTheme = 'light';
-    try {
-      savedTheme = localStorage.getItem('theme') || 'light';
-    } catch (e) {
-      // localStorage not available, use default
-    }
-    body.setAttribute('data-theme', savedTheme);
-    
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
-      body.setAttribute('data-theme', newTheme);
-      try {
-        localStorage.setItem('theme', newTheme);
-      } catch (e) {
-        // localStorage not available, continue without saving
-      }
-    });
-
-    // Navigation functionality
-    const navLinks = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Remove active class from all nav links and pages
-        navLinks.forEach(l => l.classList.remove('active'));
-        pages.forEach(p => p.classList.remove('active'));
-        
-        // Add active class to clicked nav link
-        link.classList.add('active');
-        
-        // Show corresponding page
-        const pageId = link.getAttribute('data-page');
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-          targetPage.classList.add('active');
-          
-          // Scroll to top of page
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          
-          // Add animation to cards
-          setTimeout(() => {
-            const animateElements = targetPage.querySelectorAll('.animate-in');
-            animateElements.forEach((el, index) => {
-              el.style.animationDelay = `${index * 0.1}s`;
-              el.style.animation = 'slideIn 0.6s ease-out forwards';
-            });
-          }, 100);
-        }
-      });
-    });
-
-    // Scroll to top button
-    const scrollTopBtn = document.getElementById('scrollTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        scrollTopBtn.classList.add('visible');
-      } else {
-        scrollTopBtn.classList.remove('visible');
-      }
-    });
-    
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Add smooth scrolling and entrance animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = 'slideIn 0.6s ease-out forwards';
-        }
-      });
-    }, observerOptions);
-
-    // Observe all animate-in elements
-    document.addEventListener('DOMContentLoaded', () => {
-      const animateElements = document.querySelectorAll('.animate-in');
-      animateElements.forEach(el => observer.observe(el));
-    });
-
-    // Add typing effect to the main title (optional enhancement)
-    const title = document.querySelector('h1');
-    if (title && title.textContent === 'Ugur Ersoz') {
-      const text = title.textContent;
-      title.textContent = '';
-      title.style.opacity = '1';
-      
-      let i = 0;
-      const typeEffect = setInterval(() => {
-        title.textContent += text.charAt(i);
-        i++;
-        if (i >= text.length) {
-          clearInterval(typeEffect);
-        }
-      }, 100);
-    }
-
-    // Add hover effects for cards
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card, .project-card, .skill-card, .experience-card');
-      
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.style.transform = 'translateY(-4px) scale(1.01)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'translateY(0) scale(1)';
-        });
-      });
-    });
-
-    // Add random background animations for project thumbnails
-    document.addEventListener('DOMContentLoaded', () => {
-      const projectThumbs = document.querySelectorAll('.project-thumb');
-      
-      projectThumbs.forEach(thumb => {
-        const colors = [
-          'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-          'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-          'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-          'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-          'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
-        ];
-        
-        const randomGradient = colors[Math.floor(Math.random() * colors.length)];
-        thumb.style.background = randomGradient;
-      });
-    });
-
-    // Project modal functionality
-    const modal = document.getElementById('projectModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalImage = document.getElementById('modalImage');
-    const modalBody = document.getElementById('modalBody');
-    const modalClose = document.getElementById('modalClose');
-
-    const projectData = {
-      labtracker: {
-        title: "Laboratory Management System",
-        image: "images/capstone-project1.jpeg",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>A comprehensive laboratory management system designed to streamline laboratory operations, inventory tracking, and experiment management.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>QR code-based inventory tracking</li>
-            <li>Experiment scheduling and progress monitoring</li>
-            <li>Automated report generation</li>
-            <li>Team collaboration tools</li>
-            <li>Equipment maintenance tracking</li>
-            <li>Real-time notifications</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>Vue.js, Laravel, MySQL, PWA, Bootstrap, Chart.js</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>Reduced inventory management time by 60%</li>
-            <li>Improved experiment tracking efficiency by 45%</li>
-            <li>Used by 3 research institutions</li>
-          </ul>
-        `
-      },
-      datavault: {
-        title: "Scientific Data Repository",
-        image: "DataVault",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>A secure, FAIR-compliant data repository for scientific research data with advanced version control and metadata management.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>FAIR data principles compliance</li>
-            <li>Git-like version control for datasets</li>
-            <li>Advanced metadata management</li>
-            <li>API for data access and integration</li>
-            <li>Collaborative data sharing</li>
-            <li>Data visualization tools</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>React, GraphQL, PostgreSQL, Kubernetes, Redis, Docker</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>Stores 50+ TB of research data</li>
-            <li>Supports 200+ researchers</li>
-            <li>99.9% uptime reliability</li>
-          </ul>
-        `
-      },
-      biochat: {
-        title: "AI Research Assistant",
-        image: "BioChat",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>An intelligent conversational AI assistant specialized in biological and biomedical research queries, trained on scientific literature.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>Natural language processing for research queries</li>
-            <li>Integration with PubMed and scientific databases</li>
-            <li>Citation tracking and reference management</li>
-            <li>Multi-language support</li>
-            <li>Contextual conversation memory</li>
-            <li>Research paper summarization</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>Python, Transformers, Flask, BERT, spaCy, ElasticSearch</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>Trained on 100K+ research papers</li>
-            <li>85% accuracy in query responses</li>
-            <li>Used by 500+ researchers daily</li>
-          </ul>
-        `
-      },
-      geneanalyzer: {
-        title: "Gene Expression Analysis Platform",
-        image: "GeneAnalyzer",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>A comprehensive web platform for analyzing gene expression data with interactive visualizations and statistical analysis tools.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>Interactive gene expression heatmaps</li>
-            <li>Differential expression analysis</li>
-            <li>Pathway enrichment analysis</li>
-            <li>Custom visualization dashboard</li>
-            <li>Automated statistical reports</li>
-            <li>Data export capabilities</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>Python, Streamlit, Plotly, Pandas, NumPy, SciPy</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>Processed 10,000+ gene expression datasets</li>
-            <li>Reduced analysis time by 70%</li>
-            <li>Published in 3 peer-reviewed papers</li>
-          </ul>
-        `
-      },
-      proteinfolding: {
-        title: "Protein Structure Predictor",
-        image: "ProteinFold",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>A machine learning-powered tool for predicting protein secondary structures with 3D visualization capabilities.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>Deep neural network prediction models</li>
-            <li>3D protein structure visualization</li>
-            <li>Secondary structure prediction</li>
-            <li>Confidence scoring system</li>
-            <li>Batch processing capabilities</li>
-            <li>Integration with PDB database</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>TensorFlow, PyTorch, Three.js, FastAPI, BioPython</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>92% accuracy in structure prediction</li>
-            <li>Analyzed 5,000+ protein sequences</li>
-            <li>Featured in computational biology conference</li>
-          </ul>
-        `
-      },
-      clinicaltrial: {
-        title: "Clinical Trial Management",
-        image: "TrialTracker",
-        content: `
-          <h4>🎯 Project Overview</h4>
-          <p>A comprehensive system for managing clinical trials with patient enrollment, data collection, and regulatory compliance features.</p>
-          
-          <h4>✨ Key Features</h4>
-          <ul>
-            <li>Patient enrollment and randomization</li>
-            <li>Electronic data capture (EDC)</li>
-            <li>Regulatory compliance monitoring</li>
-            <li>Real-time trial monitoring</li>
-            <li>Adverse event reporting</li>
-            <li>Statistical analysis tools</li>
-          </ul>
-          
-          <h4>🛠️ Technologies Used</h4>
-          <p>Angular, Spring Boot, Oracle DB, Docker, Jenkins</p>
-          
-          <h4>🏆 Achievements</h4>
-          <ul>
-            <li>Managed 15+ clinical trials</li>
-            <li>Enrolled 2,000+ patients</li>
-            <li>100% regulatory compliance rate</li>
-          </ul>
-        `
-      }
-    };
-
-    // Add click event listeners to project thumbnails
-    document.addEventListener('DOMContentLoaded', () => {
-      const projectThumbs = document.querySelectorAll('.project-thumb[data-project]');
-      
-      projectThumbs.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-          const projectId = thumb.getAttribute('data-project');
-          const project = projectData[projectId];
-          
-          if (project) {
-            modalTitle.textContent = project.title;
-            modalImage.textContent = project.image;
-            modalBody.innerHTML = project.content;
-            modal.classList.add('active');
+    <!-- Modal HTML -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Project Image">
+        </div>
+    </div>
+ 
+    <script>
+        function openModal(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('show');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            // Prevent body scrolling when modal is open
             document.body.style.overflow = 'hidden';
-          }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
-      });
-    });
 
-    // Close modal functionality
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Close modal with ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    // Add parallax effect to hero section
-    window.addEventListener('scroll', () => {
-      const heroContent = document.querySelector('.hero-content');
-      const profileSection = document.querySelector('.profile-section');
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      
-      if (heroContent && profileSection) {
-        heroContent.style.transform = `translateY(${rate}px)`;
-        profileSection.style.transform = `translateY(${rate * 0.3}px)`;
-      }
-    });
-  </script>
+        // Prevent modal from closing when clicking on the image
+        document.getElementById('modalImage').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
 </body>
 </html>
