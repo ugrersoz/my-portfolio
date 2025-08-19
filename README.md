@@ -20,19 +20,42 @@ This portfolio has evolved through multiple iterations:
 
 | Version | Status | Description | Location |
 |---------|--------|-------------|----------|
-| v5.0 | **Current** | Latest version with enhanced features | `index.html` |
+| v2.1 | **Current** | Enhanced v2 with real project images | `index.html` |
+| v5.0 | Archive | Previous latest version | `versions/v5/` |
 | v4.0 | Archive | Previous iteration | `versions/v4/` |
 | v3.0 | Archive | Third iteration | `versions/v3/` |
-| v2.0 | Archive | Second iteration | `versions/v2/` |
+| v2.0 | Archive | Original v2 version | `versions/v2/` |
 | v1.0 | Archive | First major update | `versions/v1/` |
 | v0.0 | Archive | Initial version | `versions/v0/` |
 
+## 🚀 Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ugrersoz/my-portfolio.git
+   cd my-portfolio
+   ```
+
+2. **Open in browser**
+   ```bash
+   # Simply open index.html in your browser
+   open index.html
+   ```
+
+3. **Or serve locally**
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx serve .
+   ```
 
 ## 📁 Project Structure
 
 ```
 my-portfolio/
-├── index.html          # Main portfolio page (v5)
+├── index.html          # Main portfolio page (v2)
 ├── README.md           # Project documentation
 ├── LICENSE            # MIT License
 ├── images/            # Portfolio images and assets
@@ -61,25 +84,6 @@ my-portfolio/
 - Responsive Design
 - GitHub Pages (Deployment)
 
-## 📈 Development Timeline
-
-- **v5.0** (Latest) - Enhanced UI/UX and performance optimizations
-- **v4.0** - Added new project sections and improved navigation
-- **v3.0** - Responsive design improvements and mobile optimization  
-- **v2.0** - Second iteration with improved styling
-- **v1.0** - First major update with enhanced features
-- **v0.0** - Initial portfolio version
-
-## 🚢 Deployment
-
-This portfolio is automatically deployed using GitHub Actions. Every push to the `main` branch triggers a new deployment.
-
-### Manual Deployment
-```bash
-# Build and deploy
-npm run build
-npm run deploy
-```
 
 ## 📄 License
 
