@@ -106,6 +106,23 @@
             margin-bottom: 50px;
         }
 
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #e1f0ff;
+            box-shadow: 0 8px 24px rgba(66, 133, 244, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.08);
+            border-color: #4285f4;
+            box-shadow: 0 12px 36px rgba(66, 133, 244, 0.35);
+        }
+
         .name {
             font-size: 2.5rem;
             font-weight: 600;
@@ -515,6 +532,7 @@
         <div id="me" class="page-section active">
             <div class="container">
                 <header class="header" style="margin-top: 40px;">
+                    <img src="images/profile-pixel.png" alt="Ugur Ersoz" class="profile-image">
                     <h1 class="name">Ugur Ersoz</h1>
                     <p class="alt-names" style="font-size: 1.1rem;">Product Developer & Researcher | Berlin, Germany</p>
                     <div class="contact">
