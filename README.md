@@ -10,9 +10,11 @@ A modern, responsive portfolio website showcasing my projects and skills.
 
 - ✨ Modern and responsive design
 - 🎯 Clean and professional layout
-- 📱 Mobile-friendly interface
+- 📱 Fully mobile-optimized with hamburger navigation
+- 🖼️ Image modal with touch-friendly controls
 - 🚀 Fast loading and optimized
 - 🔧 Built with modern web technologies
+- 🎭 Smooth page transitions and micro-animations
 
 ## 🗂️ Version History
 
@@ -20,7 +22,8 @@ This portfolio has evolved through multiple iterations:
 
 | Version | Status | Description | Location |
 |---------|--------|-------------|----------|
-| v2.1 | **Current** | Enhanced v2 with real project images | `index.html` |
+| v2.2 | **Current** | Mobile responsiveness overhaul | `index.html` |
+| v2.1 | Archive | Enhanced v2 with real project images | `index.html` |
 | v5.0 | Archive | Previous latest version | `versions/v5/` |
 | v4.0 | Archive | Previous iteration | `versions/v4/` |
 | v3.0 | Archive | Third iteration | `versions/v3/` |
@@ -55,7 +58,7 @@ This portfolio has evolved through multiple iterations:
 
 ```
 my-portfolio/
-├── index.html          # Main portfolio page (v2)
+├── index.html          # Main portfolio page (v2.2)
 ├── README.md           # Project documentation
 ├── LICENSE            # MIT License
 ├── images/            # Portfolio images and assets
@@ -91,7 +94,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Ugur Ersoz**
 - GitHub: [@ugrersoz](https://github.com/ugrersoz)
 - Email: uersoz55@gmail.com
 
