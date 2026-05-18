@@ -20,8 +20,8 @@ jobs:
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
       - name: Update README
         run: |
-          sed -i "s|\(📅 **Update Date**: \).*|\1${LAST_COMMIT_DATE}|" README.md
-          sed -i "s|\(🔖 **Version**: \).*|\1${LATEST_TAG}|" README.md
+          sed -i "s|^\*\*Last updated\*\*:.*|**Last updated**: ${LAST_COMMIT_DATE}|" README.md
+          sed -i "s|^\*\*Version\*\*:.*|**Version**: ${LATEST_TAG}|" README.md
       - uses: ugrersoz/git-auto-commit-action@v4
         with:
           commit_message: "Update README with latest commit date and version"
