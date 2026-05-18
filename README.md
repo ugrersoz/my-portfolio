@@ -3,6 +3,8 @@
 Personal portfolio website built as a single-page application with vanilla HTML, CSS, and JavaScript.
 
 **Live**: [ugrersoz.github.io/my-portfolio](https://ugrersoz.github.io/my-portfolio)
+**Version**: v1.0.0
+**Last updated**: 2026-05-18
 
 ## Overview
 
