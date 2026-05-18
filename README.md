@@ -1,101 +1,43 @@
-# 🎨 My Portfolio
+# Ugur Ersoz — Portfolio
 
-A modern, responsive portfolio website showcasing my projects and skills.
+Personal portfolio website built as a single-page application with vanilla HTML, CSS, and JavaScript.
 
-## 🌐 Live Demo
+**Live**: [ugrersoz.github.io/my-portfolio](https://ugrersoz.github.io/my-portfolio)
 
-**Portfolio**: [https://ugrersoz.github.io/my-portfolio](https://ugrersoz.github.io/my-portfolio)
+## Overview
 
-## 📋 Features
+A minimal, Apple-inspired portfolio presenting my background in life sciences engineering, product development, and research. The site is fully static, mobile-responsive, and deployed via GitHub Pages.
 
-- ✨ Modern and responsive design
-- 🎯 Clean and professional layout
-- 📱 Fully mobile-optimized with hamburger navigation
-- 🖼️ Image modal with touch-friendly controls
-- 🚀 Fast loading and optimized
-- 🔧 Built with modern web technologies
-- 🎭 Smooth page transitions and micro-animations
+## Structure
 
-## 🗂️ Version History
+| Path | Purpose |
+|------|---------|
+| `index.html` | Current version (all markup, styles, and scripts embedded) |
+| `images/` | Profile photo and project visuals |
+| `versions/` | Archived snapshots of previous iterations |
+| `.github/workflows/` | GitHub Pages deployment workflow |
 
-This portfolio has evolved through multiple iterations:
+## Local Development
 
-| Version | Status | Description | Location |
-|---------|--------|-------------|----------|
-| v2.2 | **Current** | Mobile responsiveness overhaul | `index.html` |
-| v2.1 | Archive | Enhanced v2 with real project images | `index.html` |
-| v5.0 | Archive | Previous latest version | `versions/v5/` |
-| v4.0 | Archive | Previous iteration | `versions/v4/` |
-| v3.0 | Archive | Third iteration | `versions/v3/` |
-| v2.0 | Archive | Original v2 version | `versions/v2/` |
-| v1.0 | Archive | First major update | `versions/v1/` |
-| v0.0 | Archive | Initial version | `versions/v0/` |
-
-## 🚀 Quick Start
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/ugrersoz/my-portfolio.git
-   cd my-portfolio
-   ```
-
-2. **Open in browser**
-   ```bash
-   # Simply open index.html in your browser
-   open index.html
-   ```
-
-3. **Or serve locally**
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve .
-   ```
-
-## 📁 Project Structure
-
-```
-my-portfolio/
-├── index.html          # Main portfolio page (v2.2)
-├── README.md           # Project documentation
-├── LICENSE            # MIT License
-├── images/            # Portfolio images and assets
-├── versions/          # Previous versions archive
-│   ├── v0/           # Initial version
-│   │   └── index.html
-│   ├── v1/           # First major update
-│   │   └── index.html
-│   ├── v2/           # Version 2.0
-│   │   └── index.html
-│   ├── v3/           # Version 3.0
-│   │   └── index.html
-│   ├── v4/           # Version 4.0
-│   │   └── index.html
-│   └── v5/           # Version 5.0 (Current)
-│       └── index.html
-└── .github/
-    └── workflows/     # GitHub Actions for deployment
+```bash
+git clone https://github.com/ugrersoz/my-portfolio.git
+cd my-portfolio
+python -m http.server 8000
 ```
 
-## 🔧 Technologies Used
+Then open `http://localhost:8000` in a browser.
 
-- HTML5
-- CSS3
-- JavaScript
-- Responsive Design
-- GitHub Pages (Deployment)
+## Tech Stack
 
+- HTML5, CSS3 (no frameworks)
+- Vanilla JavaScript for navigation and modal interactions
+- GitHub Pages for hosting
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Released under the MIT License. See [LICENSE](LICENSE).
 
-## 👨‍💻 Author
+## Contact
 
-**Ugur Ersoz**
-- GitHub: [@ugrersoz](https://github.com/ugrersoz)
-- Email: uersoz55@gmail.com
-
-
+Ugur Ersoz — Berlin, Germany
+[GitHub](https://github.com/ugrersoz) · [LinkedIn](https://www.linkedin.com/in/ersozugur) · uersoz55@gmail.com
