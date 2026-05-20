@@ -406,41 +406,45 @@
 
         .modal-content {
             position: relative;
-            max-width: 95%;
-            max-height: 95%;
+            max-width: 90vw;
+            max-height: 85vh;
             cursor: default;
         }
 
         .close {
-            position: absolute;
-            top: -50px;
-            right: -15px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
             color: white;
-            font-size: 40px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             z-index: 2001;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(8px);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 1;
         }
 
         .close:hover {
-            color: #ff4444;
-            transform: scale(1.1);
-            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            transform: scale(1.08);
+            background: rgba(0, 0, 0, 0.85);
+            border-color: rgba(255, 255, 255, 0.7);
         }
 
         #modalImage {
             width: auto;
             height: auto;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 90vw;
+            max-height: 85vh;
             border-radius: 12px;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
             object-fit: contain;
@@ -596,16 +600,21 @@
             }
 
             .modal-content {
-                max-width: 98%;
-                max-height: 90%;
+                max-width: 92vw;
+                max-height: 80vh;
+            }
+
+            #modalImage {
+                max-width: 92vw;
+                max-height: 80vh;
             }
 
             .close {
-                top: -40px;
-                right: 0;
-                width: 36px;
-                height: 36px;
-                font-size: 28px;
+                top: 14px;
+                right: 14px;
+                width: 44px;
+                height: 44px;
+                font-size: 26px;
             }
 
             .skill-item {
@@ -656,6 +665,26 @@
         }
         .skills-values .cert-source {
             color: #86868b;
+        }
+        .cert-link {
+            color: #1d1d1f;
+            cursor: pointer;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        .cert-link:hover {
+            border-bottom-color: #1d1d1f;
+        }
+        .cert-view {
+            font-size: 0.8rem;
+            color: #0071e3;
+            margin-left: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cert-view:hover {
+            text-decoration: underline;
         }
         @media (max-width: 640px) {
             .skills-row {
@@ -1045,7 +1074,7 @@
                         <div class="skills-row">
                             <div class="skills-label">Certifications</div>
                             <div class="skills-values">
-                                <div class="cert-item">Data-Driven Precision Medicine for Diabetes <span class="cert-source">— Stanford Medicine</span></div>
+                                <div class="cert-item"><span class="cert-link" onclick="openModal('images/stanford-certificate.png')">Data-Driven Precision Medicine for Diabetes</span> <span class="cert-source">— Stanford Medicine</span><span class="cert-view" onclick="openModal('images/stanford-certificate.png')">View</span></div>
                                 <div class="cert-item">Product Ownership &amp; Process Management <span class="cert-source">— Miuul</span></div>
                                 <div class="cert-item">Agile Master &amp; Scrum Development <span class="cert-source">— Insider</span></div>
                                 <div class="cert-item">Python Programming <span class="cert-source">— Global AI Hub</span></div>
@@ -1108,11 +1137,11 @@
         }
 
         // Image modal functionality
-        function openModal(img) {
+        function openModal(imgOrSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             modal.classList.add('show');
-            modalImg.src = img.src;
+            modalImg.src = typeof imgOrSrc === 'string' ? imgOrSrc : imgOrSrc.src;
             document.body.style.overflow = 'hidden';
         }
 
