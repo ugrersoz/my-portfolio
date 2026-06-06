@@ -1,0 +1,19 @@
+{
+  "name": "Ugur Ersoz — Portfolio",
+  "short_name": "U. Ersoz",
+  "description": "Portfolio of Ugur Ersoz — product developer and researcher in life-science engineering and digital health.",
+  "start_url": "/my-portfolio/",
+  "scope": "/my-portfolio/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "images/profile-pixel.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
