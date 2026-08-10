@@ -10,10 +10,16 @@
   "lang": "en",
   "icons": [
     {
-      "src": "images/profile-pixel.png",
+      "src": "images/icon-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-512.webp",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/webp",
+      "purpose": "any"
     }
   ]
 }
