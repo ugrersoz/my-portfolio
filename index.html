@@ -26,18 +26,18 @@
     <meta property="og:title" content="Ugur Ersoz — Product Developer & Researcher">
     <meta property="og:description" content="Product developer and researcher in life-science engineering and digital health. Berlin, Germany.">
     <meta property="og:url" content="https://ugrersoz.github.io/my-portfolio/">
-    <meta property="og:image" content="https://ugrersoz.github.io/my-portfolio/images/profile-pixel.png">
+    <meta property="og:image" content="https://ugrersoz.github.io/my-portfolio/images/og-image.jpg">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ugur Ersoz — Product Developer & Researcher">
     <meta name="twitter:description" content="Product developer and researcher in life-science engineering and digital health. Berlin, Germany.">
-    <meta name="twitter:image" content="https://ugrersoz.github.io/my-portfolio/images/profile-pixel.png">
+    <meta name="twitter:image" content="https://ugrersoz.github.io/my-portfolio/images/og-image.jpg">
 
     <!-- Icons & PWA -->
-    <link rel="icon" type="image/png" href="images/profile-pixel.png">
-    <link rel="apple-touch-icon" href="images/profile-pixel.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Performance hints -->
@@ -53,7 +53,7 @@
       "name": "Ugur Ersoz",
       "alternateName": ["Uğur Ersöz", "Ugur Ersöz"],
       "url": "https://ugrersoz.github.io/my-portfolio/",
-      "image": "https://ugrersoz.github.io/my-portfolio/images/profile-pixel.png",
+      "image": "https://ugrersoz.github.io/my-portfolio/images/og-image.jpg",
       "jobTitle": "Product Developer & Researcher",
       "email": "mailto:uersoz55@gmail.com",
       "address": {
@@ -607,11 +607,28 @@
         .footer {
             text-align: center;
             margin-top: 80px;
-            padding: 30px 0;
+            padding: 30px 20px;
             border-top: 1px solid #eee;
             color: #666;
             font-size: 0.9rem;
             background: linear-gradient(180deg, #fafafa, #f0f0f0);
+        }
+
+        .footer p {
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .footer a:hover {
+            border-bottom-color: #1a73e8;
         }
 
         /* Mobile Navigation */
@@ -918,24 +935,24 @@
             <div class="container">
                 <p class="greeting">Hey!</p>
                 <header class="header" style="margin-top: 16px;">
-                    <img src="images/profile-pixel.png" alt="Ugur Ersoz" class="profile-image">
+                    <img src="images/profile.webp" alt="Ugur Ersoz" class="profile-image" decoding="async" fetchpriority="high">
                     <h1 class="name">Ugur Ersoz</h1>
                     <p class="alt-names">Uğur Ersöz (TR) · Ugur Ersöz (DE)</p>
                     <p class="alt-names" style="font-size: 1.1rem; margin-top: 6px;">Product Developer & Researcher | Berlin, Germany</p>
                     <div class="contact">
                         <a class="contact-item" href="mailto:uersoz55@gmail.com">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
-                                alt="Email">
+                                alt="Email" decoding="async">
                             Mail
                         </a>
                         <a class="contact-item" href="https://www.linkedin.com/in/ersozugur" target="_blank" rel="noopener noreferrer">
                             <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                                alt="LinkedIn">
+                                alt="LinkedIn" decoding="async">
                             LinkedIn
                         </a>
                         <a class="contact-item" href="https://github.com/ugrersoz" target="_blank" rel="noopener noreferrer">
                             <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                                alt="GitHub">
+                                alt="GitHub" decoding="async">
                             GitHub
                         </a>
                     </div>
@@ -1054,13 +1071,13 @@
                                         <li>Contributed to a first launch that reached support from <strong>357 followers and upvoters</strong>.</li>
                                     </ul>
                                     <div class="launch-post-frame">
-                                        <img src="images/uniqgene-ai.png" alt="Uniqgene AI product launch page" class="launch-post-image" onclick="openModal(this)">
+                                        <img src="images/uniqgene-ai.webp" alt="Uniqgene AI product launch page" class="launch-post-image" onclick="openModal(this)" loading="lazy" decoding="async">
                                     </div>
                                     <div class="project-links" style="margin-top: 14px;">
                                         <a href="https://www.producthunt.com/products/uniqgene?launch=uniqgene-ai" target="_blank" rel="noopener noreferrer" class="project-link">Product Hunt Launch</a>
                                     </div>
                                     <div class="launch-post-frame">
-                                        <img src="images/uniqgene-product-hunt-launch.png" alt="LinkedIn post recognizing Product Hunt launch coordination" class="launch-post-image" onclick="openModal(this)">
+                                        <img src="images/uniqgene-product-hunt-launch.webp" alt="LinkedIn post recognizing Product Hunt launch coordination" class="launch-post-image" onclick="openModal(this)" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </details>
@@ -1082,7 +1099,7 @@
                                         <li>Supported content flows for tailored training routines and nutrition recommendations.</li>
                                     </ul>
                                     <div class="launch-post-frame">
-                                        <img src="images/uniqgene-sports-predisposition-report.png" alt="Uniqgene Sports Predisposition Analysis interactive report" class="launch-post-image" onclick="openModal(this)">
+                                        <img src="images/uniqgene-sports-predisposition-report.webp" alt="Uniqgene Sports Predisposition Analysis interactive report" class="launch-post-image" onclick="openModal(this)" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </details>
@@ -1104,7 +1121,7 @@
                                         <li>Built the segmentation logic behind the final user-facing report experience.</li>
                                     </ul>
                                     <div class="launch-post-frame">
-                                        <img src="images/uniqgene-caffeine-metabolism-report.png" alt="Uniqgene Caffeine Metabolism personalized report" class="launch-post-image" onclick="openModal(this)">
+                                        <img src="images/uniqgene-caffeine-metabolism-report.webp" alt="Uniqgene Caffeine Metabolism personalized report" class="launch-post-image" onclick="openModal(this)" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </details>
@@ -1200,7 +1217,7 @@
                                 During the program I completed assignments aimed at building an enterprise concept aligned with the <strong>UN Sustainable Development Goals</strong>, as part of the GirişGen track.
                             </p>
                             <div class="project-links" style="margin-top: 14px;">
-                                <a class="project-link" onclick="openModal('images/yetgen-certificate.jpg')" style="cursor: pointer;">View Certificate</a>
+                                <a class="project-link" onclick="openModal('images/yetgen-certificate.webp')" style="cursor: pointer;">View Certificate</a>
                             </div>
                         </div>
                     </div>
@@ -1261,9 +1278,9 @@
                     <div class="card">
                         <div class="project-content">
                             <div class="project-image-container">
-                                <img class="project-image" src="images/bersync-project.png"
+                                <img class="project-image" src="images/bersync-project.webp"
                                     alt="BerSync Remote Health Monitoring" onclick="openModal(this)"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
                             </div>
                             <div class="project-info">
                                 <div class="job-header">
@@ -1290,9 +1307,9 @@
                     <div class="card">
                         <div class="project-content">
                             <div class="project-image-container">
-                                <img class="project-image" src="images/oxford-uniqgene-poster.png"
+                                <img class="project-image" src="images/oxford-uniqgene-poster.webp"
                                     alt="Genetic Testing Research" onclick="openModal(this)"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
                             </div>
                             <div class="project-info">
                                 <div class="job-header">
@@ -1313,10 +1330,10 @@
                         <div class="project-content">
                             <div class="project-image-container">
                                 <div style="display: flex; gap: 10px;">
-                                    <img class="project-image" src="images/capstone-project1.jpeg" alt="CYP1A2 Study"
-                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;">
-                                    <img class="project-image" src="images/capstone-project2.jpeg" alt="CYP1A2 Study"
-                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;">
+                                    <img class="project-image" src="images/capstone-project1.webp" alt="CYP1A2 Study"
+                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
+                                    <img class="project-image" src="images/capstone-project2.webp" alt="CYP1A2 Study"
+                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
                                 </div>
                             </div>
                             <div class="project-info">
@@ -1341,8 +1358,8 @@
                     <div class="card">
                         <div class="project-content">
                             <div class="project-image-container">
-                                <img class="project-image" src="images/live-useful-project.jpeg" alt="LiveUseful App"
-                                    onclick="openModal(this)">
+                                <img class="project-image" src="images/live-useful-project.webp" alt="LiveUseful App"
+                                    onclick="openModal(this)" loading="lazy" decoding="async">
                             </div>
                             <div class="project-info">
                                 <div class="job-header">
@@ -1387,7 +1404,7 @@
                         <div class="skills-row">
                             <div class="skills-label">Certifications</div>
                             <div class="skills-values">
-                                <div class="cert-item"><span class="cert-link" onclick="openModal('images/stanford-certificate.png')">Data-Driven Precision Medicine for Diabetes</span> <span class="cert-source">— Stanford Medicine</span><span class="cert-view" onclick="openModal('images/stanford-certificate.png')">View</span></div>
+                                <div class="cert-item"><span class="cert-link" onclick="openModal('images/stanford-certificate.webp')">Data-Driven Precision Medicine for Diabetes</span> <span class="cert-source">— Stanford Medicine</span><span class="cert-view" onclick="openModal('images/stanford-certificate.webp')">View</span></div>
                                 <div class="cert-item">Product Ownership &amp; Process Management <span class="cert-source">— Miuul</span></div>
                                 <div class="cert-item">Agile Master &amp; Scrum Development <span class="cert-source">— Insider</span></div>
                                 <div class="cert-item">Python Programming <span class="cert-source">— Global AI Hub</span></div>
@@ -1405,13 +1422,18 @@
     <div id="imageModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="">
+            <img id="modalImage" src="" alt="" decoding="async">
         </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        <p>&copy; 2026 Ugur Ersoz. All rights reserved. | Built with passion for science, technology and design.</p>
+        <p>
+            &copy; Copyright <span id="footer-year">2026</span> Ugur Ersoz. All rights reserved.
+            Built with HTML, CSS &amp; JavaScript.
+            Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+            Last updated: <span id="footer-updated">June 10, 2026</span>.
+        </p>
     </div>
 
     <script>

@@ -20,6 +20,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Stamps the footer in the published copy only. main is never modified,
+      # so no commit-back and no write access to the source branch is needed.
+      - name: Stamp footer date
+        run: |
+          LAST_UPDATED=$(git log -1 --format=%cd --date=format:'%B %d, %Y')
+          YEAR=$(git log -1 --format=%cd --date=format:'%Y')
+          sed -i "s|<span id=\"footer-updated\">[^<]*</span>|<span id=\"footer-updated\">${LAST_UPDATED}</span>|" index.html
+          sed -i "s|<span id=\"footer-year\">[^<]*</span>|<span id=\"footer-year\">${YEAR}</span>|" index.html
+          echo "Stamped: ${LAST_UPDATED} (year ${YEAR})"
+          grep -o '<span id="footer-updated">[^<]*</span>' index.html
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
