@@ -40,11 +40,6 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
 
-    <!-- Performance hints -->
-    <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin>
-    <link rel="preconnect" href="https://content.linkedin.com" crossorigin>
-    <link rel="preconnect" href="https://github.githubassets.com" crossorigin>
-
     <!-- Structured data -->
     <script type="application/ld+json">
     {
@@ -67,978 +62,1102 @@
       ]
     }
     </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-        }
-
-        /* Navigation Styles */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid #e1e5e9;
-        }
-
-        .nav-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-        }
-
-        .nav-brand {
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #333;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-        }
-
-        .nav-item {
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .nav-item:hover {
-            background: #f0f7ff;
-            color: #1a73e8;
-        }
-
-        .nav-item.active {
-            background: #4285f4;
-            color: white;
-        }
-
-        /* Page Content Styles */
-        .main-content {
-            margin-top: 70px;
-            min-height: calc(100vh - 70px);
-        }
-
-        .page-section {
-            display: none;
-            padding: 40px 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-        }
-
-        .page-section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Home Page Styles */
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .profile-image {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid #e1f0ff;
-            box-shadow: 0 8px 24px rgba(66, 133, 244, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.08);
-            border-color: #4285f4;
-            box-shadow: 0 12px 36px rgba(66, 133, 244, 0.35);
-        }
-
-        .name {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #000;
-            margin-bottom: 8px;
-        }
-
-        .alt-names {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 12px;
-        }
-
-        .title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 24px;
-        }
-
-        .contact {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fff;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .contact-item img {
-            width: 18px;
-            height: 18px;
-        }
-
-        .contact-item:hover {
-            border-color: #4285f4;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Section Styles */
-        .section {
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 2.6rem;
-            font-weight: 600;
-            letter-spacing: -0.022em;
-            margin-bottom: 40px;
-            color: #1d1d1f;
-        }
-
-        .greeting {
-            font-size: 1.05rem;
-            color: #86868b;
-            text-align: center;
-            margin-top: 32px;
-            margin-bottom: -8px;
-            letter-spacing: 0.02em;
-        }
-
-        .courses-label {
-            font-size: 0.78rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #86868b;
-            margin-top: 18px;
-            margin-bottom: 10px;
-        }
-        .courses-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 24px;
-            font-size: 0.95rem;
-            color: #1d1d1f;
-            line-height: 1.55;
-        }
-        .courses-list div::before {
-            content: "·  ";
-            color: #86868b;
-        }
-        @media (max-width: 640px) {
-            .courses-list { grid-template-columns: 1fr; }
-            .section-title { font-size: 2rem; margin-bottom: 28px; }
-        }
-
-        /* Card Styles */
-        .card {
-            border: 1px solid #ddd;
-            background: linear-gradient(180deg, #ffffff, #fafafa);
-            border-radius: 14px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            margin-bottom: 24px;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-            border-color: #4285f4;
-            background: linear-gradient(180deg, #ffffff, #f9fbff);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .job-title {
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #1a1a1a;
-        }
-
-        .company {
-            font-size: 1rem;
-            color: #555;
-            margin-top: 4px;
-            margin-bottom: 8px;
-        }
-
-        .job-duration {
-            font-size: 0.9rem;
-            color: #666;
-            background: #f8f9fa;
-            padding: 6px 12px;
-            border-radius: 12px;
-            white-space: nowrap;
-            border: 1px solid #e9ecef;
-        }
-
-        .job-description {
-            margin-top: 16px;
-        }
-
-        .job-description ul {
-            margin-left: 20px;
-            margin-top: 8px;
-        }
-
-        .job-description li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        .launch-highlight {
-            margin-top: 18px;
-            border: 1px solid #dbe7ff;
-            border-radius: 12px;
-            background: #f8fbff;
-            overflow: hidden;
-        }
-
-        .launch-highlight summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 16px 18px;
-            cursor: pointer;
-            list-style: none;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
-
-        .launch-highlight summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .launch-summary-text {
-            display: grid;
-            gap: 3px;
-        }
-
-        .launch-summary-label {
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #4285f4;
-        }
-
-        .launch-summary-title {
-            font-size: 1rem;
-            line-height: 1.35;
-        }
-
-        .launch-toggle {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #eaf2ff;
-            color: #1a73e8;
-            font-size: 1.15rem;
-            line-height: 1;
-            flex: 0 0 auto;
-        }
-
-        .launch-highlight[open] .launch-toggle {
-            transform: rotate(45deg);
-        }
-
-        .launch-content {
-            padding: 0 18px 18px;
-            border-top: 1px solid #e4edff;
-        }
-
-        .launch-content p {
-            margin-top: 14px;
-            color: #444;
-            line-height: 1.65;
-        }
-
-        .launch-content ul {
-            margin-top: 12px;
-            margin-left: 20px;
-        }
-
-        .launch-post-frame {
-            margin-top: 16px;
-            border: 1px solid #e1e5e9;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-        }
-
-        .launch-post-image {
-            display: block;
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
-
-        /* Project Styles */
-        .project-content {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-        }
-
-        .project-image-container {
-            flex-shrink: 0;
-            width: 220px;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-        }
-
-        .project-image:hover {
-            transform: scale(1.05);
-            border-color: #4285f4;
-            box-shadow: 0 8px 24px rgba(66, 133, 244, 0.3);
-        }
-
-        .project-info {
-            flex: 1;
-        }
-
-        .card-description {
-            font-size: 0.95rem;
-            color: #555;
-            margin-top: 12px;
-            line-height: 1.6;
-        }
-
-        .project-links {
-            margin-top: 16px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            color: #4285f4;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #e1f0ff;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .project-link:hover {
-            background: linear-gradient(135deg, #4285f4, #1a73e8);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-list {
-            margin-top: 12px;
-        }
-
-        .skill-item {
-            display: inline-block;
-            background: linear-gradient(135deg, #f0f7ff, #e1f0ff);
-            color: #1a73e8;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 3px 6px 3px 0;
-            border: 1px solid #c8e1ff;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
-            background: linear-gradient(135deg, #1a73e8, #4285f4);
-            color: white;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            cursor: pointer;
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 85vh;
-            cursor: default;
-        }
-
-        .close {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 2001;
-            background: rgba(0, 0, 0, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(8px);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .close:hover {
-            color: #fff;
-            transform: scale(1.08);
-            background: rgba(0, 0, 0, 0.85);
-            border-color: rgba(255, 255, 255, 0.7);
-        }
-
-        #modalImage {
-            width: auto;
-            height: auto;
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 12px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-            object-fit: contain;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 80px;
-            padding: 30px 20px;
-            border-top: 1px solid #eee;
-            color: #666;
-            font-size: 0.9rem;
-            background: linear-gradient(180deg, #fafafa, #f0f0f0);
-        }
-
-        .footer p {
-            max-width: 720px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        .footer a {
-            color: #1a73e8;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-
-        .footer a:hover {
-            border-bottom-color: #1a73e8;
-        }
-
-        /* Mobile Navigation */
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 8px;
-            background: none;
-            border: none;
-            z-index: 101;
-        }
-
-        .nav-toggle span {
-            width: 26px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-            display: block;
-        }
-
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-content {
-                margin-top: 60px;
-            }
-
-            .container {
-                padding: 16px 14px;
-            }
-
-            .page-section {
-                padding: 24px 10px;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .project-content {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .project-image-container {
-                width: 100%;
-            }
-
-            .project-image {
-                height: 180px;
-            }
-
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .name {
-                font-size: 1.7rem;
-            }
-
-            .section-title {
-                font-size: 1.3rem;
-            }
-
-            .card {
-                padding: 18px 16px;
-                margin-bottom: 16px;
-            }
-
-            .card:hover {
-                transform: none;
-            }
-
-            .job-title {
-                font-size: 1.05rem;
-            }
-
-            .card-description {
-                font-size: 0.9rem;
-            }
-
-            .section {
-                margin-bottom: 36px;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                border-top: 1px solid #e1e5e9;
-                padding: 16px;
-                gap: 6px;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            }
-
-            .nav-menu.show {
-                display: flex;
-            }
-
-            .nav-item {
-                padding: 12px 16px;
-                font-size: 1rem;
-                text-align: center;
-                border-radius: 10px;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
-            .footer {
-                margin-top: 40px;
-                padding: 20px 16px;
-                font-size: 0.8rem;
-            }
-
-            .modal-content {
-                max-width: 92vw;
-                max-height: 80vh;
-            }
-
-            #modalImage {
-                max-width: 92vw;
-                max-height: 80vh;
-            }
-
-            .close {
-                top: 14px;
-                right: 14px;
-                width: 44px;
-                height: 44px;
-                font-size: 26px;
-            }
-
-            .skill-item {
-                font-size: 0.8rem;
-                padding: 5px 12px;
-            }
-
-            .project-link {
-                padding: 10px 16px;
-                font-size: 0.85rem;
-            }
-
-            .launch-highlight summary {
-                align-items: flex-start;
-                padding: 14px;
-            }
-
-            .launch-content {
-                padding: 0 14px 14px;
-            }
-        }
-
-        /* Skills — minimal Apple-style */
-        .skills-minimal .skills-title {
-            font-size: 2.6rem;
-            font-weight: 600;
-            letter-spacing: -0.022em;
-            color: #1d1d1f;
-            margin-bottom: 48px;
-        }
-        .skills-list {
-            border-top: 1px solid #d2d2d7;
-        }
-        .skills-row {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 40px;
-            padding: 28px 4px;
-            border-bottom: 1px solid #d2d2d7;
-        }
-        .skills-label {
-            font-size: 0.78rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #86868b;
-            padding-top: 4px;
-        }
-        .skills-values {
-            font-size: 1.05rem;
-            color: #1d1d1f;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-        .skills-values .cert-item {
-            padding: 3px 0;
-        }
-        .skills-values .cert-source {
-            color: #86868b;
-        }
-        .cert-link {
-            color: #1d1d1f;
-            cursor: pointer;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-        .cert-link:hover {
-            border-bottom-color: #1d1d1f;
-        }
-        .cert-view {
-            font-size: 0.8rem;
-            color: #0071e3;
-            margin-left: 8px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .cert-view:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 640px) {
-            .skills-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                padding: 22px 2px;
-            }
-            .skills-minimal .skills-title {
-                font-size: 2rem;
-                margin-bottom: 32px;
-            }
-            .skills-values {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .contact {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .contact-item {
-                justify-content: center;
-                padding: 12px 16px;
-            }
-
-            .name {
-                font-size: 1.5rem;
-            }
-
-            .title {
-                font-size: 1rem;
-            }
-
-            .alt-names {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-</head>
-
+<style>
+:root {
+    --ink:#20272d;
+    --muted:#606b75;
+    --blue:#245cbe;
+    --line:#e2e7eb;
+    --soft:#f6f8fa;
+    --body:960px;
+    color-scheme:light
+}
+
+* {
+    box-sizing:border-box
+}
+html {
+    scroll-behavior:smooth;
+    scroll-padding-top:100px
+}
+body {
+    margin:0;
+    background:#fff;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased
+}
+a {
+    color:inherit;
+    text-underline-offset:4px
+}
+button {
+    font:inherit;
+    color:inherit
+}
+a,button,summary {
+    -webkit-tap-highlight-color:transparent
+}
+a:focus-visible,button:focus-visible,summary:focus-visible {
+    outline:3px solid var(--blue);
+    outline-offset:5px;
+    border-radius:3px
+}
+a:hover {
+    color:var(--blue)
+}
+button,summary {
+    cursor:pointer
+}
+img {
+    max-width:100%;
+    height:auto
+}
+p,h1,h2,figure {
+    margin:0
+}
+.topbar,main,.footer {
+    width:min(var(--body),calc(100% - 64px));
+    margin-inline:auto
+}
+.topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:100px;
+    border-bottom:1px solid var(--line);
+    gap:24px
+}
+.wordmark {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:650;
+    text-decoration:none;
+    white-space:nowrap
+}
+.monogram {
+    display:grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    background:var(--ink);
+    color:#fff;
+    border-radius:10px;
+    font-size:20px;
+    letter-spacing:-1px
+}
+.topbar nav {
+    display:flex;
+    align-items:center;
+    gap:28px
+}
+.topbar nav a {
+    font-size:14px;
+    text-decoration:none;
+    color:var(--muted)
+}
+.topbar nav a[aria-current],.topbar nav a:hover {
+    color:var(--blue)
+}
+.topbar .nav-contact {
+    color:var(--ink)
+}
+.nav-contact span {
+    margin-left:6px
+}
+.hero {
+    display:grid;
+    grid-template-columns:1fr 176px;
+    align-items:center;
+    gap:64px;
+    padding:78px 0 50px
+}
+.eyebrow {
+    font-size:12px;
+    letter-spacing:.13em;
+    font-weight:600;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:8px
+}
+.location-dot {
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--blue)
+}
+h1 {
+    font-size:clamp(36px,4.7vw,54px);
+    font-weight:600;
+    line-height:1.13;
+    letter-spacing:-.055em;
+    margin:22px 0
+}
+h1 span {
+    color:var(--blue)
+}
+.hero-intro {
+    max-width:570px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.75
+}
+.hero-links {
+    display:flex;
+    align-items:center;
+    gap:24px;
+    margin-top:28px;
+    flex-wrap:wrap
+}
+.hero-links a {
+    font-size:14px;
+    text-decoration:none
+}
+.hero-links .primary-link {
+    font-weight:600;
+    color:var(--blue)
+}
+.hero-links span {
+    margin-left:6px
+}
+.portrait img {
+    display:block;
+    width:176px;
+    height:190px;
+    object-fit:cover;
+    border-radius:18px;
+    background:var(--soft)
+}
+.portrait figcaption {
+    font-size:14px;
+    font-weight:600;
+    padding-top:12px
+}
+.portrait figcaption span {
+    display:block;
+    font-size:12px;
+    font-weight:400;
+    color:var(--muted)
+}
+.focus-strip {
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    padding-bottom:34px;
+    font-size:13px;
+    color:var(--muted);
+    border-bottom:1px solid var(--line)
+}
+.focus-strip span[aria-hidden] {
+    color:#b2bbc5
+}
+.portfolio-section {
+    padding-top:55px
+}
+.section-heading {
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:22px
+}
+.section-heading>div {
+    display:flex;
+    gap:16px;
+    align-items:baseline
+}
+.section-number {
+    font-size:12px;
+    color:var(--blue);
+    font-variant-numeric:tabular-nums
+}
+.section-heading h2 {
+    font-size:22px;
+    letter-spacing:-.035em;
+    font-weight:600
+}
+.section-heading>p {
+    font-size:14px;
+    color:var(--muted)
+}
+.entry {
+    border-top:1px solid var(--line)
+}
+.entry:last-child {
+    border-bottom:1px solid var(--line)
+}
+.entry>summary {
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:22px 8px;
+    transition:background .15s
+}
+.entry>summary::-webkit-details-marker {
+    display:none
+}
+.entry>summary:hover {
+    background:var(--soft)
+}
+.entry[open]>summary {
+    background:var(--soft)
+}
+.project-index {
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+    display:grid;
+    place-items:center;
+    background:#f0f4fa;
+    border:1px solid #e0e8f2;
+    border-radius:10px;
+    color:var(--blue);
+    font-size:12px;
+    letter-spacing:.06em
+}
+.entry-copy {
+    flex:1;
+    min-width:0
+}
+.entry-title,.entry-subtitle {
+    display:block
+}
+.entry-title {
+    font-size:17px;
+    font-weight:600;
+    line-height:1.5;
+    letter-spacing:-.015em
+}
+.entry-subtitle {
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.6;
+    margin-top:3px
+}
+.entry-meta {
+    font-size:12px;
+    color:var(--muted);
+    flex-shrink:0;
+    max-width:150px;
+    text-align:right
+}
+.project-entry .entry-meta {
+    background:var(--soft);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:2px 8px
+}
+.entry-toggle {
+    font-size:24px;
+    font-weight:300;
+    color:var(--muted);
+    width:24px;
+    text-align:center;
+    flex-shrink:0
+}
+.entry[open]>.entry-toggle,.entry[open]>summary>.entry-toggle {
+    transform:rotate(45deg);
+    color:var(--blue)
+}
+.entry-body {
+    padding:24px 24px 30px;
+    background:#fafbfc;
+    border-top:1px solid var(--line)
+}
+.project-context {
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:14px
+}
+.card-description,.job-description {
+    color:#4d5862;
+    line-height:1.8
+}
+.job-description ul {
+    padding-left:20px;
+    margin:0
+}
+.job-description li+li {
+    margin-top:10px
+}
+strong {
+    font-weight:600;
+    color:var(--ink)
+}
+.project-content {
+    display:flex;
+    flex-direction:column-reverse;
+    gap:22px
+}
+.project-image-container {
+    max-width:650px
+}
+.project-image-container>div {
+    display:flex;
+    gap:12px
+}
+.project-image-container>div>.image-preview {
+    min-width:0;
+    flex:1
+}
+.image-preview {
+    display:block;
+    border:1px solid var(--line);
+    padding:0;
+    background:#fff;
+    border-radius:8px;
+    overflow:hidden;
+    cursor:zoom-in;
+    max-width:100%
+}
+.project-image-container img.project-image {
+    display:block;
+    width:100%!important;
+    height:auto!important;
+    max-height:380px;
+    object-fit:contain!important
+}
+.launch-highlight {
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-top:18px;
+    background:#fff
+}
+.launch-highlight summary {
+    display:flex;
+    justify-content:space-between;
+    gap:18px;
+    padding:16px;
+    list-style:none
+}
+.launch-highlight summary::-webkit-details-marker {
+    display:none
+}
+.launch-summary-label {
+    display:block;
+    font-size:12px;
+    color:var(--blue)
+}
+.launch-summary-title {
+    display:block;
+    font-size:15px;
+    font-weight:600
+}
+.launch-toggle {
+    font-size:23px
+}
+.launch-highlight[open] .launch-toggle {
+    transform:rotate(45deg)
+}
+.launch-content {
+    padding:0 18px 20px
+}
+.launch-content p,.launch-content ul {
+    margin-bottom:18px
+}
+.launch-post-frame {
+    margin-top:18px;
+    max-width:600px
+}
+.launch-post-image {
+    display:block;
+    max-height:500px;
+    object-fit:contain
+}
+.project-links {
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px
+}
+.project-link {
+    font-size:14px;
+    text-decoration:none;
+    border:1px solid #d4dfe9;
+    background:#fff;
+    color:var(--blue);
+    padding:7px 13px;
+    border-radius:6px
+}
+.project-link:hover {
+    background:#edf3fc
+}
+.about-text {
+    color:var(--muted);
+    max-width:750px;
+    margin-bottom:28px
+}
+.courses-label {
+    font-size:14px;
+    font-weight:600;
+    margin:18px 0 10px
+}
+.courses-list {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 20px;
+    font-size:14px
+}
+.skills-list {
+    border-top:1px solid var(--line)
+}
+.skills-row {
+    display:grid;
+    grid-template-columns:175px 1fr;
+    gap:24px;
+    padding:21px 8px;
+    border-bottom:1px solid var(--line)
+}
+.skills-label {
+    font-size:14px;
+    color:var(--muted)
+}
+.skills-values {
+    font-size:16px
+}
+.cert-item+.cert-item {
+    margin-top:9px
+}
+.cert-source {
+    color:var(--muted);
+    font-size:14px
+}
+.cert-link {
+    background:none;
+    border:0;
+    padding:0;
+    text-align:left;
+    text-decoration:underline;
+    text-underline-offset:4px
+}
+.contact-section {
+    margin-top:70px;
+    background:var(--soft);
+    padding:40px;
+    border:1px solid var(--line);
+    border-radius:12px
+}
+.contact-section h2 {
+    font-size:32px;
+    letter-spacing:-.04em;
+    margin:12px 0 10px;
+    font-weight:600
+}
+.contact-section>p:not(.eyebrow) {
+    color:var(--muted)
+}
+.email-link {
+    display:inline-block;
+    font-size:22px;
+    color:var(--blue);
+    margin-top:20px;
+    text-decoration:none;
+    overflow-wrap:anywhere
+}
+.email-link span {
+    margin-left:12px
+}
+.contact-socials {
+    display:flex;
+    gap:24px;
+    margin-top:20px;
+    font-size:14px
+}
+.contact-socials a {
+    text-decoration:none
+}
+.footer {
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:30px 0 36px;
+    color:var(--muted);
+    font-size:12px
+}
+.footer a {
+    text-decoration:none
+}
+dialog {
+    border:0;
+    border-radius:12px;
+    padding:48px 18px 18px;
+    max-width:92vw;
+    max-height:92vh;
+    background:#fff
+}
+dialog::backdrop {
+    background:rgba(15,23,32,.8)
+}
+dialog img {
+    display:block;
+    max-width:85vw;
+    max-height:76vh;
+    object-fit:contain;
+    margin:auto
+}
+.close {
+    position:absolute;
+    top:4px;
+    right:8px;
+    width:44px;
+    height:44px;
+    border:0;
+    background:transparent;
+    font-size:30px
+}
+.skip-link {
+    position:fixed;
+    top:-100px;
+    left:20px;
+    background:var(--ink);
+    color:white;
+    padding:10px 16px;
+    z-index:10
+}
+.skip-link:focus {
+    top:10px
+}
+
+@media(max-width:760px) {
+    .topbar,main,.footer {
+    width:calc(100% - 40px)
+}
+.topbar {
+    min-height:82px
+}
+.topbar nav {
+    gap:16px
+}
+.topbar .nav-contact {
+    display:none
+}
+.hero {
+    gap:28px;
+    grid-template-columns:1fr 126px;
+    padding:50px 0 32px
+}
+.portrait img {
+    width:126px;
+    height:144px
+}
+.portrait figcaption span {
+    font-size:12px
+}
+.hero-intro {
+    font-size:16px
+}
+.section-heading {
+    display:block
+}
+.section-heading>p {
+    margin-top:6px
+}
+.entry-meta {
+    display:none
+}
+.entry>summary {
+    gap:14px
+}
+.focus-strip {
+    gap:12px
+}
+.contact-section {
+    padding:28px
+}
+.footer {
+    flex-wrap:wrap
+}
+.skills-row {
+    grid-template-columns:135px 1fr;
+    gap:16px
+}
+
+}
+
+@media(max-width:480px) {
+    .topbar {
+    flex-wrap:wrap;
+    gap:16px;
+    padding:18px 0
+}
+.topbar nav {
+    gap:24px;
+    width:100%
+}
+.hero {
+    grid-template-columns:1fr;
+    position:relative;
+    padding-top:34px;
+    gap:24px
+}
+.hero-copy {
+    min-width:0
+}
+.hero .eyebrow {
+    padding-right:64px;
+    min-height:28px
+}
+.portrait {
+    position:absolute;
+    right:0;
+    top:26px
+}
+.portrait img {
+    width:52px;
+    height:52px;
+    border-radius:12px
+}
+.portrait figcaption {
+    display:none
+}
+h1 {
+    font-size:39px;
+    margin-top:28px
+}
+.hero-links {
+    gap:20px
+}
+.focus-strip {
+    font-size:12px;
+    column-gap:9px;
+    row-gap:0
+}
+.portfolio-section {
+    padding-top:40px
+}
+.project-index {
+    width:30px;
+    height:34px;
+    border-radius:7px
+}
+.entry>summary {
+    gap:10px;
+    padding:18px 0
+}
+.entry-title {
+    font-size:16px
+}
+.entry-subtitle {
+    font-size:14px
+}
+.entry-body {
+    padding:18px 12px
+}
+.skills-row {
+    grid-template-columns:1fr;
+    gap:7px
+}
+.courses-list {
+    grid-template-columns:1fr
+}
+.contact-section {
+    padding:24px 20px;
+    margin-top:48px
+}
+.contact-section h2 {
+    font-size:28px
+}
+.email-link {
+    font-size:20px
+}
+.footer {
+    gap:8px 16px
+}
+.footer>a {
+    margin-left:auto
+}
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html {
+    scroll-behavior:auto
+}
+*,*::before,*::after {
+    transition:none!important
+}
+
+}
+
+@media print {
+    .topbar,.hero-links,.footer>a {
+    display:none
+}
+main,.footer {
+    width:100%
+}
+.entry-body {
+    display:block
+}
+.entry::details-content {
+    content-visibility:visible
+}
+.contact-section {
+    break-inside:avoid
+}
+
+}
+
+
+.alternate-names { margin: 0 0 5px; color: var(--muted); font-size: 14px; }
+.profile-role { margin-bottom: 18px; font-size: 16px; line-height: 1.6; }
+.profile-role span { color: #a7b0b9; margin-inline: 3px; }
+.profile-contacts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.profile-contacts a { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; font-size: 15px; background: #fff; }
+.profile-contacts a:hover { border-color: var(--blue); background: var(--soft); }
+.profile-contacts svg { width: 19px; height: 19px; flex-shrink: 0; }
+.hero-links { margin-top: 20px; }
+.footer { align-items: baseline; font-size: 13px; }
+.footer-details { max-width: 780px; }
+.footer-details p + p { margin-top: 4px; }
+.footer-details a { color: var(--blue); }
+.footer > a { flex-shrink: 0; }
+@media (max-width: 480px) {
+ .profile-contacts { gap: 8px; }
+ .profile-contacts a { padding-inline: 12px; font-size: 14px; }
+ .profile-role { font-size: 15px; }
+ .footer > a { margin: 6px 0 0; }
+}
+
+.portrait-flip { display: block; position: relative; width: 176px; height: 190px; padding: 0; border: 0; border-radius: 18px; background: transparent; perspective: 900px; cursor: pointer; }
+.portrait-flipper { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+.portrait-flip[aria-pressed="true"] .portrait-flipper { transform: rotateY(180deg); }
+.portrait .portrait-flipper img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.portrait-back { transform: rotateY(180deg); }
+.flip-badge { position: absolute; bottom: 9px; right: 9px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff; color: var(--blue); font-size: 21px; line-height: 1; box-shadow: 0 1px 6px #0002; pointer-events: none; }
+.portrait-hint { display: block; margin-top: 7px; font-size: 12px; color: var(--muted); }
+@media (max-width: 760px) { .portrait-flip { width: 126px; height: 144px; } }
+@media (max-width: 480px) {
+ .portrait-flip { width: 52px; height: 52px; border-radius: 12px; }
+ .portrait .portrait-flipper img { border-radius: 12px; }
+ .flip-badge { width: 19px; height: 19px; font-size: 16px; bottom: -4px; right: -4px; }
+ .portrait-hint { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) { .portrait-flipper { transition: none; } }
+
+.recognition-badge { display: inline-block; padding: 2px 9px; margin-right: 5px; border: 1px solid #d4dfef; border-radius: 5px; background: #f0f4fa; color: var(--blue); font-size: 13px; font-weight: 600; }
+.recognition-description { margin-top: 5px; color: var(--muted); font-size: 14px; }
+.credential-preview { width: min(100%, 450px); margin: 14px 0 18px; }
+.credential-preview img { display: block; width: 100%; height: auto; }
+.credential-details { margin-top: 10px; }
+.credential-details > summary { width: fit-content; color: var(--blue); font-size: 14px; cursor: pointer; }
+.writing-list { border-top: 1px solid var(--line); }
+.writing-link { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 8px; border-bottom: 1px solid var(--line); text-decoration: none; }
+.writing-link:hover { background: var(--soft); }
+.writing-link > span:last-child { color: var(--blue); }
+.writing-more { display: inline-block; margin-top: 18px; font-size: 14px; color: var(--blue); text-decoration: none; }
+.contact-socials { flex-wrap: wrap; }
+
+/* Quiet, text-led portfolio layout. */
+:root { --body: 900px; --ink: #242424; --muted: #747474; --blue: #414141; --soft: #fafafa; --line: #ededed; }
+body { font-family: Arial, Helvetica, sans-serif; color: #555; line-height: 1.7; }
+.topbar { border-bottom: 0; min-height: 86px; }
+.monogram { background: transparent; color: var(--ink); border-radius: 0; }
+.hero { padding: 48px 0 18px; gap: 40px; }
+.hero h1 { font-size: 28px; font-weight: 600; line-height: 1.45; letter-spacing: -.025em; margin: 0 0 24px; color: #555; }
+.hero-copy > .eyebrow { display: none; }
+.alternate-names { font-size: 15px; }
+.profile-role { color: var(--muted); font-size: 16px; }
+.profile-contacts a { border: 0; padding: 5px 0; background: transparent; border-radius: 0; }
+.profile-contacts { gap: 24px; margin-top: 12px; }
+.hero-links .primary-link { color: var(--muted); font-weight: 400; }
+.portfolio-section { padding-top: 58px; }
+.section-heading { margin-bottom: 20px; }
+.section-heading h2, .contact-section h2 { color: var(--muted); font-size: 18px; font-weight: 400; letter-spacing: 0; }
+.section-heading > p { font-size: 15px; }
+.entry, .entry:last-child { border: 0; }
+.entry > summary { padding: 17px 10px; gap: 18px; border-radius: 4px; }
+.entry[open] > summary { background: transparent; }
+.entry-title { display: inline; color: #202020; font-size: 19px; font-weight: 400; letter-spacing: 0; }
+.entry-subtitle { display: inline; color: var(--muted); font-size: 16px; margin-left: 9px; line-height: 1.65; }
+.entry-meta { color: var(--muted); font-size: 14px; }
+.project-entry .entry-meta { display: none; }
+.entry-toggle { color: #858585; font-size: 28px; font-weight: 400; line-height: 1; transition: transform .18s ease; }
+.entry[open] > summary > .entry-toggle { transform: rotate(90deg); color: #555; }
+.entry-body { margin: 0 10px 14px; padding: 16px 18px 22px; border: 0; border-left: 1px solid var(--line); background: transparent; }
+.about-text { color: #555; }
+.skills-list, .skills-row, .writing-list, .writing-link { border: 0; }
+.skills-row { padding: 17px 10px; }
+.skills-values { color: #333; }
+.writing-link { padding: 17px 10px; }
+.writing-link .entry-subtitle { display: block; margin-left: 0; margin-top: 4px; }
+.contact-section { background: transparent; border: 0; border-radius: 0; padding: 0; margin-top: 64px; }
+.contact-section h2 { margin: 0 0 22px; }
+.contact-section > p { padding: 0 10px; max-width: 820px; font-size: 18px; color: #555 !important; line-height: 1.8; }
+.contact-list { margin-top: 24px; }
+.contact-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 15px 10px; text-decoration: none; border-radius: 4px; }
+.contact-row:hover { background: var(--soft); }
+.contact-label { display: inline-flex; align-items: center; gap: 18px; color: #222; font-size: 19px; }
+.contact-label svg, .medium-mark { width: 22px; height: 22px; flex-shrink: 0; color: #555; }
+.medium-mark { display: inline-grid; place-items: center; font-family: Georgia, serif; font-weight: bold; font-size: 21px; line-height: 1; }
+.contact-handle { font-size: 16px; color: var(--muted); overflow-wrap: anywhere; text-align: right; }
+.footer { margin-top: 74px; color: var(--muted); }
+@media (max-width: 760px) {
+ .hero { grid-template-columns: 1fr 126px; gap: 26px; }
+ .hero h1 { font-size: 25px; }
+ .entry-meta { display: block; max-width: 115px; font-size: 13px; }
+ .entry-title { font-size: 18px; }
+ .entry-subtitle { display: block; margin: 4px 0 0; font-size: 15px; }
+ .project-entry .entry-meta { display: none; }
+}
+@media (max-width: 480px) {
+ .hero { grid-template-columns: 1fr; padding-top: 28px; }
+ .hero h1 { font-size: 24px; padding-right: 72px; line-height: 1.5; }
+ .portrait { top: 30px; }
+ .portfolio-section { padding-top: 42px; }
+ .entry > summary { padding: 15px 0; gap: 10px; flex-wrap: wrap; }
+ .entry-copy { flex-basis: calc(100% - 40px); }
+ .entry-meta { order: 3; max-width: none; flex-basis: 100%; text-align: left; }
+ .entry-toggle { margin-left: auto; }
+ .entry-body { margin-inline: 0; padding-inline: 12px; }
+ .contact-section { margin-top: 46px; }
+ .contact-section > p { padding: 0; font-size: 16px; }
+ .contact-row { padding: 15px 0; gap: 12px; }
+ .contact-label { font-size: 17px; gap: 10px; }
+ .contact-handle { font-size: 14px; min-width: 0; }
+ .footer { margin-top: 48px; }
+}
+
+/* Editorial clarity, restrained surfaces, and deliberate typography. */
+:root { --body: 920px; --ink: #1d1d1f; --muted: #6e6e73; --blue: #1d1d1f; --soft: #f5f5f7; --line: #e8e8ed; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--ink); font-weight: 400; letter-spacing: -.012em; }
+::selection { background: #dce8e5; color: #152922; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: #487d70; }
+.topbar { min-height: 84px; border-bottom: 1px solid var(--line); }
+.wordmark { font-size: 15px; font-weight: 600; letter-spacing: -.025em; gap: 9px; }
+.monogram { font-size: 22px; font-weight: 500; width: 30px; letter-spacing: -.08em; }
+.topbar nav { gap: 28px; }
+.topbar nav a { font-size: 13px; }
+.topbar .nav-contact { border: 1px solid var(--line); border-radius: 100px; padding: 7px 13px; }
+.topbar nav a:hover { color: #111; }
+.hero { padding: 66px 0 48px; grid-template-columns: minmax(0,1fr) 176px; gap: 70px; }
+.hero-copy > .eyebrow { display: block; font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: .025em; color: var(--muted); margin-bottom: 20px; }
+.hero h1 { font-size: clamp(32px,4.5vw,44px); font-weight: 500; line-height: 1.12; letter-spacing: -.055em; margin: 0 0 24px; color: var(--ink); }
+.hero h1 span { color: #77777d; }
+.hero-intro { font-size: 17px; line-height: 1.75; letter-spacing: -.015em; color: #55555b; max-width: 530px; margin-bottom: 24px; }
+.alternate-names { font-size: 13px; margin-bottom: 3px; color: var(--muted); }
+.profile-role { font-size: 14px; margin-bottom: 0; }
+.profile-contacts { margin-top: 15px; gap: 22px; }
+.profile-contacts a { font-size: 13px; min-height: 36px; gap: 7px; }
+.profile-contacts svg { width: 16px; height: 16px; }
+.hero-links { margin-top: 20px; }
+.hero-links .primary-link { display: inline-flex; align-items: center; gap: 20px; color: var(--ink); font-size: 13px; font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: #b9b9c0; }
+.hero-links .primary-link span { transition: transform .2s ease; }
+.hero-links .primary-link:hover span { transform: translateY(3px); }
+.portrait-flip { width: 176px; height: 190px; border-radius: 18px; }
+.portrait .portrait-flipper img { border: 1px solid #0000000d; }
+.portrait figcaption { font-size: 13px; font-weight: 500; padding-top: 14px; }
+.portrait figcaption span, .portrait-hint { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.flip-badge { color: #333; }
+.portfolio-section { padding-top: 52px; }
+.section-heading { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.section-heading h2 { font-size: 15px; font-weight: 500; color: #64646a; letter-spacing: -.015em; }
+.section-heading > p { font-size: 13px; }
+.entry > summary { padding: 17px 8px; border-radius: 6px; transition: background .2s ease; }
+.entry > summary:hover { background: #f8f8fa; }
+.entry-title { font-size: 18px; font-weight: 450; letter-spacing: -.025em; }
+.entry-subtitle { font-size: 15px; color: #74747a; letter-spacing: -.015em; }
+.entry-meta { font-size: 13px; }
+.entry-toggle { font-size: 25px; color: #939399; }
+.entry[open] > summary > .entry-copy .entry-title { color: #335e53; }
+.entry-body { border-left: 1px solid #d6e2de; padding: 15px 20px 22px; margin-left: 8px; }
+.card-description, .job-description { font-size: 16px; color: #55555b; line-height: 1.8; }
+.launch-highlight { background: transparent; border-color: var(--line); }
+.project-link { border-radius: 7px; border-color: #dedee3; color: var(--ink); font-size: 13px; }
+.project-link:hover { background: var(--soft); }
+.about-text { font-size: 17px; line-height: 1.8; color: #55555b; }
+.skills-row { padding: 17px 8px; }
+.skills-label { font-size: 14px; color: var(--muted); }
+.skills-values { font-size: 15px; line-height: 1.85; }
+.cert-link { text-decoration-color: #c0c0c6; }
+.cert-link:hover { text-decoration-color: var(--ink); }
+.cert-source { font-size: 14px; }
+.writing-link { border-radius: 6px; padding: 17px 8px; }
+.writing-link .entry-subtitle { font-size: 13px; }
+.writing-more { font-size: 13px; color: var(--muted); }
+.contact-section { margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line); }
+.contact-section h2 { font-size: 24px; font-weight: 500; letter-spacing: -.04em; color: var(--ink); margin-bottom: 18px; }
+.contact-section > p { padding: 0; font-size: 17px; line-height: 1.8; }
+.contact-list { margin-top: 26px; }
+.contact-row { padding: 14px 8px; }
+.contact-label { font-size: 17px; gap: 16px; }
+.contact-label svg { width: 18px; height: 18px; }
+.contact-handle { font-size: 14px; }
+.footer { margin-top: 64px; border-top: 1px solid var(--line); padding-top: 24px; font-size: 12px; letter-spacing: 0; line-height: 1.8; }
+@media (max-width: 760px) {
+ .topbar nav { gap: 20px; }
+ .hero { grid-template-columns: minmax(0,1fr) 126px; gap: 30px; padding-block: 44px 26px; }
+ .portrait-flip { width: 126px; height: 144px; }
+ .hero h1 { font-size: 35px; }
+ .hero-intro { font-size: 16px; }
+ .entry-subtitle { display: block; margin-left: 0; }
+ .section-heading > p { margin-top: 7px; }
+}
+@media (max-width: 480px) {
+ .topbar { gap: 12px; padding-block: 17px; }
+ .topbar nav { gap: 26px; }
+ .hero { display: flex; flex-direction: column; align-items: stretch; gap: 26px; padding-top: 32px; }
+ .hero h1 { font-size: 36px; padding-right: 0; }
+ .hero-copy > .eyebrow { padding: 0; min-height: 0; margin-bottom: 18px; }
+ .portrait { position: static; display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; align-items: center; }
+ .portrait-flip { grid-row: 1 / 3; width: 72px; height: 78px; }
+ .portrait figcaption { display: block; padding-top: 0; align-self: end; }
+ .portrait-hint { position: static; width: auto; height: auto; clip-path: none; overflow: visible; margin-top: 2px; align-self: start; }
+ .flip-badge { width: 21px; height: 21px; right: -5px; bottom: -5px; }
+ .portfolio-section { padding-top: 36px; }
+ .entry > summary { padding-inline: 0; }
+ .entry-title { font-size: 17px; }
+ .entry-body { margin-left: 0; padding-inline: 14px; }
+ .skills-row { padding-inline: 0; }
+ .contact-section { margin-top: 48px; }
+ .contact-row { padding-inline: 0; gap: 10px; }
+ .contact-label { font-size: 16px; gap: 10px; }
+ .contact-handle { font-size: 13px; }
+ .footer { margin-top: 42px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-links .primary-link:hover span { transform: none; } }
+/* Dry-brush accent: saturated pigment, broken edges, and fine paint gaps. */
+.topbar { position: relative; }
+.topbar::before {
+ content: "";
+ position: absolute;
+ top: 4px;
+ left: 0;
+ width: clamp(128px, 20vw, 190px);
+ height: 16px;
+ pointer-events: none;
+ background:
+  linear-gradient(178deg, transparent 0 17%, #ffffffa6 18% 20%, transparent 21% 76%, #ffffffb3 77% 79%, transparent 80%),
+  linear-gradient(1deg, transparent 0 29%, #ffffff8c 30% 32%, transparent 33% 88%, #ffffffa6 89% 91%, transparent 92%),
+  linear-gradient(to bottom, #c71929 0 39%, #fff 39% 59%, #141414 59% 100%);
+ opacity: 1;
+ transform: rotate(-1.2deg);
+ transform-origin: left center;
+ clip-path: polygon(0 24%, 6% 15%, 3% 8%, 18% 12%, 28% 3%, 40% 9%, 52% 0, 68% 7%, 79% 4%, 100% 13%, 87% 23%, 97% 29%, 82% 35%, 93% 42%, 80% 49%, 98% 57%, 86% 66%, 100% 73%, 89% 80%, 95% 87%, 73% 91%, 62% 86%, 47% 97%, 34% 91%, 20% 100%, 4% 91%, 10% 81%, 1% 72%, 6% 59%, 0 49%, 5% 36%);
+ -webkit-mask-image: linear-gradient(to right, #000b 0, #000 7% 78%, #000b 91%, #0004 100%);
+ mask-image: linear-gradient(to right, #000b 0, #000 7% 78%, #000b 91%, #0004 100%);
+}
+</style></head>
 <body>
-    <!-- Navigation -->
-    <div class="nav-container">
-        <div class="nav-wrapper">
-            <nav class="nav">
-                <div class="nav-brand">Ugur Ersoz</div>
-                <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="nav-menu">
-                    <li class="nav-item active" data-page="me">Me</li>
-                    <li class="nav-item" data-page="education">Education</li>
-                    <li class="nav-item" data-page="experience">Experience</li>
-                    <li class="nav-item" data-page="projects">Projects</li>
-                    <li class="nav-item" data-page="skills">Skills</li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar"><a class="wordmark" href="#me" aria-label="Ugur Ersoz, home"><span class="monogram" aria-hidden="true">ue.</span>Ugur Ersoz</a><nav aria-label="Main navigation"><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#education">About</a><a href="#contact" class="nav-contact">Get in touch <span aria-hidden="true">↗</span></a></nav></header>
+<main id="main">
+<section id="me" class="hero" aria-labelledby="intro-heading"><div class="hero-copy"><p class="eyebrow">Life sciences &amp; digital health</p><h1 id="intro-heading">Science, understood.<br><span>Products, made useful.</span></h1><p class="hero-intro">I’m Ugur. I connect life sciences, data, and product development to make digital health easier to understand and use.</p><p class="alternate-names">Uğur Ersöz (TR) · Ugur Ersöz (DE)</p><p class="profile-role">Product Developer &amp; Researcher <span aria-hidden="true">|</span> Berlin, Germany</p><div class="profile-contacts" aria-label="Contact links"><a href="mailto:uersoz55@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M2 5h4v15H2z"/><path fill="#34a853" d="M18 5h4v15h-4z"/><path fill="#ea4335" d="M2 4h4l6 5 6-5h4v5l-10 8L2 9z"/><path fill="#fbbc04" d="M18 4h4v5l-4 3z"/><path fill="#c5221f" d="M2 4h4v8L2 9z"/></svg>Mail</a><a href="https://www.linkedin.com/in/ersozugur" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="3" fill="#0a66c2"/><path fill="#fff" d="M5 9h3v10H5zm1.5-5a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4zM10 9h3v1.4c.7-1.1 1.7-1.7 3.1-1.7 2.7 0 3.9 1.7 3.9 4.6V19h-3v-5.1c0-1.5-.4-2.5-1.8-2.5-1.5 0-2.2 1-2.2 2.5V19h-3z"/></svg>LinkedIn</a><a href="https://github.com/ugrersoz" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.09c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.16 1.74 1.16 1.02 1.74 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15A10.74 10.74 0 0 1 12 6.15c.95 0 1.9.13 2.8.38 2.14-1.45 3.07-1.15 3.07-1.15.61 1.54.23 2.68.12 2.96.72.79 1.15 1.79 1.15 3.02 0 4.32-2.63 5.27-5.14 5.55.41.35.76 1.04.76 2.1v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8z"/></svg>GitHub</a></div><div class="hero-links"><a href="#projects" class="primary-link">Discover the work <span aria-hidden="true">↓</span></a></div></div><figure class="portrait">
+<button class="portrait-flip" type="button" aria-label="Portrait with black glasses" aria-pressed="false" aria-describedby="portrait-hint">
+ <span class="portrait-flipper" aria-hidden="true">
+  <img class="portrait-front" src="images/profile.webp" width="400" height="400" alt="" fetchpriority="high" decoding="async">
+  <img class="portrait-back" src="images/portrait-glasses.png" width="1254" height="1254" alt="" decoding="async">
+ </span>
+ <span class="flip-badge" aria-hidden="true">↻</span>
+</button>
+<figcaption>Ugur Ersoz<span>Product developer &amp; researcher</span></figcaption>
+<span id="portrait-hint" class="portrait-hint">Click or tap to flip</span>
+</figure></section>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Me Page -->
-        <div id="me" class="page-section active">
-            <div class="container">
-                <p class="greeting">Hey!</p>
-                <header class="header" style="margin-top: 16px;">
-                    <img src="images/profile.webp" alt="Ugur Ersoz" class="profile-image" decoding="async" fetchpriority="high">
-                    <h1 class="name">Ugur Ersoz</h1>
-                    <p class="alt-names">Uğur Ersöz (TR) · Ugur Ersöz (DE)</p>
-                    <p class="alt-names" style="font-size: 1.1rem; margin-top: 6px;">Product Developer & Researcher | Berlin, Germany</p>
-                    <div class="contact">
-                        <a class="contact-item" href="mailto:uersoz55@gmail.com">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
-                                alt="Email" decoding="async">
-                            Mail
-                        </a>
-                        <a class="contact-item" href="https://www.linkedin.com/in/ersozugur" target="_blank" rel="noopener noreferrer">
-                            <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                                alt="LinkedIn" decoding="async">
-                            LinkedIn
-                        </a>
-                        <a class="contact-item" href="https://github.com/ugrersoz" target="_blank" rel="noopener noreferrer">
-                            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                                alt="GitHub" decoding="async">
-                            GitHub
-                        </a>
-                    </div>
-                </header>
+<section class="portfolio-section" id="projects" aria-labelledby="projects-heading"><div class="section-heading"><div><h2 id="projects-heading">Selected work</h2></div></div><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">Bayer AG dashboard</span><span class="entry-subtitle">A clearer view of R&amp;D investment.</span></span><span class="entry-meta">Data analysis</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">HTW Berlin · Master's Course Project · Web App · Oct 2025 – Feb 2026</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-info" style="width: 100%;">
 
-                <section class="section">
-                    <div class="card">
-                        <p style="font-size: 1.15rem; line-height: 1.7; color: #1d1d1f; text-align: center; font-weight: 500; margin-bottom: 18px;">
-                            🏀 Enthusiastic team player dedicated to thriving in challenging projects. 🧬
-                        </p>
-                        <p style="font-size: 1.05rem; line-height: 1.8; color: #555; text-align: center;">
-                            I am a young scientist and entrepreneurial engineer in the fields of digital health technologies. With a curious and investigative identity, I enjoy being involved in product management, product development, and R&amp;D processes. I always strive to be part of a team in tasks that involve innovation and competition.
-                        </p>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <!-- Education Page -->
-        <div id="education" class="page-section">
-            <div class="container">
-                <section class="section">
-                    <h2 class="section-title">Education</h2>
-
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Master of Life Science Engineering & Management</div>
-                                <div class="company">HTW Berlin</div>
-                            </div>
-                            <div class="job-duration">Oct 2024 – Present</div>
-                        </div>
-                        <div class="job-description">
-                            <p style="color: #555; line-height: 1.6;">
-                                Focus on combining engineering expertise with management principles in biotechnology.
-                            </p>
-                            <div class="courses-label">Courses</div>
-                            <div class="courses-list">
-                                <div>Special Topics in Business Administration</div>
-                                <div>Advanced Processes in Life Science Industries</div>
-                                <div>Project Management for Production Processes</div>
-                                <div>Project 2: Management and Innovation</div>
-                                <div>New Technologies and Products</div>
-                                <div>Life Science Engineering 2</div>
-                                <div>Project 1: Engineering and Management</div>
-                                <div>Human Resources Management and Leadership</div>
-                                <div>Life Science Engineering 1</div>
-                                <div>Regulatory Affairs and Clinical Trial Management</div>
-                                <div>Corporate Finance and Controlling</div>
-                                <div>Strategic Marketing in Life Sciences</div>
+                                <div class="card-description">
+                                    Built an analytical dashboard to evaluate <strong>Bayer AG's R&D investment trends</strong> and commercialization performance across product lines. Structured and validated multi-source tabular data for reliable comparisons and exploratory drill-down analysis.
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://bayer-m3.lovable.app" target="_blank" rel="noopener noreferrer" class="project-link">Live demo ↗</a>
+                                    <a href="https://www.linkedin.com/posts/activity-7416885505050624000--5Ck"
+                                        target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">ZemaSync</span><span class="entry-subtitle">Digital health, shaped around clinical workflows.</span></span><span class="entry-meta">Product strategy</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">HTW Berlin · Advanced Topics in Life Sciences Engineering · Apr 2025 – Jul 2025</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-info" style="width: 100%;">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Bachelor of Science – Molecular Biology and Genetics (Bioinformatics-focused)</div>
-                                <div class="company">Bahçeşehir University</div>
+                                <div class="card-description">
+                                    Defined business requirements, <strong>solution architecture</strong>, and go-to-market logic for a digital health platform, translating clinical workflows into structured product specifications. Delivered a user-centric digital product concept with clear value proposition and workflow logic.
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://www.linkedin.com/posts/activity-7348380456037298176-Lzha"
+                                        target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                                </div>
                             </div>
-                            <div class="job-duration">Sep 2018 – 2023</div>
                         </div>
-                        <div class="job-description">
-                            <ul>
-                                <li><strong>ApplyBAU Scholarship</strong> (Merit-based)</li>
-                                <li><strong>Capstone Project: A Grade</strong> (Highest achievement)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- Experience Page -->
-        <div id="experience" class="page-section">
-            <div class="container">
-                <section class="section">
-                    <h2 class="section-title">Experience</h2>
-
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Product Developer & Researcher</div>
-                                <div class="company">Uniqgene</div>
+                    </div></div></details><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">BerSync</span><span class="entry-subtitle">Wearable insights for patients and caregivers.</span></span><span class="entry-meta">Health technology</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">HTW Berlin · New Technologies & Products (Master's Course) · Nov 2024</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-image-container">
+                                <img class="project-image" src="images/bersync-project.webp"
+                                    alt="BerSync Remote Health Monitoring" onclick="openModal(this)"
+                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
                             </div>
-                            <div class="job-duration">Jan 2023 – Oct 2024</div>
+                            <div class="project-info">
+
+                                <div class="card-description">
+                                    Co-founded a digital health startup concept as <strong>CTO</strong>, addressing gaps
+                                    in chronic disease management. Designed a two-component system: a
+                                    <strong>screenless multi-parameter wearable</strong> (blood pressure, glucose, heart
+                                    rate, SpO2, body temperature) and a <strong>companion mobile app</strong> with
+                                    real-time dashboards and caregiver alerts. Led the technical architecture,
+                                    sensor integration strategy, and competitive analysis. Presented to a jury panel at
+                                    HTW Berlin.
+                                </div>
+
+                            </div>
                         </div>
+                    </div></div></details><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">Genetic testing & wearable analytics</span><span class="entry-subtitle">From genetic data to personal insights.</span></span><span class="entry-meta">Applied research</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">Uniqgene · University of Oxford Research Poster · Apr – Sep 2024</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-image-container">
+                                <img class="project-image" src="images/oxford-uniqgene-poster.webp"
+                                    alt="Genetic Testing Research" onclick="openModal(this)"
+                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+                            </div>
+                            <div class="project-info">
+
+                                <div class="card-description">
+                                    Integrated <strong>400+ gene associations</strong> with wearable-derived metrics (heart rate, sleep, VO2 max, endurance) to map biomarkers to sports, nutrition, and recovery needs. Built a structured analytical framework translating genotype–phenotype findings into personalized recommendations. Co-authored and presented the research poster at the <strong>University of Oxford</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    </div></div></details><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">Caffeine metabolism pipeline</span><span class="entry-subtitle">Understanding caffeine response through genetics.</span></span><span class="entry-meta">Bioinformatics</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">Bahçeşehir University · MBG4999 Capstone Project · Mar – Jun 2023</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-image-container">
+                                <div style="display: flex; gap: 10px;">
+                                    <img class="project-image" src="images/capstone-project1.webp" alt="CYP1A2 Study"
+                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
+                                    <img class="project-image" src="images/capstone-project2.webp" alt="CYP1A2 Study"
+                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                            <div class="project-info">
+
+                                <div class="card-description">
+                                    Built an end-to-end <strong>Python analysis pipeline</strong> for CYP1A2 genotype–phenotype comparison across global and Turkish cohorts. Integrated multi-source genomic datasets and survey data (<strong>60+ participants</strong>). Awarded an <strong>A grade</strong> for the MBG4999 capstone project, supervised by <strong>Assistant Professor Zeynep Tacer Caba</strong>. The research examined the relationship between CYP1A2 genotypes, caffeine metabolism, and sports performance among Turkish young adults.
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/ugrersoz/bsc-capstone-project" target="_blank" rel="noopener noreferrer"
+                                        class="project-link">GitHub Repo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div></details><details class="entry project-entry"><summary><span class="entry-copy"><span class="entry-title">LiveUseful</span><span class="entry-subtitle">Small habits. Healthier everyday lives.</span></span><span class="entry-meta">Product design</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="project-context">MZV YetGen Program · Startup Challenge · Feb – May 2021</p><div class="card">
+                        <div class="project-content">
+                            <div class="project-image-container">
+                                <img class="project-image" src="images/live-useful-project.webp" alt="LiveUseful App"
+                                    onclick="openModal(this)" loading="lazy" decoding="async">
+                            </div>
+                            <div class="project-info">
+
+                                <div class="card-description">
+                                    Co-led design of a mobile wellness concept aligned with <strong>UN SDG 3</strong>, including value proposition, feature flows, and engagement strategy based on habit-tracking and behavioral science.
+                                </div>
+                            </div>
+                        </div>
+                    </div></div></details></section>
+<section class="portfolio-section" id="experience" aria-labelledby="experience-heading"><div class="section-heading"><div><h2 id="experience-heading">Experience</h2></div></div><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Product Developer & Researcher</span><span class="entry-subtitle">Uniqgene</span></span><span class="entry-meta">Jan 2023 – Oct 2024</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
+
                         <div class="job-description">
                             <ul>
                                 <li>Transformed complex genetic and wearable data into clear, user-oriented insights, improving knowledge transfer between <strong>R&D, product, and software teams</strong>.</li>
@@ -1130,16 +1249,8 @@
                                 <a href="https://www.linkedin.com/posts/uniqgene-uniqathlete-meettheteam-share-7142441999697170432-1ndR/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0_IvUBhrKpS_7RniL0JIb8FOtWsnypLK8" target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Intern & Growth Hacker</span><span class="entry-subtitle">Uniqgene</span></span><span class="entry-meta">Feb 2022 – Jan 2023</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Intern & Growth Hacker</div>
-                                <div class="company">Uniqgene</div>
-                            </div>
-                            <div class="job-duration">Feb 2022 – Jan 2023</div>
-                        </div>
                         <div class="job-description">
                             <ul>
                                 <li>Conducted structured market and literature research using <strong>50+ academic and industry sources</strong>, supporting early feature exploration for wellness-related product concepts.</li>
@@ -1149,16 +1260,8 @@
                                 <li>Assisted in coordinating tasks in <strong>Jira</strong> and contributed to partnership outreach by representing the company at several European healthcare events.</li>
                             </ul>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Research and Development Intern <span style="font-weight: 400; color: #86868b; font-size: 0.95rem;">(Mandatory Undergraduate Internship)</span></span><span class="entry-subtitle">Uniqgene</span></span><span class="entry-meta">Jul 2023 – Aug 2023</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Research and Development Intern <span style="font-weight: 400; color: #86868b; font-size: 0.95rem;">(Mandatory Undergraduate Internship)</span></div>
-                                <div class="company">Uniqgene</div>
-                            </div>
-                            <div class="job-duration">Jul 2023 – Aug 2023</div>
-                        </div>
                         <div class="job-description">
                             <ul>
                                 <li>Processed DNA samples for approximately <strong>40 individuals</strong> across <strong>12 gene regions</strong>, contributing 500 genotype data points to the company database.</li>
@@ -1166,16 +1269,8 @@
                                 <li>Reviewed biological correctness of radar/bar chart components tested by <strong>50+ pilot users</strong> and checked 12 gene–trait associations for scientific consistency.</li>
                             </ul>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Engineering Team Member</span><span class="entry-subtitle">Kariyer Ve Gelişim Kulübü (Career &amp; Development Club) · Bahçeşehir University Student Club · Istanbul, Türkiye</span></span><span class="entry-meta">Oct 2020 – Oct 2022</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Engineering Team Member</div>
-                                <div class="company">Kariyer Ve Gelişim Kulübü (Career &amp; Development Club) · Bahçeşehir University Student Club · Istanbul, Türkiye</div>
-                            </div>
-                            <div class="job-duration">Oct 2020 – Oct 2022</div>
-                        </div>
                         <div class="job-description">
                             <ul>
                                 <li>Took an active role in <strong>event organization and team coordination</strong> across the club's flagship activities, working closely with cross-functional student teams.</li>
@@ -1184,31 +1279,15 @@
                                 <li>Contributed engaging content as a member of <strong>Dakika Magazine</strong>'s writing team.</li>
                             </ul>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Product Developer</span><span class="entry-subtitle">Live USeful</span></span><span class="entry-meta">May 2021 – Jun 2021</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Product Developer</div>
-                                <div class="company">Live USeful</div>
-                            </div>
-                            <div class="job-duration">May 2021 – Jun 2021</div>
-                        </div>
                         <div class="job-description">
                             <p style="color: #555; line-height: 1.7;">
                                 On the last day of the <strong>MZV YetGen (Yetkin Gençler)</strong> training program, together with my team mates, we designed a mobile application project aligned with the third goal of the UN Sustainable Development Goals — <em>Good Health and Well-Being</em>.
                             </p>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Trainee</span><span class="entry-subtitle">Yetkin Gençler (YetGen)</span></span><span class="entry-meta">Feb 2021 – May 2021</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Trainee</div>
-                                <div class="company">Yetkin Gençler (YetGen)</div>
-                            </div>
-                            <div class="job-duration">Feb 2021 – May 2021</div>
-                        </div>
                         <div class="job-description">
                             <p style="color: #555; line-height: 1.7;">
                                 YetGen is a <strong>12-week 21st Century Competencies Training Program</strong> covering Effective Presentation Techniques, Teamwork, Career Planning, Excel, Information / Media / Finance Literacy, Social Innovation, and the GirişGen entrepreneurship process.
@@ -1217,181 +1296,49 @@
                                 During the program I completed assignments aimed at building an enterprise concept aligned with the <strong>UN Sustainable Development Goals</strong>, as part of the GirişGen track.
                             </p>
                             <div class="project-links" style="margin-top: 14px;">
-                                <a class="project-link" onclick="openModal('images/yetgen-certificate.webp')" style="cursor: pointer;">View Certificate</a>
+                                <button type="button" class="project-link" onclick="openModal('images/yetgen-certificate.webp')">View Certificate</button>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Content Creator</span><span class="entry-subtitle">Medium · Volunteer experience · Arts &amp; Culture</span></span><span class="entry-meta">Nov 2020 – Jun 2021</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><p class="card-description">Wrote in Turkish about basketball, culture, and personal development, including contributions to Yetkin Yayın. Shared reflections on the YetGen program and the GirişGen entrepreneurship experience.</p><div class="project-links"><a class="project-link" href="https://uersoz55.medium.com/" target="_blank" rel="noopener noreferrer">Read on Medium ↗</a><a class="project-link" href="#writing">Selected writing ↓</a></div></div></details></section>
+<section class="portfolio-section" id="education" aria-labelledby="education-heading"><div class="section-heading"><div><h2 id="education-heading">Background</h2></div></div><p class="about-text">Molecular biology shaped how I ask questions. Engineering and product development shape what I do with the answers. I work with research, product, and software teams to turn complex scientific information into practical experiences.</p><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Master of Life Science Engineering & Management</span><span class="entry-subtitle">HTW Berlin</span></span><span class="entry-meta">Oct 2024 – Present</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-        <!-- Projects Page -->
-        <div id="projects" class="page-section">
-            <div class="container">
-                <section class="section">
-                    <h2 class="section-title">Projects</h2>
-
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-info" style="width: 100%;">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">Bayer AG – Technology & Market Analysis Dashboard</div>
-                                        <div class="company">HTW Berlin · Master's Course Project · Web App</div>
-                                    </div>
-                                    <div class="job-duration">Oct 2025 – Feb 2026</div>
-                                </div>
-                                <div class="card-description">
-                                    Built an analytical dashboard to evaluate <strong>Bayer AG's R&D investment trends</strong> and commercialization performance across product lines. Structured and validated multi-source tabular data for reliable comparisons and exploratory drill-down analysis.
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://bayer-m3.lovable.app" target="_blank" rel="noopener noreferrer" class="project-link">🟢 Live
-                                        Demo</a>
-                                    <a href="https://www.linkedin.com/posts/activity-7416885505050624000--5Ck"
-                                        target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                                </div>
+                        <div class="job-description">
+                            <p style="color: #555; line-height: 1.6;">
+                                Focus on combining engineering expertise with management principles in biotechnology.
+                            </p>
+                            <div class="courses-label">Courses</div>
+                            <div class="courses-list">
+                                <div>Special Topics in Business Administration</div>
+                                <div>Advanced Processes in Life Science Industries</div>
+                                <div>Project Management for Production Processes</div>
+                                <div>Project 2: Management and Innovation</div>
+                                <div>New Technologies and Products</div>
+                                <div>Life Science Engineering 2</div>
+                                <div>Project 1: Engineering and Management</div>
+                                <div>Human Resources Management and Leadership</div>
+                                <div>Life Science Engineering 1</div>
+                                <div>Regulatory Affairs and Clinical Trial Management</div>
+                                <div>Corporate Finance and Controlling</div>
+                                <div>Strategic Marketing in Life Sciences</div>
                             </div>
                         </div>
-                    </div>
+                    </div></div></details><details class="entry"><summary><span class="entry-copy"><span class="entry-title">Bachelor of Science – Molecular Biology and Genetics (Bioinformatics-focused)</span><span class="entry-subtitle">Bahçeşehir University</span></span><span class="entry-meta">Sep 2018 – 2023</span><span class="entry-toggle" aria-hidden="true">›</span></summary><div class="entry-body"><div class="card">
 
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-info" style="width: 100%;">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">ZemaSync – Digital Health Startup Concept</div>
-                                        <div class="company">HTW Berlin · Advanced Topics in Life Sciences Engineering</div>
-                                    </div>
-                                    <div class="job-duration">Apr 2025 – Jul 2025</div>
-                                </div>
-                                <div class="card-description">
-                                    Defined business requirements, <strong>solution architecture</strong>, and go-to-market logic for a digital health platform, translating clinical workflows into structured product specifications. Delivered a user-centric digital product concept with clear value proposition and workflow logic.
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://www.linkedin.com/posts/activity-7348380456037298176-Lzha"
-                                        target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                                </div>
-                            </div>
+                        <div class="job-description">
+                            <ul>
+                                <li><strong>ApplyBAU Scholarship</strong> (Merit-based)</li>
+                                <li><strong>MBG4999 · Capstone Project — Grade A</strong><br>Supervisor: Assistant Professor Zeynep Tacer Caba.</li>
+                            </ul>
                         </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img class="project-image" src="images/bersync-project.webp"
-                                    alt="BerSync Remote Health Monitoring" onclick="openModal(this)"
-                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
-                            </div>
-                            <div class="project-info">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">BerSync — Remote Health Monitoring</div>
-                                        <div class="company">HTW Berlin · New Technologies & Products (Master's Course)</div>
-                                    </div>
-                                    <div class="job-duration">Nov 2024</div>
-                                </div>
-                                <div class="card-description">
-                                    Co-founded a digital health startup concept as <strong>CTO</strong>, addressing gaps
-                                    in chronic disease management. Designed a two-component system: a
-                                    <strong>screenless multi-parameter wearable</strong> (blood pressure, glucose, heart
-                                    rate, SpO2, body temperature) and a <strong>companion mobile app</strong> with
-                                    real-time dashboards and caregiver alerts. Led the technical architecture,
-                                    sensor integration strategy, and competitive analysis. Presented to a jury panel at
-                                    HTW Berlin.
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img class="project-image" src="images/oxford-uniqgene-poster.webp"
-                                    alt="Genetic Testing Research" onclick="openModal(this)"
-                                    style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
-                            </div>
-                            <div class="project-info">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">Genetic Testing & Wearable Analytics</div>
-                                        <div class="company">Uniqgene · University of Oxford Research Poster</div>
-                                    </div>
-                                    <div class="job-duration">Apr – Sep 2024</div>
-                                </div>
-                                <div class="card-description">
-                                    Integrated <strong>400+ gene associations</strong> with wearable-derived metrics (heart rate, sleep, VO2 max, endurance) to map biomarkers to sports, nutrition, and recovery needs. Built a structured analytical framework translating genotype–phenotype findings into personalized recommendations. Co-authored and presented the research poster at the <strong>University of Oxford</strong>.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <div style="display: flex; gap: 10px;">
-                                    <img class="project-image" src="images/capstone-project1.webp" alt="CYP1A2 Study"
-                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
-                                    <img class="project-image" src="images/capstone-project2.webp" alt="CYP1A2 Study"
-                                        onclick="openModal(this)" style="width: 50%; height: 150px; object-fit: cover;" loading="lazy" decoding="async">
-                                </div>
-                            </div>
-                            <div class="project-info">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">AI-Powered Caffeine Metabolism Pipeline</div>
-                                        <div class="company">Bahçeşehir University · Capstone Project</div>
-                                    </div>
-                                    <div class="job-duration">Feb – Jun 2023</div>
-                                </div>
-                                <div class="card-description">
-                                    Built an end-to-end <strong>Python analysis pipeline</strong> for CYP1A2 genotype–phenotype comparison across global and Turkish cohorts. Integrated multi-source genomic datasets and survey data (<strong>60+ participants</strong>). Awarded the highest grade (A).
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/ugrersoz/bsc-capstone-project" target="_blank" rel="noopener noreferrer"
-                                        class="project-link">GitHub Repo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img class="project-image" src="images/live-useful-project.webp" alt="LiveUseful App"
-                                    onclick="openModal(this)" loading="lazy" decoding="async">
-                            </div>
-                            <div class="project-info">
-                                <div class="job-header">
-                                    <div>
-                                        <div class="job-title">LiveUseful – Lifestyle Wellness Platform</div>
-                                        <div class="company">MZV YetGen Program · Startup Challenge</div>
-                                    </div>
-                                    <div class="job-duration">Feb – May 2021</div>
-                                </div>
-                                <div class="card-description">
-                                    Co-led design of a mobile wellness concept aligned with <strong>UN SDG 3</strong>, including value proposition, feature flows, and engagement strategy based on habit-tracking and behavioral science.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- Skills  -->
-        <div id="skills" class="page-section">
-            <div class="container">
-                <section class="section skills-minimal">
-                    <h2 class="skills-title">Skills</h2>
-                    <div class="skills-list">
+                    </div></div></details></section>
+<section class="portfolio-section" id="skills" aria-labelledby="skills-heading"><div class="section-heading"><div><h2 id="skills-heading">Tools & skills</h2></div></div><div class="skills-list">
                         <div class="skills-row">
                             <div class="skills-label">Programming</div>
                             <div class="skills-values">Python (Pandas, NumPy) · SQL · JavaScript · HTML / CSS · Git / GitHub</div>
                         </div>
                         <div class="skills-row">
                             <div class="skills-label">AI Tools</div>
-                            <div class="skills-values">Claude Code · Cursor · Copilot</div>
+                            <div class="skills-values">Claude Code · Cursor · Copilot · Lovable</div>
                         </div>
                         <div class="skills-row">
                             <div class="skills-label">Product &amp; Design</div>
@@ -1404,7 +1351,8 @@
                         <div class="skills-row">
                             <div class="skills-label">Certifications</div>
                             <div class="skills-values">
-                                <div class="cert-item"><span class="cert-link" onclick="openModal('images/stanford-certificate.webp')">Data-Driven Precision Medicine for Diabetes</span> <span class="cert-source">— Stanford Medicine</span><span class="cert-view" onclick="openModal('images/stanford-certificate.webp')">View</span></div>
+                                <div class="cert-item"><button type="button" class="cert-link" onclick="openModal('images/bloomberg-market-concepts.png')">Bloomberg Market Concepts</button> <span class="cert-source">— Bloomberg · Issued Nov 2025</span></div>
+                                <div class="cert-item"><button type="button" class="cert-link" onclick="openModal('images/stanford-certificate.webp')">Data-Driven Precision Medicine for Diabetes</button> <span class="cert-source">— Stanford Medicine</span></div>
                                 <div class="cert-item">Product Ownership &amp; Process Management <span class="cert-source">— Miuul</span></div>
                                 <div class="cert-item">Agile Master &amp; Scrum Development <span class="cert-source">— Insider</span></div>
                                 <div class="cert-item">Python Programming <span class="cert-source">— Global AI Hub</span></div>
@@ -1412,110 +1360,43 @@
                                 <div class="cert-item">Data Visualization <span class="cert-source">— University Canada West</span></div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="" decoding="async">
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>
-            &copy; Copyright <span id="footer-year">2026</span> Ugur Ersoz. All rights reserved.
-            Built with HTML, CSS &amp; JavaScript.
-            Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
-            Last updated: <span id="footer-updated">August 10, 2026</span>.
-        </p>
-    </div>
-
-    <script>
-        // Navigation functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const navItems = document.querySelectorAll('.nav-item');
-            const pageSection = document.querySelectorAll('.page-section');
-
-            navItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    const targetPage = this.getAttribute('data-page');
-
-                    // Remove active class from all nav items and pages
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    pageSection.forEach(page => page.classList.remove('active'));
-
-                    // Add active class to clicked nav item and target page
-                    this.classList.add('active');
-                    document.getElementById(targetPage).classList.add('active');
-
-                    // Close mobile menu if open
-                    document.querySelector('.nav-menu').classList.remove('show');
-
-                    // Smooth scroll to top
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            });
-        });
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const navMenu = document.querySelector('.nav-menu');
-            const navToggle = document.querySelector('.nav-toggle');
-            navMenu.classList.toggle('show');
-            navToggle.classList.toggle('active');
-        }
-
-        // Image modal functionality
-        function openModal(imgOrSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.classList.add('show');
-            modalImg.src = typeof imgOrSrc === 'string' ? imgOrSrc : imgOrSrc.src;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside the image
-        document.getElementById('imageModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Smooth animations for page transitions
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-
-            document.querySelectorAll('.card').forEach(card => {
-                observer.observe(card);
-            });
-        });
-    </script>
-</body>
-
-</html>
+                    <div class="skills-row"><div class="skills-label">Recognition</div><div class="skills-values"><div class="cert-item"><button type="button" class="cert-link" onclick="openModal('images/lovable-recognition.png')">Top 10% of users</button> <span class="cert-source">— Lovable</span></div></div></div></div></section>
+<section class="portfolio-section" id="writing" aria-labelledby="writing-heading"><div class="section-heading"><div><h2 id="writing-heading">Writing</h2></div><p>Basketball, culture, and learning. Written in Turkish.</p></div><div class="writing-list"><a class="writing-link" href="https://uersoz55.medium.com/olduk-tek-bi%CC%87r-nefes-5297566a8b71" target="_blank" rel="noopener noreferrer"><span><span class="entry-title" lang="tr">Olduk Tek Bir Nefes</span><span class="entry-subtitle">Basketball · Yetkin Yayın · Jun 2021</span></span><span aria-hidden="true">↗</span></a><a class="writing-link" href="https://uersoz55.medium.com/yetgen-21-giri%C5%9Fgen-fd8662ace6cc" target="_blank" rel="noopener noreferrer"><span><span class="entry-title" lang="tr">YetGen 21’ — GirişGen</span><span class="entry-subtitle">Entrepreneurship · May 2021</span></span><span aria-hidden="true">↗</span></a><a class="writing-link" href="https://uersoz55.medium.com/zi%CC%87hni%CC%87mi%CC%87zi%CC%87n-%C3%B6z%C3%BC-mantali%CC%87te-3862c7196359" target="_blank" rel="noopener noreferrer"><span><span class="entry-title" lang="tr">Zihnimizin Özü: Mantalite</span><span class="entry-subtitle">Personal development · Yetkin Yayın · Mar 2021</span></span><span aria-hidden="true">↗</span></a></div><a class="writing-more" href="https://uersoz55.medium.com/" target="_blank" rel="noopener noreferrer">All writing on Medium ↗</a></section>
+<section class="contact-section" id="contact" aria-labelledby="contact-heading"><h2 id="contact-heading">Let’s chat</h2><p>A research question. A product idea. A conversation worth having.<br>I’m interested in thoughtful work at the intersection of <strong>science and digital health</strong>.</p><div class="contact-list"><a class="contact-row" href="https://www.linkedin.com/in/ersozugur" target="_blank" rel="noopener noreferrer"><span class="contact-label"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="3" fill="#0a66c2"/><path fill="#fff" d="M5 9h3v10H5zm1.5-5a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4zM10 9h3v1.4c.7-1.1 1.7-1.7 3.1-1.7 2.7 0 3.9 1.7 3.9 4.6V19h-3v-5.1c0-1.5-.4-2.5-1.8-2.5-1.5 0-2.2 1-2.2 2.5V19h-3z"/></svg>LinkedIn</span><span class="contact-handle">ersozugur</span></a><a class="contact-row" href="https://github.com/ugrersoz" target="_blank" rel="noopener noreferrer"><span class="contact-label"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.09c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.16 1.74 1.16 1.02 1.74 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15A10.74 10.74 0 0 1 12 6.15c.95 0 1.9.13 2.8.38 2.14-1.45 3.07-1.15 3.07-1.15.61 1.54.23 2.68.12 2.96.72.79 1.15 1.79 1.15 3.02 0 4.32-2.63 5.27-5.14 5.55.41.35.76 1.04.76 2.1v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8z"/></svg>GitHub</span><span class="contact-handle">ugrersoz</span></a><a class="contact-row" href="https://uersoz55.medium.com/" target="_blank" rel="noopener noreferrer"><span class="contact-label"><span class="medium-mark" aria-hidden="true">M</span>Medium</span><span class="contact-handle">uersoz55</span></a><a class="contact-row" href="mailto:uersoz55@gmail.com"><span class="contact-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg>Email</span><span class="contact-handle">uersoz55@gmail.com</span></a></div></section>
+</main>
+<footer class="footer"><div class="footer-details"><p>© Copyright <span id="footer-year">2026</span> Ugur Ersoz. All rights reserved. Built with HTML, CSS &amp; JavaScript. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.</p><p>Last updated: <span id="footer-updated">September 07, 2026</span>.</p></div><a href="#me">Back to top ↑</a></footer>
+<dialog id="imageModal" aria-label="Image preview"><button class="close" type="button" aria-label="Close image preview" autofocus>×</button><img id="modalImage" alt="" decoding="async"></dialog>
+<script>
+const portraitFlip = document.querySelector('.portrait-flip');
+portraitFlip.addEventListener('click', () => {
+ portraitFlip.setAttribute('aria-pressed', String(portraitFlip.getAttribute('aria-pressed') !== 'true'));
+});
+const modal = document.getElementById('imageModal');
+const modalImage = document.getElementById('modalImage');
+let previousFocus;
+function openModal(source) {
+ previousFocus = document.activeElement;
+ modalImage.src = typeof source === 'string' ? source : source.src;
+ modalImage.alt = typeof source === 'string' ? 'Certificate preview' : source.alt;
+ modal.showModal(); document.body.style.overflow = 'hidden';
+}
+function closeModal() { modal.close(); }
+modal.querySelector('.close').addEventListener('click', closeModal);
+modal.addEventListener('click', event => { if(event.target === modal) closeModal(); });
+modal.addEventListener('close', () => { document.body.style.overflow = ''; previousFocus?.focus(); });
+document.querySelectorAll('img[onclick]').forEach(img => {
+ const button = document.createElement('button'); button.type = 'button'; button.className = 'image-preview';
+ button.setAttribute('aria-label', 'Enlarge: ' + img.alt); img.removeAttribute('onclick');
+ img.before(button); button.append(img); button.addEventListener('click', () => openModal(img));
+});
+const navLinks = [...document.querySelectorAll('nav a')];
+if ('IntersectionObserver' in window) {
+ const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) navLinks.forEach(link => {
+   const current = link.hash === '#' + entry.target.id;
+   if(current) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+  }); });
+ }, {rootMargin: '-10% 0px -65% 0px', threshold: 0});
+ document.querySelectorAll('main > section').forEach(section => observer.observe(section));
+}
+</script></body></html>
