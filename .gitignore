@@ -40,3 +40,28 @@ _site/
 # Local env
 .env
 .env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+.npmrc
+.netrc
+.aws/
+.ssh/
+credentials*.json
+service-account*.json
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.zip
+*.bak
+
+# Private local archives and maintenance notes
+versions/
+content-sources.md
+private/
+backups/

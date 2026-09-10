@@ -1,18 +1,11 @@
-# Security Policy
+# Security
 
-## Scope
+Report vulnerabilities privately using the email contact on the [website](https://ugrersoz.github.io/#contact). If GitHub private vulnerability reporting is enabled, you may also use [a private advisory](https://github.com/ugrersoz/ugrersoz.github.io/security/advisories/new). Do not include credentials or personal data in public issues.
 
-This repository hosts a static personal portfolio website. There is no backend, no user data collection, and no authentication surface.
+This is a public, static portfolio. It has no login, backend, analytics, or visitor database. Published contact details and media are public and can be copied. GitHub operates the hosting infrastructure.
 
-## Reporting a Vulnerability
+Never commit credentials, private documents, or original personal datasets. Google ownership verification files are intentionally public and must remain deployed. If a credential is exposed, revoke or rotate it first; deleting a file does not remove it from Git history, forks, or existing copies.
 
-If you discover a security issue (for example, a content-injection vector via a dependency or an exposed secret in commit history), please report it privately:
+Only the current `main` version is maintained. Automated checks validate public assets and browser policy before publishing. The deployment uses pinned actions and explicitly selected public paths.
 
-- Email: **uersoz55@gmail.com**
-- Or open a private [GitHub Security Advisory](https://github.com/ugrersoz/my-portfolio/security/advisories/new).
-
-Please do **not** open a public issue for security reports.
-
-## Response Expectations
-
-This project is maintained on a best-effort basis by a single author. Valid reports will be acknowledged within seven days, and fixes will be deployed via the standard `main` → GitHub Pages workflow.
+The browser policy limits scripts to this site's files and blocks connections, embedded frames, plugins, and form submissions. GitHub Pages does not provide repository-configurable response headers; HTML metadata cannot enforce `frame-ancestors`, `Permissions-Policy`, or `X-Content-Type-Options`. Do not treat it as protection against all attacks or scraping.
