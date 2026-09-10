@@ -2,7 +2,7 @@
 
 Personal portfolio of Ugur Ersoz, a product developer and researcher in life sciences and digital health, based in Berlin.
 
-[Live website](https://ugrersoz.github.io/my-portfolio/)
+[Live website](https://ugrersoz.github.io/)
 
 ## Design and content
 
@@ -33,7 +33,13 @@ The site uses HTML, CSS, and vanilla JavaScript. It has no package dependencies 
 
 ## Deployment
 
-The existing GitHub Actions workflow publishes to GitHub Pages when changes are pushed to `main`. The workflow stamps the footer’s year and update date in the published copy. Local edits do not change the live website until published.
+The repository is `ugrersoz/ugrersoz.github.io`. GitHub Actions prepares the public files and publishes them to `gh-pages` when changes are pushed to `main`. GitHub Pages must serve the root of `gh-pages`. The workflow stamps the footer and sitemap using the latest commit date in Europe/Istanbul. Local edits do not change the live website until published. The old `/my-portfolio/` address redirects to the root site.
+
+## Search discovery
+
+The canonical URL, structured person data, social-preview URLs, app manifest, and sitemap use `https://ugrersoz.github.io/`. The public `robots.txt` allows crawling and points to the sitemap. Previous snapshots and maintenance files are excluded from the published artifact.
+
+For Google Search Console, add the URL-prefix property `https://ugrersoz.github.io/`, verify ownership using an HTML tag in `index.html` (or a verification file explicitly included in the publishing step), submit `https://ugrersoz.github.io/sitemap.xml`, and request indexing for the homepage. Verification requires the owner's Google account. Crawling and indexing are controlled by Google and are not guaranteed by the site configuration.
 
 ## Validation
 

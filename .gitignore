@@ -35,6 +35,7 @@ env/
 .tmp/
 tmp/
 .codex-browser-profile/
+_site/
 
 # Local env
 .env

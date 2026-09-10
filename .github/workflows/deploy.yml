@@ -23,6 +23,8 @@ jobs:
       # Stamps the footer in the published copy only. main is never modified,
       # so no commit-back and no write access to the source branch is needed.
       - name: Stamp footer date
+        env:
+          TZ: Europe/Istanbul
         run: |
           LAST_UPDATED=$(git log -1 --format=%cd --date=format:'%B %d, %Y')
           YEAR=$(git log -1 --format=%cd --date=format:'%Y')
@@ -30,11 +32,20 @@ jobs:
           sed -i "s|<span id=\"footer-year\">[^<]*</span>|<span id=\"footer-year\">${YEAR}</span>|" index.html
           echo "Stamped: ${LAST_UPDATED} (year ${YEAR})"
           grep -o '<span id="footer-updated">[^<]*</span>' index.html
+          MODIFIED=$(git log -1 --format=%cd --date=format:'%Y-%m-%d')
+          sed -i "s|<lastmod>[^<]*</lastmod>|<lastmod>${MODIFIED}</lastmod>|" sitemap.xml
+
+      - name: Prepare public site
+        run: |
+          mkdir -p _site
+          cp index.html robots.txt sitemap.xml site.webmanifest _site/
+          cp -R images my-portfolio _site/
+          touch _site/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./_site
           publish_branch: gh-pages
           enable_jekyll: false
