@@ -39,6 +39,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html robots.txt sitemap.xml site.webmanifest _site/
+          cp googlec3d2fe7a9e66be57.html _site/
           cp -R images my-portfolio _site/
           touch _site/.nojekyll
 
